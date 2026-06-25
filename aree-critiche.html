@@ -1,0 +1,615 @@
+<title>Aree Critiche Identificate — ACI Global Servizi</title>
+<style>
+  :root {
+    --ground: #F3F5F9;
+    --surface: #FFFFFF;
+    --text: #1A2233;
+    --text-soft: #4A5568;
+    --navy: #1B3A6B;
+    --navy-light: #243F72;
+    --alta: #C41D1D;
+    --alta-bg: #FDF1F1;
+    --media: #B86800;
+    --media-bg: #FEF8EC;
+    --divider: #DDE2EC;
+    --badge-alta-bg: #FDECEA;
+    --badge-media-bg: #FEF3CD;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--ground);
+    color: var(--text);
+    font-family: "Helvetica Neue", Arial, "Liberation Sans", sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── DOCUMENT HEADER ── */
+  .doc-header {
+    background: var(--navy);
+    color: #fff;
+    padding: 64px 80px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  .doc-header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      -55deg,
+      rgba(255,255,255,0.03) 0px,
+      rgba(255,255,255,0.03) 1px,
+      transparent 1px,
+      transparent 28px
+    );
+    pointer-events: none;
+  }
+  .doc-header__label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 20px;
+  }
+  .doc-header__title {
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 900;
+    letter-spacing: -0.025em;
+    line-height: 1.08;
+    color: #fff;
+    max-width: 680px;
+    margin-bottom: 28px;
+  }
+  .doc-header__intro {
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.65;
+    color: rgba(255,255,255,0.72);
+    max-width: 620px;
+  }
+  .doc-header__meta {
+    margin-top: 40px;
+    display: flex;
+    gap: 32px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+  }
+  .meta-item__label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    display: block;
+    margin-bottom: 4px;
+  }
+  .meta-item__value {
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.8);
+  }
+
+  /* ── SECTION BANNER ── */
+  .section-banner {
+    background: var(--navy-light);
+    color: #fff;
+    padding: 28px 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+    margin-top: 48px;
+  }
+  .section-banner::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      -55deg,
+      rgba(255,255,255,0.025) 0px,
+      rgba(255,255,255,0.025) 1px,
+      transparent 1px,
+      transparent 28px
+    );
+  }
+  .section-banner__title {
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.9);
+    position: relative;
+    z-index: 1;
+  }
+  .section-banner__count {
+    font-size: 80px;
+    font-weight: 900;
+    color: rgba(255,255,255,0.06);
+    line-height: 1;
+    position: absolute;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    letter-spacing: -0.04em;
+    user-select: none;
+  }
+
+  /* ── CARD GRID ── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1px;
+    background: var(--divider);
+    margin: 0;
+  }
+
+  /* ── ISSUE CARD ── */
+  .card {
+    background: var(--surface);
+    padding: 28px 28px 28px 32px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .card::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+  }
+  .card--alta::before { background: var(--alta); }
+  .card--media::before { background: var(--media); }
+
+  .card__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .card__title {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.35;
+    color: var(--text);
+    flex: 1;
+  }
+  .badge {
+    flex-shrink: 0;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 3px;
+    margin-top: 1px;
+  }
+  .badge--alta {
+    background: var(--badge-alta-bg);
+    color: var(--alta);
+    border: 1px solid rgba(196, 29, 29, 0.15);
+  }
+  .badge--media {
+    background: var(--badge-media-bg);
+    color: var(--media);
+    border: 1px solid rgba(184, 104, 0, 0.18);
+  }
+
+  .card__impact-label {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+    margin-bottom: -8px;
+  }
+  .card__impact-text {
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--text-soft);
+  }
+  .card__impact-text strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  /* ── NOTA DI CHIUSURA ── */
+  .nota {
+    margin: 48px 80px 0;
+    padding: 32px 36px;
+    background: var(--surface);
+    border-left: 4px solid var(--divider);
+    border: 1px solid var(--divider);
+  }
+  .nota__title {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+    margin-bottom: 16px;
+  }
+  .nota__body {
+    font-size: 13.5px;
+    line-height: 1.75;
+    color: var(--text-soft);
+  }
+  .nota__body p + p { margin-top: 10px; }
+  .nota__body strong { color: var(--text); font-weight: 600; }
+  .nota__body ul {
+    margin: 8px 0 8px 20px;
+  }
+  .nota__body ul li { margin-bottom: 4px; }
+
+  /* ── FOOTER ── */
+  .doc-footer {
+    margin-top: 64px;
+    padding: 24px 80px;
+    border-top: 1px solid var(--divider);
+    font-size: 12px;
+    color: var(--text-soft);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    opacity: 0.7;
+  }
+
+  /* ── LEGEND ── */
+  .legend {
+    display: flex;
+    gap: 24px;
+    padding: 20px 80px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--divider);
+    align-items: center;
+  }
+  .legend__label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+    margin-right: 8px;
+  }
+  .legend__item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .legend__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .legend__dot--alta { background: var(--alta); }
+  .legend__dot--media { background: var(--media); }
+
+  @media (max-width: 768px) {
+    .doc-header { padding: 40px 24px 36px; }
+    .section-banner { padding: 20px 24px; }
+    .card-grid { grid-template-columns: 1fr; }
+    .nota { margin: 32px 24px 0; }
+    .legend { padding: 16px 24px; flex-wrap: wrap; }
+    .doc-footer { padding: 20px 24px; flex-direction: column; gap: 8px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+</style>
+
+<!-- DOCUMENT HEADER -->
+<div class="doc-header">
+  <p class="doc-header__label">Analisi Euristica — ACI Global Servizi</p>
+  <h1 class="doc-header__title">Aree Critiche Identificate</h1>
+  <p class="doc-header__intro">
+    Sintesi delle principali aree critiche emerse dall'analisi del sito. Le criticità
+    sono organizzate per area tematica, con un indicatore di severità che riflette
+    l'impatto concreto sull'utente.
+  </p>
+  <div class="doc-header__meta">
+    <div class="meta-item">
+      <span class="meta-item__label">Metodo</span>
+      <span class="meta-item__value">Valutazione euristica (NNG, ISO 9241)</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-item__label">Sezioni analizzate</span>
+      <span class="meta-item__value">5 aree tematiche</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-item__label">Criticità totali</span>
+      <span class="meta-item__value">14 issue identificate</span>
+    </div>
+  </div>
+</div>
+
+<!-- LEGEND -->
+<div class="legend">
+  <span class="legend__label">Severità</span>
+  <div class="legend__item">
+    <span class="legend__dot legend__dot--alta"></span>
+    <span>ALTA — ostacola il completamento del task principale</span>
+  </div>
+  <div class="legend__item">
+    <span class="legend__dot legend__dot--media"></span>
+    <span>MEDIA — degrada l'esperienza o la percezione del brand</span>
+  </div>
+</div>
+
+<!-- ══ SEZIONE 1: HOMEPAGE ══ -->
+<div class="section-banner">
+  <span class="section-banner__title">Homepage e Primo Impatto</span>
+  <span class="section-banner__count">01</span>
+</div>
+<div class="card-grid">
+
+  <div class="card card--alta">
+    <div class="card__header">
+      <h2 class="card__title">Il numero 803.116 non è il fulcro visivo della pagina</h2>
+      <span class="badge badge--alta">Alta</span>
+    </div>
+    <p class="card__impact-label">Impatto</p>
+    <p class="card__impact-text">
+      L'unica azione davvero rilevante per l'utente — chiamare il numero verde — non ha
+      una CTA evidente e persistente. Un utente in emergenza non trova il recapito a colpo
+      d'occhio. <strong>Ogni secondo di ritardo aumenta lo stress e il rischio di abbandono.</strong>
+    </p>
+  </div>
+
+  <div class="card card--alta">
+    <div class="card__header">
+      <h2 class="card__title">I quick link non hanno gerarchia: "Soccorso" e "Green Pass" sono sullo stesso piano</h2>
+      <span class="badge badge--alta">Alta</span>
+    </div>
+    <p class="card__impact-label">Impatto</p>
+    <p class="card__impact-text">
+      Il blocco quick link mette sullo stesso piano voci di urgenza completamente diversa:
+      "Soccorso stradale" accanto a "Green Pass" (una pagina obsoleta).
+      <strong>In situazioni di urgenza l'utente deve valutare ogni voce invece di trovare
+      subito quella corretta</strong>, con alto rischio di errore o abbandono.
+    </p>
+  </div>
+
+  <div class="card card--media">
+    <div class="card__header">
+      <h2 class="card__title">Il carousel above the fold è editoriale: alta probabilità che nessuno lo consideri</h2>
+      <span class="badge badge--media">Media</span>
+    </div>
+    <p class="card__impact-label">Impatto</p>
+    <p class="card__impact-text">
+      Il primo elemento visivo che l'utente vede è un carosello editoriale che non comunica
+      la value proposition. Non si capisce velocemente cosa fa l'azienda e in cosa può
+      essere utile. <strong>I carousel hanno in media meno dell'1% di click-through
+      sulla prima slide, praticamente zero sulle successive.</strong>
+    </p>
+  </div>
+
+</div>
+
+<!-- ══ SEZIONE 2: NAVIGAZIONE ══ -->
+<div class="section-banner">
+  <span class="section-banner__title">Navigazione e Architettura dell'Informazione</span>
+  <span class="section-banner__count">02</span>
+</div>
+<div class="card-grid">
+
+  <div class="card card--alta">
+    <div class="card__header">
+      <h2 class="card__title">Voci secondarie (Media Room, Lavora con noi) ingombrano la navigazione principale</h2>
+      <span class="badge badge--alta">Alta</span>
+    </div>
+    <p class="card__impact-label">Impatto</p>
+    <p class="card__impact-text">
+      Questi contenuti hanno natura istituzionale o secondaria e non dovrebbero occupare
+      la navigazione principale. <strong>Chi cerca i servizi deve scansionare voci irrilevanti</strong>,
+      con tempi di navigazione più lunghi e percezione di disorganizzazione.
+    </p>
+  </div>
+
+  <div class="card card--media">
+    <div class="card__header">
+      <h2 class="card__title">La sezione "Chi siamo" è troppo frammentata per il valore che contiene</h2>
+      <span class="badge badge--media">Media</span>
+    </div>
+    <p class="card__impact-label">Impatto</p>
+    <p class="card__impact-text">
+      I dati più forti del sito — <strong>88% di soddisfazione, 300 operatori h24, 10 milioni
+      di minuti gestiti</strong> — restano sepolti come voce secondaria invece di essere usati
+      come segnali di fiducia nelle pagine servizio. Le informazioni che potrebbero convincere
+      un utente indeciso non raggiungono mai il momento giusto del percorso di decisione.
+    </p>
+  </div>
+
+</div>
+
+<!-- ══ SEZIONE 3: CONTENUTI ══ -->
+<div class="section-banner">
+  <span class="section-banner__title">Contenuti e Struttura delle Pagine</span>
+  <span class="section-banner__count">03</span>
+</div>
+<div class="card-grid">
+
+  <div class="card card--alta">
+    <div class="card__header">
+      <h2 class="card__title">La pagina Soccorso Stradale non risponde a nessuna domanda concreta dell'utente</h2>
+      <span class="badge badge--alta">Alta</span>
+    </div>
+    <p class="card__impact-label">Impatto</p>
+    <p class="card__impact-text">
+      Quanto costa? Cosa succede dopo la chiamata? Quanto aspetto? Nessuna tariffa visibile,
+      nessun passaggio operativo, nessuna distinzione tra soci ACI e non soci.
+      <strong>C'è il forte rischio che gli utenti chiamino per domande elementari che il sito
+      potrebbe risolvere da solo</strong>, creando un collo di bottiglia sul canale telefonico.
+    </p>
+  </div>
+
+  <div class="card card--media">
+    <div class="card__header">
+      <h2 class="card__title">Le tariffe del Soccorso Stradale esistono ma non sono facilmente consultabili</h2>
+      <span class="badge badge--media">Media</span>
+    </div>
+    <p class="card__impact-label">Impatto</p>
+    <p class="card__impact-text">
+      Le tariffe sono informazioni davvero utili alla decisione. Il formato attuale —
+      <strong>PDF da scaricare e leggere</strong> — aumenta ulteriormente il carico cognitivo
+      in un momento già stressante. In B2B, l'assenza di trasparenza sui costi può bloccare
+      i processi di procurement.
+    </p>
+  </div>
+
+  <div class="card card--alta">
+    <div class="card__header">
+      <h2 class="card__title">La pagina Noleggio crea un'aspettativa che non soddisfa</h2>
+      <span class="badge badge--alta">Alta</span>
+    </div>
+    <p class="card__impact-label">Impatto</p>
+    <p class="card__impact-text">
+      La voce "Noleggio a breve termine" è nel sottomenu Privati, ma la pagina non mostra
+      subito tariffe né catalogo. Le FAQ sono presenti come download di un PDF: scomodo.
+      <strong>L'utente con intenzione di noleggiare arriva in un vicolo cieco.</strong>
+      La frustrazione si trasferisce sulla percezione dell'intera azienda.
+    </p>
+  </div>
+
+  <div class="card card--alta">
+    <div class="card__header">
+      <h2 class="card__title">Le pagine Aziende sono una copia delle pagine Privati: nessun valore B2B</h2>
+      <span class="badge badge--alta">Alta</span>
+    </div>
+    <p class="card__impact-label">Impatto</p>
+    <p class="card__impact-text">
+      Un fleet manager non trova SLA, rendicontazione né referenze.
+      <strong>Non ha elementi per giustificare internamente la scelta di ACI Global Servizi.</strong>
+    </p>
+  </div>
+
+</div>
+
+<!-- ══ SEZIONE 4: EDITORIALE ══ -->
+<div class="section-banner">
+  <span class="section-banner__title">Contenuto Editoriale e Segnali di Abbandono</span>
+  <span class="section-banner__count">04</span>
+</div>
+<div class="card-grid">
+
+  <div class="card card--alta">
+    <div class="card__header">
+      <h2 class="card__title">La Media Room è ferma al 2020 ma ha piena visibilità in navigazione</h2>
+      <span class="badge badge--alta">Alta</span>
+    </div>
+    <p class="card__impact-label">Impatto</p>
+    <p class="card__impact-text">
+      Una sezione editoriale con le ultime notizie datate 6 anni fa non dovrebbe essere
+      nella navigazione principale. Chi la raggiunge — un giornalista, un partner, un
+      potenziale cliente — <strong>riceve un segnale molto negativo sulla vitalità
+      dell'azienda</strong>, che rafforza i dubbi sulla credibilità del brand.
+    </p>
+  </div>
+
+  <div class="card card--media">
+    <div class="card__header">
+      <h2 class="card__title">Lo slider Media Room compare in fondo a ogni pagina del sito</h2>
+      <span class="badge badge--media">Media</span>
+    </div>
+    <p class="card__impact-label">Impatto</p>
+    <p class="card__impact-text">
+      Il problema della Media Room non resta isolato: <strong>si propaga su tutto il sito,
+      incluse le pagine servizio</strong>, nel momento in cui l'utente sta decidendo se chiamare.
+    </p>
+  </div>
+
+  <div class="card card--media">
+    <div class="card__header">
+      <h2 class="card__title">Le pagine istituzionali (Mission, Valori) sono generiche e senza contenuti</h2>
+      <span class="badge badge--media">Media</span>
+    </div>
+    <p class="card__impact-label">Impatto</p>
+    <p class="card__impact-text">
+      I contenuti potrebbero essere intercambiabili con qualunque altra azienda di servizi.
+      Non c'è nessun elemento concreto che renda credibili i valori dichiarati: nessun dato,
+      nessuna storia, nessun proof point specifico di ACI Global Servizi.
+      <strong>Contribuisce anche a penalizzazioni SEO per contenuto scarso.</strong>
+    </p>
+  </div>
+
+</div>
+
+<!-- ══ SEZIONE 5: BRAND ══ -->
+<div class="section-banner">
+  <span class="section-banner__title">Brand e Posizionamento Sara Assicurazioni</span>
+  <span class="section-banner__count">05</span>
+</div>
+<div class="card-grid">
+
+  <div class="card card--alta">
+    <div class="card__header">
+      <h2 class="card__title">Sara Assicurazioni compare solo come logo tra i partner nel footer</h2>
+      <span class="badge badge--alta">Alta</span>
+    </div>
+    <p class="card__impact-label">Impatto</p>
+    <p class="card__impact-text">
+      Dopo l'acquisizione di ACI Global Servizi, Sara appare nel footer al pari di qualsiasi
+      altro partner istituzionale. Per utenti business e investitori, la solidità del gruppo
+      Sara è un segnale di garanzia rilevante che il sito attuale <strong>nasconde completamente
+      invece di valorizzare</strong>. Si perde un vantaggio competitivo diretto in una categoria
+      ad alto rischio percepito.
+    </p>
+  </div>
+
+  <div class="card card--media">
+    <div class="card__header">
+      <h2 class="card__title">Il sito non comunica nulla sull'acquisizione e su cosa cambia per il cliente</h2>
+      <span class="badge badge--media">Media</span>
+    </div>
+    <p class="card__impact-label">Impatto</p>
+    <p class="card__impact-text">
+      Non esiste nessuna sezione o messaggio che spieghi agli utenti già clienti cosa cambia
+      con l'acquisizione, perché è una garanzia in più, e come si evolve l'offerta.
+      <strong>Il silenzio su un cambiamento rilevante viene letto come mancanza di trasparenza.</strong>
+    </p>
+  </div>
+
+</div>
+
+<!-- NOTA CRITERI -->
+<div class="nota">
+  <p class="nota__title">Nota sui Criteri di Severity</p>
+  <div class="nota__body">
+    <p>
+      Le criticità sono state identificate e classificate attraverso una <strong>valutazione
+      euristica</strong> condotta secondo i principi consolidati della letteratura UX
+      (Nielsen Norman Group, ISO 9241, Krug, Redish, Fogg).
+    </p>
+    <p>La severity di ogni criticità è stata assegnata combinando due criteri:</p>
+    <ul>
+      <li><strong>Impatto sul task principale</strong>: quanto la criticità ostacola il completamento
+      dell'azione più importante per l'utente, ovvero comprendere l'offerta e decidere se e come
+      contattare l'azienda.</li>
+      <li><strong>Ampiezza del danno</strong>: quanti utenti e quante pagine coinvolge; una
+      criticità trasversale a tutto il sito ha peso maggiore di una localizzata.</li>
+    </ul>
+    <p>
+      La valutazione euristica è il metodo standard per identificare problemi di usabilità
+      in assenza di dati primari. È fondato su pattern consolidati e osservazione diretta,
+      ma non sostituisce la misurazione quantitativa. <strong>Alcune priorità potrebbero
+      essere ridefinite se disponibili dati di traffico, heatmap o test con utenti reali.</strong>
+    </p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="doc-footer">
+  <span>Aree Critiche Identificate — ACI Global Servizi</span>
+  <span>Valutazione euristica · NNG / ISO 9241</span>
+</div>
