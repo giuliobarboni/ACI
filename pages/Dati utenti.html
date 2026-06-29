@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+
+<html lang="it">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Ricerca Desk – Passaggio 2: Dati sugli utenti | ACI Global Servizi</title>
+
+  <style>
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+ 
+
+    body {
+
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+
+      background: #F5F6F8;
+
+      color: #1A1A2E;
+
+      padding: 40px 24px;
+
+      font-size: 14px;
+
+      line-height: 1.6;
+
+    }
+
+ 
+
+    header {
+
+      max-width: 960px;
+
+      margin: 0 auto 32px;
+
+    }
+
+ 
+
+    .project-label {
+
+      font-size: 11px;
+
+      font-weight: 600;
+
+      letter-spacing: 0.08em;
+
+      text-transform: uppercase;
+
+      color: #6B7280;
+
+      margin-bottom: 8px;
+
+    }
+
+ 
+
+    h1 {
+
+      font-size: 24px;
+
+      font-weight: 700;
+
+      color: #111827;
+
+      margin-bottom: 6px;
+
+    }
+
+ 
+
+    .subtitle {
+
+      font-size: 14px;
+
+      color: #6B7280;
+
+    }
+
+ 
+
+    /* TREND */
+
+    .trend-block {
+
+      max-width: 960px;
+
+      margin: 0 auto 40px;
+
+      background: #1B2A4A;
+
+      color: #fff;
+
+      border-radius: 12px;
+
+      padding: 28px 32px;
+
+    }
+
+ 
+
+    .trend-block h2 {
+
+      font-size: 13px;
+
+      font-weight: 600;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.07em;
+
+      color: #93C5FD;
+
+      margin-bottom: 12px;
+
+    }
+
+ 
+
+    .trend-block p {
+
+      font-size: 15px;
+
+      line-height: 1.75;
+
+      color: #E2E8F0;
+
+    }
+
+ 
+
+    /* CATEGORIE */
+
+    .category {
+
+      max-width: 960px;
+
+      margin: 0 auto 48px;
+
+    }
+
+ 
+
+    .cat-header {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 14px;
+
+      margin-bottom: 24px;
+
+      padding: 16px 20px;
+
+      border-radius: 10px;
+
+    }
+
+ 
+
+    .cat-sentiment .cat-header { background: #7C2D12; color: #fff; }
+
+    .cat-domande .cat-header { background: #1E40AF; color: #fff; }
+
+    .cat-task .cat-header { background: #047857; color: #fff; }
+
+    .cat-painpoints .cat-header { background: #991B1B; color: #fff; }
+
+ 
+
+    .cat-tag {
+
+      font-size: 11px;
+
+      font-weight: 700;
+
+      letter-spacing: 0.1em;
+
+      text-transform: uppercase;
+
+      padding: 4px 10px;
+
+      background: rgba(255,255,255,0.15);
+
+      border-radius: 4px;
+
+    }
+
+ 
+
+    .cat-header h2 {
+
+      font-size: 18px;
+
+      font-weight: 700;
+
+    }
+
+ 
+
+    .cat-header .cat-desc {
+
+      font-size: 13px;
+
+      opacity: 0.85;
+
+      margin-left: auto;
+
+    }
+
+ 
+
+    /* CARDS */
+
+    .card-grid {
+
+      display: grid;
+
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+
+      gap: 16px;
+
+    }
+
+ 
+
+    .card {
+
+      background: #fff;
+
+      border-radius: 10px;
+
+      border: 1px solid #E5E7EB;
+
+      padding: 20px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 8px;
+
+      transition: box-shadow 0.15s;
+
+    }
+
+ 
+
+    .card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+
+ 
+
+    .card-tag {
+
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 5px;
+
+      font-size: 10px;
+
+      font-weight: 700;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.06em;
+
+      padding: 3px 8px;
+
+      border-radius: 99px;
+
+      width: fit-content;
+
+    }
+
+ 
+
+    .tag-fondato { background: #D1FAE5; color: #065F46; }
+
+    .tag-verosimile { background: #FEF3C7; color: #92400E; }
+
+ 
+
+    .card-label {
+
+      font-size: 15px;
+
+      font-weight: 700;
+
+      color: #111827;
+
+      line-height: 1.35;
+
+    }
+
+ 
+
+    .card-quote {
+
+      font-size: 13px;
+
+      color: #4B5563;
+
+      font-style: italic;
+
+      border-left: 3px solid #D1D5DB;
+
+      padding: 6px 0 6px 12px;
+
+      margin: 4px 0;
+
+    }
+
+ 
+
+    .card-context {
+
+      font-size: 12px;
+
+      color: #6B7280;
+
+    }
+
+ 
+
+    .card-relevance {
+
+      font-size: 12px;
+
+      color: #1D4ED8;
+
+      background: #EFF6FF;
+
+      border-radius: 6px;
+
+      padding: 8px 10px;
+
+      margin-top: 4px;
+
+      border-left: 3px solid #3B82F6;
+
+    }
+
+ 
+
+    .card-relevance strong {
+
+      font-size: 10px;
+
+      font-weight: 700;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.05em;
+
+      display: block;
+
+      margin-bottom: 2px;
+
+      color: #3B82F6;
+
+    }
+
+ 
+
+    .card-source {
+
+      font-size: 11px;
+
+      color: #3B82F6;
+
+      margin-top: 4px;
+
+      text-decoration: none;
+
+      word-break: break-word;
+
+    }
+
+ 
+
+    .card-source:hover { text-decoration: underline; }
+
+ 
+
+    .card-wide { grid-column: 1 / -1; }
+
+ 
+
+    .methodology-note {
+
+      max-width: 960px;
+
+      margin: 0 auto 32px;
+
+      background: #FFF7ED;
+
+      border-left: 3px solid #F59E0B;
+
+      padding: 14px 18px;
+
+      border-radius: 6px;
+
+      font-size: 12px;
+
+      color: #78350F;
+
+    }
+
+ 
+
+    .methodology-note strong {
+
+      display: block;
+
+      margin-bottom: 4px;
+
+      text-transform: uppercase;
+
+      font-size: 10px;
+
+      letter-spacing: 0.06em;
+
+    }
+
+ 
+
+    footer {
+
+      max-width: 960px;
+
+      margin: 40px auto 0;
+
+      font-size: 11px;
+
+      color: #9CA3AF;
+
+      border-top: 1px solid #E5E7EB;
+
+      padding-top: 16px;
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+ 
+
+<header>
+
+  <div class="project-label">ACI Global Servizi — Ricerca Desk</div>
+
+  <h1>Passaggio 2 · Dati sugli utenti</h1>
+
+  <p class="subtitle">Sintesi qualitativa da fonti conversazionali: recensioni Trustpilot, forum, community, articoli di settore. Riferimenti diretti agli utenti italiani del soccorso stradale e dei servizi assicurativi correlati.</p>
+
+</header>
+
+ 
+
+<!-- TREND SUMMARY -->
+
+<div class="trend-block">
+
+  <h2>Sintesi del trend</h2>
+
+  <p>
+
+    Gli utenti italiani arrivano al soccorso stradale in un momento di forte stress emotivo e raramente con piena fiducia nel provider. Il giudizio si polarizza: chi vive un'esperienza positiva ringrazia per nome il singolo operatore o carrista; chi vive un'esperienza negativa accusa il sistema nel suo complesso. I problemi più ricorrenti riguardano i tempi di attesa imprevedibili, la mancanza di trasparenza sui costi, la frammentazione tra centralino e rete di carristi locali, e l'opacità su cosa è effettivamente coperto dalla tessera o dalla polizza. Le domande che gli utenti si pongono prima dell'evento — "quanto costa", "cosa è incluso", "come funziona" — restano in larga parte senza risposta sui canali digitali, e questo si traduce in chiamate evitabili al numero verde e in una percezione diffusa di servizio "opaco".
+
+  </p>
+
+</div>
+
+ 
+
+<div class="methodology-note">
+
+  <strong>Nota sulle fonti</strong>
+
+  Le recensioni Trustpilot mostrano un bias auto-selettivo: chi scrive è prevalentemente chi ha avuto esperienze estreme (molto positive o molto negative). Vanno lette come segnali di pattern, non come distribuzione rappresentativa. ACI Global Servizi su Trustpilot ha 64 recensioni e ACI (Automobile Club d'Italia) ne ha oltre 300 — campioni limitati ma sufficienti per individuare temi ricorrenti.
+
+</div>
+
+ 
+
+<!-- ========== CATEGORIA 1: SENTIMENT ========== -->
+
+<div class="category cat-sentiment">
+
+  <div class="cat-header">
+
+    <span class="cat-tag">Categoria 01</span>
+
+    <h2>Sentiment</h2>
+
+    <span class="cat-desc">Come le persone parlano del soccorso stradale</span>
+
+  </div>
+
+ 
+
+  <div class="card-grid">
+
+ 
+
+    <div class="card">
+
+      <span class="card-tag tag-fondato">✓ Fondato</span>
+
+      <div class="card-label">Tono prevalente nelle recensioni: stress, frustrazione, senso di abbandono</div>
+
+      <div class="card-quote">"Posso solo dire VERGOGNA, noi paghiamo e in cambio abbiamo un servizio che vale poco più di zero!"</div>
+
+      <div class="card-quote">"IL PEGGIOR SERVIZIO CLIENTI CHE ABBIA MAI UTILIZZATO. Rimasto in panne... L'attesa minima non è MAI stata inferiore ai 15 minuti con punte di 30. Ho dovuto fare innumerevoli telefonate perché il carro attrezzi non si trovava mai."</div>
+
+      <div class="card-relevance"><strong>Rilevanza per il progetto</strong>L'utente arriva al sito o al telefono in stato di stress alto. Ogni attrito amplifica l'emozione negativa: ogni informazione non trovata diventa motivo di frustrazione.</div>
+
+      <a class="card-source" href="https://it.trustpilot.com/review/www.aciglobal.it" target="_blank">Trustpilot — ACI Global Servizi</a>
+
+    </div>
+
+ 
+
+    <div class="card">
+
+      <span class="card-tag tag-fondato">✓ Fondato</span>
+
+      <div class="card-label">Le recensioni positive ringraziano per nome il singolo operatore o carrista</div>
+
+      <div class="card-quote">"Voglio ringraziare il signor Luciano Matteo che è stato molto gentile ad aiutarmi a portare il mio mezzo a Benevento... un servizio ottimo e molto professionale."</div>
+
+      <div class="card-quote">"L'autista del carro attrezzi (Fabio)... puntualissimo, super competente ed di una cortesia straordinaria. Messaggio diretto per l'Aci: dovreste assumere solo persone come Fabio."</div>
+
+      <div class="card-relevance"><strong>Rilevanza per il progetto</strong>La qualità del servizio è percepita come una variabile individuale, non sistemica. Il sito può lavorare per costruire un'aspettativa di affidabilità prima dell'esperienza, attraverso dati aggregati (88% soddisfazione, 300 operatori h24).</div>
+
+      <a class="card-source" href="https://it.trustpilot.com/review/www.aci.it?page=4" target="_blank">Trustpilot — ACI Italia</a>
+
+    </div>
+
+ 
+
+    <div class="card">
+
+      <span class="card-tag tag-fondato">✓ Fondato</span>
+
+      <div class="card-label">Forte distinzione tra marchio "importante" e servizio percepito come scadente</div>
+
+      <div class="card-quote">"Mi dispiace per il marchio importante ACI, sempre disponibile e cortese al telefono, ma il soccorritore locale è stato poco professionale."</div>
+
+      <div class="card-relevance"><strong>Rilevanza per il progetto</strong>Il brand ACI ha ancora valore percepito. Il sito può capitalizzare su questo posizionamento per costruire fiducia, ma deve gestire le aspettative su tempi reali e modalità del servizio per evitare il gap tra promessa e realtà.</div>
+
+      <a class="card-source" href="https://it.trustpilot.com/review/www.aciglobal.it" target="_blank">Trustpilot — ACI Global Servizi</a>
+
+    </div>
+
+ 
+
+    <div class="card">
+
+      <span class="card-tag tag-fondato">✓ Fondato</span>
+
+      <div class="card-label">Diffidenza preventiva: gli utenti arrivano al servizio con dubbi sulla reale convenienza</div>
+
+      <div class="card-quote">"Non è tutto oro quello che riluce... La copertura dell'ACI è capillare soprattutto in Italia, dove svolge un lavoro impeccabile. Però se il carro attrezzi deve fare un tragitto di più di 20 Km per venirti a prendere, una parte della spesa è a tuo carico."</div>
+
+      <div class="card-quote">"Spesso chi risponde non sa, non è preciso... La mia impressione è che ci marciano e ci provano."</div>
+
+      <div class="card-relevance"><strong>Rilevanza per il progetto</strong>Trasparenza preventiva sulle coperture e i limiti = riduzione della diffidenza. Le esclusioni e i limiti chilometrici devono essere chiari nel sito, non scoperti al telefono.</div>
+
+      <a class="card-source" href="https://www.camperonline.it/forum/varie/altro-sui-camper/vale-la-pena-farsi-socio-aci/234301" target="_blank">CamperOnLine — Forum soci ACI</a>
+
+    </div>
+
+ 
+
+    <div class="card">
+
+      <span class="card-tag tag-fondato">✓ Fondato</span>
+
+      <div class="card-label">Il confronto con i competitor è frequente e basato sull'esperienza concreta</div>
+
+      <div class="card-quote">"Il giorno dopo ho dovuto chiamare un altro soccorritore (fortunatamente non ACI) che, a differenza del primo, ha prelevato l'auto con molta facilità."</div>
+
+      <div class="card-context">Su Trustpilot, AutoAssist (competitor minore) ha valutazione "Eccellente" 4,3/5 con recensioni che enfatizzano velocità e gentilezza. ACI ha "Scarso" 1,9/5.</div>
+
+      <div class="card-relevance"><strong>Rilevanza per il progetto</strong>L'utente ha riferimenti competitivi diretti. Il sito deve comunicare elementi differenzianti concreti (rete capillare, copertura Europa, app, dati di soddisfazione) non generici.</div>
+
+      <a class="card-source" href="https://it.trustpilot.com/review/autoassist.it" target="_blank">Trustpilot — AutoAssist</a>
+
+    </div>
+
+ 
+
+  </div>
+
+</div>
+
+ 
+
+<!-- ========== CATEGORIA 2: DOMANDE E OBIEZIONI ========== -->
+
+<div class="category cat-domande">
+
+  <div class="cat-header">
+
+    <span class="cat-tag">Categoria 02</span>
+
+    <h2>Domande e obiezioni</h2>
+
+    <span class="cat-desc">Cosa si chiedono prima e durante l'uso del servizio</span>
+
+  </div>
+
+ 
+
+  <div class="card-grid">
+
+ 
+
+    <div class="card">
+
+      <span class="card-tag tag-fondato">✓ Fondato</span>
+
+      <div class="card-label">"Conviene farsi socio ACI? Quanto costa? Cosa copre?"</div>
+
+      <div class="card-context">Domanda ricorrente su forum (CamperOnLine, Triumph Forum, Tripadvisor), su Quora, su articoli SEO ("Conviene fare la tessera ACI?"). Gli utenti cercano comparazioni concrete tra tipologie di tessera e tra ACI e l'assistenza inclusa nella polizza assicurativa.</div>
+
+      <div class="card-relevance"><strong>Rilevanza per il progetto</strong>Domanda di base che il sito attuale non risolve. Una sezione comparativa chiara (tipologie di servizio, cosa è incluso/escluso, esempi pratici) ridurrebbe le obiezioni e il carico sul numero verde.</div>
+
+      <a class="card-source" href="https://www.camperonline.it/forum/varie/altro-sui-camper/vale-la-pena-farsi-socio-aci/234301" target="_blank">CamperOnLine</a>
+
+    </div>
+
+ 
+
+    <div class="card">
+
+      <span class="card-tag tag-fondato">✓ Fondato</span>
+
+      <div class="card-label">"Quanto costa il soccorso se NON sono socio? Cosa devo aspettarmi di pagare?"</div>
+
+      <div class="card-context">Articoli divulgativi (Motor1, Genertel, TuttoSoccorsoStradale) tentano di rispondere con cifre indicative (€116–140 in autostrada, €1–1,23/km extra), segno che la domanda esiste ma le risposte ufficiali sui siti dei provider sono opache.</div>
+
+      <div class="card-relevance"><strong>Rilevanza per il progetto</strong>Trasparenza tariffaria è un asset competitivo. I PDF tariffari attualmente nascosti nel sito ACI Global Servizi vanno trasformati in contenuti scansionabili e linkati dalla pagina soccorso.</div>
+
+      <a class="card-source" href="https://www.genertel.it/blog/carroattrezzi-soccorso-stradale" target="_blank">Genertel — Soccorso stradale e carro attrezzi</a>
+
+    </div>
+
+ 
+
+    <div class="card">
+
+      <span class="card-tag tag-fondato">✓ Fondato</span>
+
+      <div class="card-label">"Quanto tempo devo aspettare per il carro attrezzi?"</div>
+
+      <div class="card-quote">"Ho aspettato in chiamata 2 ore ed il carro attrezzi è arrivato dopo 5 ore. Servizio molto discutibile."</div>
+
+      <div class="card-quote">"Prima prospettiva di attesa, 45 minuti. Seconda proposta di attesa, ulteriori 24 minuti. Terza proposta di attesa, altri 30 minuti."</div>
+
+      <div class="card-relevance"><strong>Rilevanza per il progetto</strong>L'incertezza sui tempi è la principale fonte di frustrazione. Comunicare tempi medi di intervento e fornire tracking in tempo reale via app sono leve forti di rassicurazione.</div>
+
+      <a class="card-source" href="https://it.trustpilot.com/review/www.aci.it?page=3" target="_blank">Trustpilot — ACI</a>
+
+    </div>
+
+ 
+
+    <div class="card">
+
+      <span class="card-tag tag-fondato">✓ Fondato</span>
+
+      <div class="card-label">"L'assistenza copre anche all'estero? Su quali paesi?"</div>
+
+      <div class="card-quote">"Inoltre ci sono alcune nazioni europee dove la tessera non è valida (mi viene in mente la Norvegia, ma ce ne sono altre, la lista completa la trovi scaricando il PDF delle condizioni di copertura dal sito ACI)."</div>
+
+      <div class="card-relevance"><strong>Rilevanza per il progetto</strong>La copertura geografica (32 paesi via ARC Europe) è un asset competitivo che il sito attuale non valorizza visivamente. Una mappa interattiva o un elenco chiaro dei paesi coperti sarebbe più efficace di un PDF scaricabile.</div>
+
+      <a class="card-source" href="https://www.camperonline.it/forum/varie/altro-sui-camper/vale-la-pena-farsi-socio-aci/234301" target="_blank">CamperOnLine</a>
+
+    </div>
+
+ 
+
+    <div class="card">
+
+      <span class="card-tag tag-fondato">✓ Fondato</span>
+
+      <div class="card-label">"Cosa succede se l'auto va portata oltre i km coperti? Devo pagare?"</div>
+
+      <div class="card-quote">"La signorina del centralino mi conferma che è un mio diritto, senza specificare che ci sarebbe stato un costo aggiuntivo. A metà tragitto il carro attrezzi mi chiama per puntualizzare che avrei dovuto pagare 3 euro al km."</div>
+
+      <div class="card-relevance"><strong>Rilevanza per il progetto</strong>Le condizioni "non dette" sono il problema più segnalato. Una pagina che spieghi cosa è incluso, cosa è escluso e cosa è a pagamento — con esempi — costruisce fiducia preventiva.</div>
+
+      <a class="card-source" href="https://it.trustpilot.com/review/www.europassistance.it?page=174" target="_blank">Trustpilot — Europ Assistance</a>
+
+    </div>
+
+ 
+
+    <div class="card">
+
+      <span class="card-tag tag-fondato">✓ Fondato</span>
+
+      <div class="card-label">"Mi danno un'auto sostitutiva? Quando? A quali condizioni?"</div>
+
+      <div class="card-quote">"L'auto sostitutiva mi verrà data solo una volta fatta la diagnosi e solo se la lavorazione supera le 8 ore (anche se l'auto rimane settimane in officina, valgono solo le ore di lavorazione)."</div>
+
+      <div class="card-relevance"><strong>Rilevanza per il progetto</strong>Le condizioni dell'auto sostitutiva sono spesso scoperte solo dopo il guasto. Esplicitare le regole nel sito — preferibilmente in formato Q&A — riduce frustrazione e contenzioso.</div>
+
+      <a class="card-source" href="https://it.trustpilot.com/review/www.aciglobal.it?page=2" target="_blank">Trustpilot — ACI Global Servizi</a>
+
+    </div>
+
+ 
+
+    <div class="card">
+
+      <span class="card-tag tag-fondato">✓ Fondato</span>
+
+      <div class="card-label">"Cosa devo fare quando sono in panne? Quali numeri chiamare?"</div>
+
+      <div class="card-context">Domanda elementare ma molto cercata: numerosi articoli SEO esistono per rispondere ("Cosa fare in caso di guasto", "Auto in panne cosa fare") — segno di un bisogno informativo concreto che il sito di un provider di soccorso dovrebbe presidiare direttamente.</div>
+
+      <div class="card-relevance"><strong>Rilevanza per il progetto</strong>Una pagina "Cosa fare se sei in panne" con istruzioni chiare (sicurezza prima, poi il numero) posizionerebbe ACI Global come autorità informativa e intercetterebbe traffico in fase precedente al bisogno.</div>
+
+      <a class="card-source" href="https://it.motor1.com/features/362722/auto-ferma-in-autostrada-cosa-fare-chiedere-assistenza/" target="_blank">Motor1 — Auto ferma in autostrada</a>
+
+    </div>
+
+ 
+
+    <div class="card">
+
+      <span class="card-tag tag-fondato">✓ Fondato</span>
+
+      <div class="card-label">"L'assistenza inclusa nella mia assicurazione vale lo stesso? Mi serve davvero la tessera ACI?"</div>
+
+      <div class="card-quote">"Avendo una duplicazione di copertura, ho anche rinunciato alla tessera ACI che avevo da un certo numero di anni: l'unica cosa che avrebbe avuto la tessera ACI in più della mia polizza attuale è la possibilità di chiamare il carro attrezzi anche se sono solo passeggero di un'auto di amici."</div>
+
+      <div class="card-relevance"><strong>Rilevanza per il progetto</strong>Il sito deve articolare chiaramente la value proposition specifica della tessera/servizio rispetto alle alternative (polizza, soccorsi locali). Il valore aggiunto va comunicato in modo concreto, con esempi d'uso.</div>
+
+      <a class="card-source" href="https://www.camperonline.it/forum/varie/altro-sui-camper/vale-la-pena-farsi-socio-aci/234301" target="_blank">CamperOnLine</a>
+
+    </div>
+
+ 
+
+  </div>
+
+</div>
+
+ 
+
+<!-- ========== CATEGORIA 3: TASK ========== -->
+
+<div class="category cat-task">
+
+  <div class="cat-header">
+
+    <span class="cat-tag">Categoria 03</span>
+
+    <h2>Task</h2>
+
+    <span class="cat-desc">Cosa cercano concretamente di fare</span>
+
+  </div>
+
+ 
+
+  <div class="card-grid">
+
+ 
+
+    <div class="card">
+
+      <span class="card-tag tag-fondato">✓ Fondato</span>
+
+      <div class="card-label">Chiedere soccorso in emergenza (auto ferma, guasto in corso)</div>
+
+      <div class="card-context">Task primario in massimo stress: l'utente deve poter raggiungere il numero verde 803.116 immediatamente, da qualsiasi punto del sito, da qualsiasi dispositivo. Anche l'app i803116 esiste con questo scopo dichiarato: contatto facilitato con la Centrale Operativa.</div>
+
+      <div class="card-relevance"><strong>Rilevanza per il progetto</strong>Il numero verde deve essere persistente e tappabile in ogni schermata. Su mobile è prioritario il "call now" diretto. L'app va promossa come canale alternativo.</div>
+
+      <a class="card-source" href="https://www.aciglobal.it/aci-global/la-nostra-app" target="_blank">ACI Global Servizi — App i803.116</a>
+
+    </div>
+
+ 
+
+    <div class="card">
+
+      <span class="card-tag tag-fondato">✓ Fondato</span>
+
+      <div class="card-label">Capire cosa fare prima di chiamare (sicurezza, posizione, kit emergenza)</div>
+
+      <div class="card-context">Numerosi articoli divulgativi rispondono a questa esigenza: "indossa il giubbotto catarifrangente, posiziona il triangolo a 50/100m, sposta l'auto in sicurezza, prepara i dati di posizione e veicolo prima di chiamare". Tutte indicazioni che riducono ansia e migliorano l'esito dell'intervento.</div>
+
+      <div class="card-relevance"><strong>Rilevanza per il progetto</strong>Una guida operativa step-by-step nel sito ACI Global Servizi assolverebbe a un task ricorrente e posizionerebbe il brand come autorità competente, non solo come fornitore di servizio.</div>
+
+      <a class="card-source" href="https://www.tcs.ch/it/test-consigli/consigli/controlli-e-manutenzione/guasto-che-fare.php" target="_blank">TCS — Un guasto, cosa fare?</a>
+
+    </div>
+
+ 
+
+    <div class="card">
+
+      <span class="card-tag tag-fondato">✓ Fondato</span>
+
+      <div class="card-label">Valutare l'acquisto di una tessera o di un servizio (fase decisionale)</div>
+
+      <div class="card-context">Gli utenti confrontano tipologie di tessera ACI tra loro (Club, Sistema, Gold) e con le alternative (polizza assicurativa, soccorso pay-per-use). Cercano confronti concreti, esempi d'uso, calcolo del break-even.</div>
+
+      <div class="card-relevance"><strong>Rilevanza per il progetto</strong>Anche se ACI Global Servizi non vende direttamente le tessere (lo fa ACI Italia), il sito deve aiutare l'utente a capire l'offerta. Tabelle comparative chiare e scenari d'uso aiutano la decisione.</div>
+
+      <a class="card-source" href="https://praticheauto.online/blog/articles/tessera-aci-tutto-quello-che-devi-sapere" target="_blank">Pratiche Auto Online</a>
+
+    </div>
+
+ 
+
+    <div class="card">
+
+      <span class="card-tag tag-fondato">✓ Fondato</span>
+
+      <div class="card-label">Tracciare lo stato dell'intervento (dove è il carro attrezzi, quando arriva)</div>
+
+      <div class="card-context">L'app i803116 dichiara la funzione "tracking dell'assistenza". Le recensioni negative segnalano costantemente che, quando l'attesa è lunga, l'utente richiama più volte per avere aggiornamenti — un costo sia per l'utente che per il call center.</div>
+
+      <div class="card-relevance"><strong>Rilevanza per il progetto</strong>Il tracking è una funzione di alto valore che ACI Global ha già nell'app ma non comunica adeguatamente. Promuoverla come differenziatore può abbattere il volume di chiamate di follow-up.</div>
+
+      <a class="card-source" href="https://www.aciglobal.it/aci-global/la-nostra-app" target="_blank">ACI Global Servizi — App i803.116</a>
+
+    </div>
+
+ 
+
+    <div class="card">
+
+      <span class="card-tag tag-fondato">✓ Fondato</span>
+
+      <div class="card-label">Risolvere il post-intervento (officina, auto sostitutiva, rimborsi)</div>
+
+      <div class="card-quote">"Da qui l'odissea, nessuna officina prende in carico la riparazione, decine di chiamate al call center... mi viene detto per 3 giorni che stanno cercando una destinazione."</div>
+
+      <div class="card-relevance"><strong>Rilevanza per il progetto</strong>Il "dopo il traino" è una fase critica spesso ignorata dalla comunicazione. Il sito può chiarire cosa succede dopo l'intervento (rete officine, processo auto sostitutiva, tempi attesi) per ridurre l'incertezza.</div>
+
+      <a class="card-source" href="https://it.trustpilot.com/review/www.aciglobal.it?page=2" target="_blank">Trustpilot — ACI Global Servizi</a>
+
+    </div>
+
+ 
+
+    <div class="card">
+
+      <span class="card-tag tag-fondato">✓ Fondato</span>
+
+      <div class="card-label">Informarsi su tariffe e condizioni prima dell'evento</div>
+
+      <div class="card-context">Le tariffe ACI Global esistono come PDF tabellari per tipo di intervento e fascia oraria, ma sono nascoste sotto la voce "Privati > Tariffe Soccorso Stradale" e non linkate dalla pagina soccorso (analisi as-is del sito attuale).</div>
+
+      <div class="card-relevance"><strong>Rilevanza per il progetto</strong>Le tariffe vanno esposte in modo scansionabile direttamente nelle pagine servizio, non scaricabili come PDF. Va aggiunta differenziazione socio/non socio se rilevante.</div>
+
+      <a class="card-source" href="https://www.aciglobalservizi.it/it/service/privati/privati__tariffe_soccorso_stradale" target="_blank">ACI Global Servizi — Tariffe (PDF)</a>
+
+    </div>
+
+ 
+
+    <div class="card">
+
+      <span class="card-tag tag-fondato">✓ Fondato</span>
+
+      <div class="card-label">Scaricare l'app ed essere preparati prima del bisogno</div>
+
+      <div class="card-context">L'app i803116 è disponibile su App Store e Google Play. Le sue funzioni principali sono: richiesta soccorso con un click, geolocalizzazione automatica, tracking, memorizzazione posizione auto, integrazione tessera ACI, numeri pubblica utilità.</div>
+
+      <div class="card-relevance"><strong>Rilevanza per il progetto</strong>Il download dell'app è un task preventivo: chi la scarica è chi si preoccupa di essere preparato. Il sito può intercettare questo segmento con CTA dedicate, idealmente non solo nel footer.</div>
+
+      <a class="card-source" href="https://apps.apple.com/it/app/aci-global/id398469440" target="_blank">App Store — ACI Global</a>
+
+    </div>
+
+ 
+
+  </div>
+
+</div>
+
+ 
+
+<!-- ========== CATEGORIA 4: PAIN POINTS ========== -->
+
+<div class="category cat-painpoints">
+
+  <div class="cat-header">
+
+    <span class="cat-tag">Categoria 04</span>
+
+    <h2>Obiettivi e pain points</h2>
+
+    <span class="cat-desc">Cosa vogliono ottenere, cosa li blocca o frustra</span>
+
+  </div>
+
+ 
+
+  <div class="card-grid">
+
+ 
+
+    <div class="card">
+
+      <span class="card-tag tag-fondato">✓ Fondato</span>
+
+      <div class="card-label">Pain: tempi di attesa imprevedibili e ripetuti rinvii</div>
+
+      <div class="card-quote">"Chiesto intervento per auto bloccata alle 13.30, alle 17 ancora nessun intervento nonostante varie telefonate di sollecito."</div>
+
+      <div class="card-quote">"Prima prospettiva di attesa, 45 minuti. Seconda proposta di attesa, ulteriori 24 minuti. Terza proposta di attesa, altri 30 minuti."</div>
+
+      <div class="card-relevance"><strong>Rilevanza per il progetto</strong>L'utente accetta tempi lunghi se sono certi. Comunicare un'aspettativa realistica e mantenere l'utente informato in tempo reale è meno costoso che rincorrere chiamate di sollecito.</div>
+
+      <a class="card-source" href="https://it.trustpilot.com/review/www.aciglobal.it?page=2" target="_blank">Trustpilot — ACI Global Servizi</a>
+
+    </div>
+
+ 
+
+    <div class="card">
+
+      <span class="card-tag tag-fondato">✓ Fondato</span>
+
+      <div class="card-label">Pain: frammentazione tra centralino e carrista locale</div>
+
+      <div class="card-quote">"Mi hanno prima risposto dal call center di Aci Global al quale ho prospettato il problema e poi, dopo oltre 20 minuti di attesa, mi hanno ricontattato chiedendomi informazioni più in dettaglio... la centralinista ha cominciato a dare di matto dicendomi di rispettare il lavoro altrui."</div>
+
+      <div class="card-quote">"Il carro attrezzi è arrivato per poi portarmi alla prima officina disponibile perché il centralino si era rifiutato di usare il bollino delle emergenze."</div>
+
+      <div class="card-relevance"><strong>Rilevanza per il progetto</strong>L'utente percepisce ACI Global e il carrista locale come una catena fragile: ogni passaggio è un punto di rottura. Il sito può rassicurare comunicando la dimensione e l'affidabilità della rete (1.800 partner multiservizi).</div>
+
+      <a class="card-source" href="https://it.trustpilot.com/review/www.aci.it?page=8" target="_blank">Trustpilot — ACI Italia</a>
+
+    </div>
+
+ 
+
+    <div class="card">
+
+      <span class="card-tag tag-fondato">✓ Fondato</span>
+
+      <div class="card-label">Pain: opacità dei costi e sorprese in fattura</div>
+
+      <div class="card-quote">"Ho chiamato un altro soccorso... Alla fine spendendo 360 euro ci hanno portato a casa con il carro attrezzi."</div>
+
+      <div class="card-quote">"Mi presenta il conto di €228 che pago con carta e mi rilascia un foglietto colorato sulla cui validità fiscale ho seri dubbi."</div>
+
+      <div class="card-relevance"><strong>Rilevanza per il progetto</strong>La trasparenza tariffaria preventiva è il pain più risolvibile dal sito web. È anche il più alto in termini di ritorno di fiducia: chi sa cosa pagherà non si sente fregato.</div>
+
+      <a class="card-source" href="https://it.trustpilot.com/review/www.aci.it?page=3" target="_blank">Trustpilot — ACI Italia</a>
+
+    </div>
+
+ 
+
+    <div class="card">
+
+      <span class="card-tag tag-fondato">✓ Fondato</span>
+
+      <div class="card-label">Pain: scoprire condizioni e limiti solo durante l'emergenza</div>
+
+      <div class="card-quote">"Mi dicono che siccome l'officina si trova a 37 km di distanza, ovvero 2 km in più rispetto al servizio previsto, il mio veicolo sarà parcheggiato in un deposito, ed eventualmente trasferito il giorno successivo."</div>
+
+      <div class="card-quote">"Loro non possono intervenire perché eseguono questo esercizio esclusivamente dal lunedì al venerdì."</div>
+
+      <div class="card-relevance"><strong>Rilevanza per il progetto</strong>Le condizioni di erogazione (km coperti, orari, perimetro) devono essere accessibili in chiaro prima dell'evento. Una FAQ ben costruita o una sezione "Cosa è incluso" risolve gran parte di queste sorprese.</div>
+
+      <a class="card-source" href="https://it.trustpilot.com/review/www.aciglobal.it?page=2" target="_blank">Trustpilot — ACI Global Servizi</a>
+
+    </div>
+
+ 
+
+    <div class="card">
+
+      <span class="card-tag tag-fondato">✓ Fondato</span>
+
+      <div class="card-label">Pain: difficoltà a parlare con qualcuno che sa rispondere</div>
+
+      <div class="card-quote">"È praticamente impossibile parlare con un operatore in grado di seguire lo stato di avanzamento di una pratica e di dare risposte utili."</div>
+
+      <div class="card-quote">"Decine di chiamate al call center (Romania) dove mi viene detto per 3 giorni che stanno cercando una destinazione."</div>
+
+      <div class="card-relevance"><strong>Rilevanza per il progetto</strong>Self-service ben fatto = sollievo per call center e utente. Tracking, FAQ, stato pratica online riducono la dipendenza dal centralino umano.</div>
+
+      <a class="card-source" href="https://it.trustpilot.com/review/www.europassistance.it?page=2" target="_blank">Trustpilot — Europ Assistance</a>
+
+    </div>
+
+ 
+
+    <div class="card">
+
+      <span class="card-tag tag-fondato">✓ Fondato</span>
+
+      <div class="card-label">Obiettivo: tranquillità, certezza di non essere abbandonati</div>
+
+      <div class="card-quote">"Le 2 volte che ho avuto bisogno mi son trovato benissimo... soddisfatto."</div>
+
+      <div class="card-quote">"È una sicurezza in più... ti dà tranquillità."</div>
+
+      <div class="card-relevance"><strong>Rilevanza per il progetto</strong>Il valore percepito del servizio non è "il carro attrezzi": è "non rimanere soli quando qualcosa va male". Il sito deve costruire fiducia preventiva — la promessa è di affidabilità in caso di bisogno, non di tariffa migliore.</div>
+
+      <a class="card-source" href="https://www.motoclub-tingavert.it/t18337s.html" target="_blank">Forum Motoclub Tingavert</a>
+
+    </div>
+
+ 
+
+    <div class="card">
+
+      <span class="card-tag tag-fondato">✓ Fondato</span>
+
+      <div class="card-label">Obiettivo: tornare a casa, tornare in viaggio (continuità di mobilità)</div>
+
+      <div class="card-quote">"Auto sostitutiva? Un sogno. Ho l'auto in officina e avrei diritto ad un'auto sostitutiva con il servizio Patto chiaro di Stellantis... ebbene dopo 6 giorni sono ancora a piedi."</div>
+
+      <div class="card-relevance"><strong>Rilevanza per il progetto</strong>Il pain "non posso muovermi" è più forte del pain "auto rotta". I servizi accessori (auto sostitutiva, traino a destinazione, taxi, hotel) sono leva di fiducia: vanno comunicati come parte integrante del valore.</div>
+
+      <a class="card-source" href="https://it.trustpilot.com/review/www.aciglobal.it" target="_blank">Trustpilot — ACI Global Servizi</a>
+
+    </div>
+
+ 
+
+    <div class="card">
+
+      <span class="card-tag tag-fondato">✓ Fondato</span>
+
+      <div class="card-label">Pain: rimbalzo tra entità del gruppo (ACI, ACI Global, ACI Sara, compagnia assicurativa)</div>
+
+      <div class="card-quote">"Automobil club mi risponde subito ma mi dice che nonostante io sia tesserato devo contattare un altro numero telefonico proprio perché legato ad un'assicurazione."</div>
+
+      <div class="card-relevance"><strong>Rilevanza per il progetto</strong>L'utente non distingue (e non vuole distinguere) tra le diverse entità. Il sito di ACI Global Servizi deve chiarire il proprio ruolo nel gruppo e gestire chiaramente i punti di passaggio (es. quando rimandare ad ACI Italia o a Sara Assicurazioni).</div>
+
+      <a class="card-source" href="https://it.trustpilot.com/review/www.aci.it?page=3" target="_blank">Trustpilot — ACI Italia</a>
+
+    </div>
+
+ 
+
+  </div>
+
+</div>
+
+ 
+
+<footer>
+
+  Ricerca desk prodotta per il progetto di redesign sito web ACI Global Servizi &nbsp;·&nbsp; Giugno 2026 &nbsp;·&nbsp; Tutti i dati sono "Fondati" — basati su fonti dirette verificate (Trustpilot, forum, articoli divulgativi). Le citazioni dirette sono riportate testualmente. Le recensioni online vanno lette come segnali di pattern, non come campione statisticamente rappresentativo della soddisfazione complessiva.
+
+</footer>
+
+ 
+
+</body>
+
+</html>

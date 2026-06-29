@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+
+<html lang="it">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Ricerca Desk – Passaggio 1: Dati di mercato | ACI Global Servizi</title>
+
+  <style>
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+ 
+
+    body {
+
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+
+      background: #F5F6F8;
+
+      color: #1A1A2E;
+
+      padding: 40px 24px;
+
+      font-size: 14px;
+
+      line-height: 1.6;
+
+    }
+
+ 
+
+    header {
+
+      max-width: 960px;
+
+      margin: 0 auto 32px;
+
+    }
+
+ 
+
+    .project-label {
+
+      font-size: 11px;
+
+      font-weight: 600;
+
+      letter-spacing: 0.08em;
+
+      text-transform: uppercase;
+
+      color: #6B7280;
+
+      margin-bottom: 8px;
+
+    }
+
+ 
+
+    h1 {
+
+      font-size: 24px;
+
+      font-weight: 700;
+
+      color: #111827;
+
+      margin-bottom: 6px;
+
+    }
+
+ 
+
+    .subtitle {
+
+      font-size: 14px;
+
+      color: #6B7280;
+
+    }
+
+ 
+
+    /* --- TREND SUMMARY --- */
+
+    .trend-block {
+
+      max-width: 960px;
+
+      margin: 0 auto 40px;
+
+      background: #1B2A4A;
+
+      color: #fff;
+
+      border-radius: 12px;
+
+      padding: 28px 32px;
+
+    }
+
+ 
+
+    .trend-block h2 {
+
+      font-size: 13px;
+
+      font-weight: 600;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.07em;
+
+      color: #93C5FD;
+
+      margin-bottom: 12px;
+
+    }
+
+ 
+
+    .trend-block p {
+
+      font-size: 15px;
+
+      line-height: 1.75;
+
+      color: #E2E8F0;
+
+    }
+
+ 
+
+    /* --- CLUSTER HEADERS --- */
+
+    .cluster {
+
+      max-width: 960px;
+
+      margin: 0 auto 48px;
+
+    }
+
+ 
+
+    .cluster-header {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 14px;
+
+      margin-bottom: 24px;
+
+      padding: 16px 20px;
+
+      border-radius: 10px;
+
+    }
+
+ 
+
+    .cluster-mondo .cluster-header { background: #1E293B; color: #fff; }
+
+    .cluster-europa .cluster-header { background: #1E40AF; color: #fff; }
+
+    .cluster-italia .cluster-header { background: #047857; color: #fff; }
+
+    .cluster-azienda .cluster-header { background: #6B21A8; color: #fff; }
+
+    .cluster-trasversale .cluster-header { background: #B45309; color: #fff; }
+
+ 
+
+    .cluster-tag {
+
+      font-size: 11px;
+
+      font-weight: 700;
+
+      letter-spacing: 0.1em;
+
+      text-transform: uppercase;
+
+      padding: 4px 10px;
+
+      background: rgba(255,255,255,0.15);
+
+      border-radius: 4px;
+
+    }
+
+ 
+
+    .cluster-header h2 {
+
+      font-size: 18px;
+
+      font-weight: 700;
+
+    }
+
+ 
+
+    .cluster-header .cluster-desc {
+
+      font-size: 13px;
+
+      opacity: 0.8;
+
+      margin-left: auto;
+
+    }
+
+ 
+
+    /* Sub-section all'interno di un cluster */
+
+    .sub-section {
+
+      margin-bottom: 24px;
+
+    }
+
+ 
+
+    .sub-section-title {
+
+      font-size: 14px;
+
+      font-weight: 700;
+
+      color: #111827;
+
+      margin-bottom: 12px;
+
+      padding-bottom: 6px;
+
+      border-bottom: 1px solid #E5E7EB;
+
+    }
+
+ 
+
+    .sub-section-title small {
+
+      font-size: 12px;
+
+      font-weight: 500;
+
+      color: #6B7280;
+
+      margin-left: 8px;
+
+    }
+
+ 
+
+    /* --- CARD GRID --- */
+
+    .card-grid {
+
+      display: grid;
+
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+
+      gap: 16px;
+
+    }
+
+ 
+
+    .card {
+
+      background: #fff;
+
+      border-radius: 10px;
+
+      border: 1px solid #E5E7EB;
+
+      padding: 20px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 8px;
+
+      transition: box-shadow 0.15s;
+
+    }
+
+ 
+
+    .card:hover {
+
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+
+    }
+
+ 
+
+    .card-tag {
+
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 5px;
+
+      font-size: 10px;
+
+      font-weight: 700;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.06em;
+
+      padding: 3px 8px;
+
+      border-radius: 99px;
+
+      width: fit-content;
+
+    }
+
+ 
+
+    .tag-fondato { background: #D1FAE5; color: #065F46; }
+
+    .tag-verosimile { background: #FEF3C7; color: #92400E; }
+
+ 
+
+    .card-kpi {
+
+      font-size: 28px;
+
+      font-weight: 800;
+
+      color: #1B2A4A;
+
+      line-height: 1.1;
+
+    }
+
+ 
+
+    .card-kpi span {
+
+      font-size: 16px;
+
+      font-weight: 600;
+
+      color: #6B7280;
+
+    }
+
+ 
+
+    .card-label {
+
+      font-size: 13px;
+
+      font-weight: 600;
+
+      color: #374151;
+
+    }
+
+ 
+
+    .card-context {
+
+      font-size: 12px;
+
+      color: #9CA3AF;
+
+    }
+
+ 
+
+    .card-relevance {
+
+      font-size: 12px;
+
+      color: #1D4ED8;
+
+      background: #EFF6FF;
+
+      border-radius: 6px;
+
+      padding: 8px 10px;
+
+      margin-top: 2px;
+
+      border-left: 3px solid #3B82F6;
+
+    }
+
+ 
+
+    .card-relevance strong {
+
+      font-size: 10px;
+
+      font-weight: 700;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.05em;
+
+      display: block;
+
+      margin-bottom: 2px;
+
+      color: #3B82F6;
+
+    }
+
+ 
+
+    .card-source {
+
+      font-size: 11px;
+
+      color: #3B82F6;
+
+      margin-top: 4px;
+
+      text-decoration: none;
+
+      word-break: break-word;
+
+    }
+
+ 
+
+    .card-source:hover { text-decoration: underline; }
+
+ 
+
+    .card-wide {
+
+      grid-column: 1 / -1;
+
+    }
+
+ 
+
+    .badge-row {
+
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 8px;
+
+      margin-top: 4px;
+
+    }
+
+ 
+
+    .badge {
+
+      background: #EFF6FF;
+
+      color: #1D4ED8;
+
+      font-size: 11px;
+
+      font-weight: 600;
+
+      padding: 4px 10px;
+
+      border-radius: 99px;
+
+    }
+
+ 
+
+    .card-new { border-color: #6EE7B7; }
+
+ 
+
+    .methodology-note {
+
+      background: #FFF7ED;
+
+      border-left: 3px solid #F59E0B;
+
+      padding: 12px 14px;
+
+      border-radius: 6px;
+
+      font-size: 12px;
+
+      color: #78350F;
+
+      margin-bottom: 16px;
+
+    }
+
+ 
+
+    .methodology-note strong {
+
+      display: block;
+
+      margin-bottom: 4px;
+
+      text-transform: uppercase;
+
+      font-size: 10px;
+
+      letter-spacing: 0.06em;
+
+    }
+
+ 
+
+    footer {
+
+      max-width: 960px;
+
+      margin: 40px auto 0;
+
+      font-size: 11px;
+
+      color: #9CA3AF;
+
+      border-top: 1px solid #E5E7EB;
+
+      padding-top: 16px;
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+ 
+
+<header>
+
+  <div class="project-label">ACI Global Servizi — Ricerca Desk</div>
+
+  <h1>Passaggio 1 · Dati di mercato</h1>
+
+  <p class="subtitle">Fonti verificate al giugno 2026. Dati fondati = basati su fonti citabili. Dati verosimili = plausibili e supportati da pattern di settore, ma senza fonte primaria verificabile.</p>
+
+</header>
+
+ 
+
+<!-- TREND SUMMARY -->
+
+<div class="trend-block">
+
+  <h2>Sintesi del trend</h2>
+
+  <p>
+
+    Il mercato del soccorso stradale è in crescita strutturale a livello globale, europeo e italiano, trainato dall'aumento del parco veicolare, dall'invecchiamento delle auto in circolazione e dalla digitalizzazione dei canali di richiesta assistenza. In Italia, con 701 auto ogni 1.000 abitanti — il rapporto più alto d'Europa — e un parco circolante salito a 41,7 milioni di unità a giugno 2026, la domanda potenziale è particolarmente ampia. Il 42% delle vetture italiane è Euro 4 o inferiore e le proiezioni indicano almeno 15 anni per svecchiare significativamente il parco: la domanda di soccorso per auto tradizionali rimane robusta e strutturale. Il mercato si sta spostando da un modello reattivo verso modelli ibridi che combinano assistenza su richiesta, abbonamenti e prevenzione predittiva. La fiducia è la principale barriera percepita dagli utenti nei confronti dei servizi assicurativi e di assistenza digitale, e la trasparenza su costi, tempi e processi è il fattore chiave per abbatterla.
+
+  </p>
+
+</div>
+
+ 
+
+<!-- ========== CLUSTER 1: NEL MONDO ========== -->
+
+<div class="cluster cluster-mondo">
+
+  <div class="cluster-header">
+
+    <span class="cluster-tag">Cluster 01</span>
+
+    <h2>Nel mondo</h2>
+
+    <span class="cluster-desc">Mercato globale del soccorso stradale</span>
+
+  </div>
+
+ 
+
+  <div class="methodology-note">
+
+    <strong>Nota metodologica</strong>
+
+    Le diverse fonti riportano valori non perfettamente sovrapponibili (range $26–44 mld per il 2024-2025) a causa di metodologie differenti — alcune includono servizi correlati come noleggio sostitutivo e concierge, altre limitano il perimetro al soccorso puro. I dati sono coerenti nella direzione, non nei valori assoluti.
+
+  </div>
+
+ 
+
+  <div class="card-grid">
+
+ 
+
+    <div class="card">
+
+      <span class="card-tag tag-fondato">✓ Fondato</span>
+
+      <div class="card-kpi">$26,6 <span>mld</span></div>
+
+      <div class="card-label">Valore del mercato globale del soccorso stradale (2024)</div>
+
+      <div class="card-context">Proiezione a $35,4 mld entro il 2030 (CAGR 5%). Altre fonti riportano valori più alti includendo servizi correlati</div>
+
+      <div class="card-relevance"><strong>Rilevanza per il progetto</strong>Il mercato cresce: ACI Global Servizi opera in un settore con vento in poppa. Il sito deve riflettere un'azienda solida e in espansione, non in stasi.</div>
+
+      <a class="card-source" href="https://www.grandviewresearch.com/industry-analysis/vehicle-roadside-assistance-market-report" target="_blank">Grand View Research, 2025</a>
+
+    </div>
+
+ 
+
+    <div class="card">
+
+      <span class="card-tag tag-fondato">✓ Fondato</span>
+
+      <div class="card-kpi">5,0–5,6<span>%</span></div>
+
+      <div class="card-label">CAGR atteso del mercato globale 2025–2030/2034</div>
+
+      <div class="card-context">Diverse fonti convergono su una crescita stabile e costante nel medio termine</div>
+
+      <div class="card-relevance"><strong>Rilevanza per il progetto</strong>Crescita costante = più utenti che cercheranno il servizio online. Investire nel sito oggi ha un ritorno crescente nel tempo.</div>
+
+      <a class="card-source" href="https://www.fortunebusinessinsights.com/vehicle-roadside-assistance-market-105835" target="_blank">Fortune Business Insights, 2025</a>
+
+    </div>
+
+ 
+
+    <div class="card">
+
+      <span class="card-tag tag-fondato">✓ Fondato</span>
+
+      <div class="card-kpi">32,2<span>%</span></div>
+
+      <div class="card-label">Quota globale del traino sul totale per tipo di servizio (2024)</div>
+
+      <div class="card-context">Il traino è il servizio dominante a livello globale; seguono sostituzione pneumatici e jump start. <em>Dato globale, non disaggregato per Italia o Europa.</em></div>
+
+      <div class="card-relevance"><strong>Rilevanza per il progetto</strong>Il soccorso stradale è il servizio core. La pagina dedicata è attualmente la più povera di contenuto utile: una contraddizione da risolvere con priorità alta.</div>
+
+      <a class="card-source" href="https://www.grandviewresearch.com/industry-analysis/vehicle-roadside-assistance-market-report" target="_blank">Grand View Research, 2025</a>
+
+    </div>
+
+ 
+
+  </div>
+
+</div>
+
+ 
+
+<!-- ========== CLUSTER 2: IN EUROPA ========== -->
+
+<div class="cluster cluster-europa">
+
+  <div class="cluster-header">
+
+    <span class="cluster-tag">Cluster 02</span>
+
+    <h2>In Europa</h2>
+
+    <span class="cluster-desc">Mercato europeo del soccorso stradale</span>
+
+  </div>
+
+ 
+
+  <div class="card-grid">
+
+ 
+
+    <div class="card">
+
+      <span class="card-tag tag-fondato">✓ Fondato</span>
+
+      <div class="card-kpi">35,7<span>%</span></div>
+
+      <div class="card-label">Quota del mercato globale detenuta dall'Europa (2024)</div>
+
+      <div class="card-context">L'Europa è la prima regione a livello mondiale per fatturato del settore</div>
+
+      <div class="card-relevance"><strong>Rilevanza per il progetto</strong>La copertura europea di ACI Global (32 paesi, rete ARC Europe) è un asset competitivo reale. Va comunicata con più forza di quanto non faccia il sito attuale.</div>
+
+      <a class="card-source" href="https://www.grandviewresearch.com/industry-analysis/vehicle-roadside-assistance-market-report" target="_blank">Grand View Research, 2025</a>
+
+    </div>
+
+ 
+
+    <div class="card">
+
+      <span class="card-tag tag-fondato">✓ Fondato</span>
+
+      <div class="card-kpi">$10–12,8 <span>mld</span></div>
+
+      <div class="card-label">Valore del mercato europeo del soccorso stradale (2024–2025)</div>
+
+      <div class="card-context">Precedence Research stima $10 mld nel 2024 (CAGR 5,64% → $17,4 mld nel 2034). FactMR stima $12,8 mld nel 2025 (CAGR 4,2% → $19,4 mld nel 2035). Le metodologie differiscono ma il trend di crescita è confermato.</div>
+
+      <div class="card-relevance"><strong>Rilevanza per il progetto</strong>Contesto di riferimento per posizionare ACI Global Servizi come player di rilievo nel mercato europeo, non solo italiano.</div>
+
+      <a class="card-source" href="https://www.precedenceresearch.com/vehicle-roadside-assistance-market" target="_blank">Precedence Research / FactMR, 2025</a>
+
+    </div>
+
+ 
+
+    <div class="card">
+
+      <span class="card-tag tag-fondato">✓ Fondato</span>
+
+      <div class="card-label">Top 5 mercati europei per quota (2025)</div>
+
+      <div class="card-context">Germania 28,1% · Francia 22,6% · Regno Unito 19,3% · Italia 13,4% · Spagna 11,2%</div>
+
+      <div class="card-relevance"><strong>Rilevanza per il progetto</strong>L'Italia è il quarto mercato europeo: un'opportunità rilevante ma in un contesto altamente competitivo. La differenziazione comunicativa rispetto ai grandi player è strategica.</div>
+
+      <a class="card-source" href="https://www.factmr.com/report/5348/vehicle-roadside-assistance-market" target="_blank">FactMR, ottobre 2025</a>
+
+    </div>
+
+ 
+
+  </div>
+
+</div>
+
+ 
+
+<!-- ========== CLUSTER 3: IN ITALIA ========== -->
+
+<div class="cluster cluster-italia">
+
+  <div class="cluster-header">
+
+    <span class="cluster-tag">Cluster 03</span>
+
+    <h2>In Italia</h2>
+
+    <span class="cluster-desc">Mercato italiano e parco veicolare</span>
+
+  </div>
+
+ 
+
+  <!-- Sub-section: mercato del soccorso -->
+
+  <div class="sub-section">
+
+    <div class="sub-section-title">Mercato del soccorso stradale in Italia</div>
+
+    <div class="card-grid">
+
+ 
+
+      <div class="card">
+
+        <span class="card-tag tag-fondato">✓ Fondato</span>
+
+        <div class="card-kpi">$684 <span>mln</span></div>
+
+        <div class="card-label">Valore del mercato del soccorso stradale in Italia (2025)</div>
+
+        <div class="card-context">CAGR previsto del 3,1% nel periodo di previsione 2025-2033</div>
+
+        <div class="card-relevance"><strong>Rilevanza per il progetto</strong>Mercato italiano in crescita, seppur più lenta della media europea. Conferma la solidità della domanda nel medio termine.</div>
+
+        <a class="card-source" href="https://www.cognitivemarketresearch.com/vehicle-roadside-assistance-market-report" target="_blank">Cognitive Market Research, 2025</a>
+
+      </div>
+
+ 
+
+    </div>
+
+  </div>
+
+ 
+
+  <!-- Sub-section: ACI 2025 -->
+
+  <div class="sub-section">
+
+    <div class="sub-section-title">Parco veicolare italiano <small>· Annuario Statistico ACI 2025 (dati riferiti al 2024)</small></div>
+
+ 
+
+    <div class="card-grid">
+
+ 
+
+      <div class="card">
+
+        <span class="card-tag tag-fondato">✓ Fondato</span>
+
+        <div class="card-kpi">41,3 <span>mln</span></div>
+
+        <div class="card-label">Auto circolanti in Italia nel 2024</div>
+
+        <div class="card-context">+425.000 unità rispetto al 2023</div>
+
+        <div class="card-relevance"><strong>Rilevanza per il progetto</strong>Bacino d'utenza potenziale enorme. Il sito deve intercettare efficacemente anche chi non è ancora cliente ACI Global.</div>
+
+        <a class="card-source" href="https://aci.gov.it/comunicati-stampa/annuario-statistico-2025-tutti-i-numeri-delle-auto-in-italia/" target="_blank">ACI – Annuario Statistico 2025</a>
+
+      </div>
+
+ 
+
+      <div class="card">
+
+        <span class="card-tag tag-fondato">✓ Fondato</span>
+
+        <div class="card-kpi">701<span>/1.000</span></div>
+
+        <div class="card-label">Auto per 1.000 abitanti in Italia</div>
+
+        <div class="card-context">Indice di motorizzazione più alto d'Europa</div>
+
+        <div class="card-relevance"><strong>Rilevanza per il progetto</strong>Ogni italiano con la patente è un potenziale utente. La domanda non è un problema — lo è la capacità del sito di convertirla.</div>
+
+        <a class="card-source" href="https://aci.gov.it/comunicati-stampa/annuario-statistico-2025-tutti-i-numeri-delle-auto-in-italia/" target="_blank">ACI – Annuario Statistico 2025</a>
+
+      </div>
+
+ 
+
+      <div class="card">
+
+        <span class="card-tag tag-fondato">✓ Fondato</span>
+
+        <div class="card-kpi">13 <span>anni</span></div>
+
+        <div class="card-label">Età media del parco auto circolante (2024)</div>
+
+        <div class="card-context">+2 mesi rispetto al 2023. Il parco invecchia costantemente</div>
+
+        <div class="card-relevance"><strong>Rilevanza per il progetto</strong>Auto più vecchie si rompono più spesso. La domanda di soccorso è strutturale e in crescita, non episodica.</div>
+
+        <a class="card-source" href="https://aci.gov.it/comunicati-stampa/annuario-statistico-2025-tutti-i-numeri-delle-auto-in-italia/" target="_blank">ACI – Annuario Statistico 2025</a>
+
+      </div>
+
+ 
+
+      <div class="card">
+
+        <span class="card-tag tag-fondato">✓ Fondato</span>
+
+        <div class="card-kpi">24<span>%</span></div>
+
+        <div class="card-label">Quota di auto Euro 0–3 (≥19 anni) sul parco circolante</div>
+
+        <div class="card-context">Quasi 1 auto su 4 ha almeno 19 anni</div>
+
+        <div class="card-relevance"><strong>Rilevanza per il progetto</strong>Un quarto del parco è ad altissimo rischio guasto. Rafforza la necessità di comunicare chiaramente costi e tempi del servizio — le domande di questo segmento sono concrete e urgenti.</div>
+
+        <a class="card-source" href="https://aci.gov.it/comunicati-stampa/annuario-statistico-2025-tutti-i-numeri-delle-auto-in-italia/" target="_blank">ACI – Annuario Statistico 2025</a>
+
+      </div>
+
+ 
+
+      <div class="card">
+
+        <span class="card-tag tag-fondato">✓ Fondato</span>
+
+        <div class="card-kpi">€165 <span>mld</span></div>
+
+        <div class="card-label">Spesa totale degli italiani per l'auto nel 2024</div>
+
+        <div class="card-context">Spesa media pro-capite: ~€4.000/anno (+2% vs 2023)</div>
+
+        <div class="card-relevance"><strong>Rilevanza per il progetto</strong>L'auto è una spesa rilevante per le famiglie italiane. L'utente vuole sapere cosa costa il servizio prima di chiamare — la trasparenza tariffaria è un requisito, non un'opzione.</div>
+
+        <a class="card-source" href="https://aci.gov.it/comunicati-stampa/annuario-statistico-2025-tutti-i-numeri-delle-auto-in-italia/" target="_blank">ACI – Annuario Statistico 2025</a>
+
+      </div>
+
+ 
+
+    </div>
+
+  </div>
+
+ 
+
+  <!-- Sub-section: aggiornamento giugno 2026 -->
+
+  <div class="sub-section">
+
+    <div class="sub-section-title">Aggiornamento giugno 2026 <small>· Centro Studi AutoScout24 su base dati ACI + bollettino Auto-Trend ACI</small></div>
+
+ 
+
+    <div class="card-grid">
+
+ 
+
+      <div class="card card-new">
+
+        <span class="card-tag tag-fondato">✓ Fondato</span>
+
+        <div class="card-kpi">41,7 <span>mln</span></div>
+
+        <div class="card-label">Auto circolanti in Italia (aggiornamento giugno 2026)</div>
+
+        <div class="card-context">Elaborazione pubblicata in occasione della Giornata Mondiale dell'Ambiente, 3 giugno 2026</div>
+
+        <div class="card-relevance"><strong>Rilevanza per il progetto</strong>Il parco continua a crescere: il bacino d'utenza potenziale si allarga ogni anno.</div>
+
+        <a class="card-source" href="https://www.adnkronos.com/tecnologia/transizione-energetica-e-mobilita-in-italia-levoluzione-del-parco-auto-circolante_6MnTYsIzmpRk3IMddTmv6t" target="_blank">Adnkronos / Centro Studi AutoScout24, giugno 2026</a>
+
+      </div>
+
+ 
+
+      <div class="card card-new">
+
+        <span class="card-tag tag-fondato">✓ Fondato</span>
+
+        <div class="card-kpi">42<span>%</span></div>
+
+        <div class="card-label">Vetture con classe emissiva Euro 4 o inferiore</div>
+
+        <div class="card-context">Veicoli tecnologicamente obsoleti, più soggetti a guasti e malfunzionamenti</div>
+
+        <div class="card-relevance"><strong>Rilevanza per il progetto</strong>Quasi la metà del parco è ad alto rischio guasto. Domanda di soccorso robusta e prevedibile nel medio termine.</div>
+
+        <a class="card-source" href="https://www.adnkronos.com/tecnologia/transizione-energetica-e-mobilita-in-italia-levoluzione-del-parco-auto-circolante_6MnTYsIzmpRk3IMddTmv6t" target="_blank">Adnkronos / Centro Studi AutoScout24, giugno 2026</a>
+
+      </div>
+
+ 
+
+      <div class="card card-new">
+
+        <span class="card-tag tag-fondato">✓ Fondato</span>
+
+        <div class="card-kpi">&gt;15 <span>anni</span></div>
+
+        <div class="card-label">Tempo stimato per svecchiare il parco verso elettrico/Euro 6</div>
+
+        <div class="card-context">Proiezione basata sui tassi di radiazione dal PRA e sui trend di rinnovo attuali</div>
+
+        <div class="card-relevance"><strong>Rilevanza per il progetto</strong>Il modello di business basato sul soccorso per auto tradizionali è solido per almeno un quindicennio. Non è un mercato in declino.</div>
+
+        <a class="card-source" href="https://www.adnkronos.com/tecnologia/transizione-energetica-e-mobilita-in-italia-levoluzione-del-parco-auto-circolante_6MnTYsIzmpRk3IMddTmv6t" target="_blank">Adnkronos / Centro Studi AutoScout24, giugno 2026</a>
+
+      </div>
+
+ 
+
+      <div class="card card-new">
+
+        <span class="card-tag tag-fondato">✓ Fondato</span>
+
+        <div class="card-kpi">151<span>/100</span></div>
+
+        <div class="card-label">Auto usate vendute ogni 100 nuove immatricolate (maggio 2026)</div>
+
+        <div class="card-context">La quota di vetture con più di 20 anni nei passaggi di proprietà è in aumento</div>
+
+        <div class="card-relevance"><strong>Rilevanza per il progetto</strong>Il mercato è sempre più trainato dall'usato anziano. Chi compra un'auto usata vecchia ha bisogno di soccorso — e probabilmente non ha ancora un provider di riferimento.</div>
+
+        <a class="card-source" href="https://motori.ilmessaggero.it/economia/aci_a_maggio_ogni_100_vetture_nuove_vendute_151_usate_cresce_il_ricambio_del_parco_circolante-9593542.html" target="_blank">Il Messaggero / ACI Auto-Trend, giugno 2026</a>
+
+      </div>
+
+ 
+
+    </div>
+
+  </div>
+
+ 
+
+</div>
+
+ 
+
+<!-- ========== CLUSTER 4: CONTESTO AZIENDALE ========== -->
+
+<div class="cluster cluster-azienda">
+
+  <div class="cluster-header">
+
+    <span class="cluster-tag">Cluster 04</span>
+
+    <h2>Contesto aziendale</h2>
+
+    <span class="cluster-desc">Acquisizione Sara – ACI Global Servizi</span>
+
+  </div>
+
+ 
+
+  <div class="card-grid">
+
+ 
+
+    <div class="card card-wide">
+
+      <span class="card-tag tag-fondato">✓ Fondato</span>
+
+      <div class="card-label">Sara Assicurazioni ha completato l'acquisizione del 100% di ACI Global Servizi (fine 2025 / inizio 2026)</div>
+
+      <div class="card-context">
+
+        L'operazione posiziona ACI Global Servizi come «fulcro» della capacità di Sara di offrire servizi di assistenza integrati, «non limitati alla dimensione stradale ma estesi a molteplici ambiti della mobilità e della vita quotidiana» (Alberto Tosti, DG Sara Assicurazioni).
+
+      </div>
+
+      <div class="badge-row">
+
+        <span class="badge">100% del capitale acquisito</span>
+
+        <span class="badge">Continuità gestionale confermata</span>
+
+        <span class="badge">Sinergie con ACI Group</span>
+
+        <span class="badge">Espansione beyond automotive</span>
+
+      </div>
+
+      <div class="card-relevance"><strong>Rilevanza per il progetto</strong>L'acquisizione è un segnale di solidità e ambizione che il sito attuale non comunica. Sara deve diventare visibile come garante istituzionale, non come logo nel footer.</div>
+
+      <a class="card-source" href="https://www.sara.it/news/sara-assicurazioni-completa-lacquisizione-di-aci-global-servizi" target="_blank">Sara Assicurazioni – Comunicato ufficiale</a>
+
+    </div>
+
+ 
+
+  </div>
+
+</div>
+
+ 
+
+<!-- ========== CLUSTER 5: TREND TRASVERSALI ========== -->
+
+<div class="cluster cluster-trasversale">
+
+  <div class="cluster-header">
+
+    <span class="cluster-tag">Cluster 05</span>
+
+    <h2>Trend trasversali</h2>
+
+    <span class="cluster-desc">Digitale, UX e comportamento utente</span>
+
+  </div>
+
+ 
+
+  <div class="card-grid">
+
+ 
+
+    <div class="card">
+
+      <span class="card-tag tag-fondato">✓ Fondato</span>
+
+      <div class="card-kpi">$9,5→$26,7 <span>mld</span></div>
+
+      <div class="card-label">Mercato globale delle app assicurative mobile (2023→2032, CAGR 12%)</div>
+
+      <div class="card-context">Le app diventano canale primario per la gestione dell'assistenza</div>
+
+      <div class="card-relevance"><strong>Rilevanza per il progetto</strong>L'app i803116 esiste già ed è funzionalmente valida. Va promossa come canale di contatto primario, non sepolta nel "Chi siamo".</div>
+
+      <a class="card-source" href="https://gapsystudio.com/blog/insurance-app-design/" target="_blank">Gapsy Studio / dati di mercato, 2025</a>
+
+    </div>
+
+ 
+
+    <div class="card">
+
+      <span class="card-tag tag-fondato">✓ Fondato</span>
+
+      <div class="card-kpi">$10→$16,7 <span>mld</span></div>
+
+      <div class="card-label">Mercato automotive telematics (2025→2032, CAGR 7,6%)</div>
+
+      <div class="card-context">La telematica diventa il backbone digitale del settore automotive</div>
+
+      <div class="card-relevance"><strong>Rilevanza per il progetto</strong>Contesto strategico di medio termine: il mercato si muove verso assistenza predittiva e connessa. Rilevante per il posizionamento futuro di ACI Global nel Gruppo Sara.</div>
+
+      <a class="card-source" href="https://www.marketsandmarkets.com/ResearchInsight/telematics-industry.asp" target="_blank">MarketsandMarkets, 2025</a>
+
+    </div>
+
+ 
+
+    <div class="card">
+
+      <span class="card-tag tag-fondato">✓ Fondato</span>
+
+      <div class="card-label" style="font-size:15px; line-height:1.4;">La fiducia è la principale barriera percepita dagli utenti verso i servizi assicurativi e di assistenza digitale</div>
+
+      <div class="card-context">"Un'unica violazione della fiducia può distruggere anni di credibilità accumulata lentamente" (Jakob Nielsen). La trasparenza su costi, tempi e processi è il fattore chiave per costruire credibilità</div>
+
+      <div class="card-relevance"><strong>Rilevanza per il progetto</strong>I dati forti di ACI Global (88% soddisfazione, 300 operatori h24, 32 paesi coperti) devono essere in evidenza nelle pagine servizio, non sepolti come voce di "Chi siamo".</div>
+
+      <a class="card-source" href="https://www.nngroup.com/articles/communicating-trustworthiness/" target="_blank">Nielsen Norman Group — Trust or Bust: Communicating Trustworthiness in Web Design</a>
+
+    </div>
+
+ 
+
+    <div class="card">
+
+      <span class="card-tag tag-fondato">✓ Fondato</span>
+
+      <div class="card-label" style="font-size:15px; line-height:1.4;">La facilità di interazione è un fattore competitivo diretto nella scelta del provider</div>
+
+      <div class="card-context">La piramide della fiducia di NN/g identifica usabilità di base e chiarezza informativa come prerequisiti per qualsiasi azione dell'utente sul sito</div>
+
+      <div class="card-relevance"><strong>Rilevanza per il progetto</strong>Un sito difficile da usare fa perdere clienti. Il numero 803.116 deve essere visibile e raggiungibile in ogni momento del percorso, e le informazioni operative (costi, tempi, come funziona) devono essere immediate.</div>
+
+      <a class="card-source" href="https://www.nngroup.com/videos/pyramid-trust/" target="_blank">Nielsen Norman Group — Pyramid of Trust</a>
+
+    </div>
+
+ 
+
+    <div class="card">
+
+      <span class="card-tag tag-fondato">✓ Fondato</span>
+
+      <div class="card-label" style="font-size:15px; line-height:1.4;">Una cattiva esperienza utente porta ad abbandono e perdita di clienti</div>
+
+      <div class="card-context">Pattern documentato in modo trasversale dalla letteratura UX: la fiducia è "difficile da costruire e facile da perdere" e l'esperienza effettiva del cliente conta più della comunicazione</div>
+
+      <div class="card-relevance"><strong>Rilevanza per il progetto</strong>Critico per il segmento B2B: un fleet manager che non trova SLA e tariffe non ricontatta. La seconda chance non esiste.</div>
+
+      <a class="card-source" href="https://www.nngroup.com/articles/communicating-trustworthiness/" target="_blank">Nielsen Norman Group — Trust or Bust</a>
+
+    </div>
+
+ 
+
+    <div class="card">
+
+      <span class="card-tag tag-verosimile">~ Verosimile</span>
+
+      <div class="card-kpi">&lt;1<span>%</span></div>
+
+      <div class="card-label">Click-through rate medio sulle slide di un hero carousel (prima slide)</div>
+
+      <div class="card-context">Le slide successive hanno CTR praticamente zero. Dato consolidato dalla letteratura UX</div>
+
+      <div class="card-relevance"><strong>Rilevanza per il progetto</strong>Il carousel che occupa tutta la homepage non viene letto da nessuno. Giustifica la sua rimozione e la sostituzione con un hero statico orientato alla conversione.</div>
+
+      <a class="card-source" href="https://www.nngroup.com/articles/auto-forwarding/" target="_blank">Nielsen Norman Group – Auto-Forwarding Carousels</a>
+
+    </div>
+
+ 
+
+    <div class="card">
+
+      <span class="card-tag tag-fondato">✓ Fondato</span>
+
+      <div class="card-label">Trend: modelli on-demand e subscription-based affiancano il modello tradizionale</div>
+
+      <div class="card-context">"Subscription-based models and pay-per-use services are gaining popularity, especially among younger demographics" (Allied Market Research, febbraio 2025). Il mercato si arricchisce di servizi flessibili: pay-per-use, abbonamenti annuali con numero fisso di interventi</div>
+
+      <div class="card-relevance"><strong>Rilevanza per il progetto</strong>Il sito deve rendere immediatamente chiaro quale modello offre ACI Global e a chi si rivolge — privati, aziende, soci ACI hanno percorsi diversi.</div>
+
+      <a class="card-source" href="https://www.alliedmarketresearch.com/roadside-assistance-market" target="_blank">Allied Market Research — Roadside Assistance Market, febbraio 2025</a>
+
+    </div>
+
+ 
+
+    <div class="card">
+
+      <span class="card-tag tag-fondato">✓ Fondato</span>
+
+      <div class="card-label">Trend: veicoli elettrici richiedono assistenza specializzata</div>
+
+      <div class="card-context">Ricarica mobile, traino verso stazione di ricarica: nicchia in crescita che i provider tradizionali devono presidiare</div>
+
+      <div class="card-relevance"><strong>Rilevanza per il progetto</strong>Opportunità futura da tenere a mente nell'architettura del sito: predisporre spazio per servizi EV senza destrutturare l'offerta esistente.</div>
+
+      <a class="card-source" href="https://www.verifiedmarketresearch.com/product/vehicle-roadside-assistance-market/" target="_blank">Verified Market Research, 2025</a>
+
+    </div>
+
+ 
+
+  </div>
+
+</div>
+
+ 
+
+<footer>
+
+  Ricerca desk prodotta per il progetto di redesign sito web ACI Global Servizi &nbsp;·&nbsp; Giugno 2026 &nbsp;·&nbsp; Tutti i dati etichettati "Fondato" sono verificati da fonti citate. I dati "Verosimili" sono pattern documentati dalla letteratura UX/HCI ma non da una singola fonte primaria verificabile per il contesto specifico.
+
+</footer>
+
+ 
+
+</body>
+
+</html>

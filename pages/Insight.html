@@ -1,0 +1,1547 @@
+<!DOCTYPE html>
+
+<html lang="it">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Ricerca Desk – Passaggio 3: Insight preliminari (versione interna) | ACI Global Servizi</title>
+
+  <style>
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+ 
+
+    body {
+
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+
+      background: #F5F6F8;
+
+      color: #1A1A2E;
+
+      padding: 40px 24px;
+
+      font-size: 14px;
+
+      line-height: 1.6;
+
+    }
+
+ 
+
+    header {
+
+      max-width: 960px;
+
+      margin: 0 auto 32px;
+
+    }
+
+ 
+
+    .project-label {
+
+      font-size: 11px;
+
+      font-weight: 600;
+
+      letter-spacing: 0.08em;
+
+      text-transform: uppercase;
+
+      color: #6B7280;
+
+      margin-bottom: 8px;
+
+    }
+
+ 
+
+    h1 {
+
+      font-size: 24px;
+
+      font-weight: 700;
+
+      color: #111827;
+
+      margin-bottom: 6px;
+
+    }
+
+ 
+
+    .subtitle {
+
+      font-size: 14px;
+
+      color: #6B7280;
+
+    }
+
+ 
+
+    .internal-badge {
+
+      display: inline-block;
+
+      background: #FEF3C7;
+
+      color: #92400E;
+
+      font-size: 11px;
+
+      font-weight: 700;
+
+      letter-spacing: 0.08em;
+
+      text-transform: uppercase;
+
+      padding: 4px 10px;
+
+      border-radius: 4px;
+
+      margin-bottom: 12px;
+
+    }
+
+ 
+
+    /* TREND */
+
+    .trend-block {
+
+      max-width: 960px;
+
+      margin: 0 auto 40px;
+
+      background: #1B2A4A;
+
+      color: #fff;
+
+      border-radius: 12px;
+
+      padding: 28px 32px;
+
+    }
+
+ 
+
+    .trend-block h2 {
+
+      font-size: 13px;
+
+      font-weight: 600;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.07em;
+
+      color: #93C5FD;
+
+      margin-bottom: 12px;
+
+    }
+
+ 
+
+    .trend-block p {
+
+      font-size: 15px;
+
+      line-height: 1.75;
+
+      color: #E2E8F0;
+
+    }
+
+ 
+
+    /* CATEGORIE */
+
+    .category {
+
+      max-width: 960px;
+
+      margin: 0 auto 48px;
+
+    }
+
+ 
+
+    .cat-header {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 14px;
+
+      margin-bottom: 24px;
+
+      padding: 16px 20px;
+
+      border-radius: 10px;
+
+    }
+
+ 
+
+    .cat-design .cat-header { background: #1E40AF; color: #fff; }
+
+    .cat-strategici .cat-header { background: #6B21A8; color: #fff; }
+
+    .cat-aperte .cat-header { background: #B45309; color: #fff; }
+
+ 
+
+    .cat-tag {
+
+      font-size: 11px;
+
+      font-weight: 700;
+
+      letter-spacing: 0.1em;
+
+      text-transform: uppercase;
+
+      padding: 4px 10px;
+
+      background: rgba(255,255,255,0.15);
+
+      border-radius: 4px;
+
+    }
+
+ 
+
+    .cat-header h2 {
+
+      font-size: 18px;
+
+      font-weight: 700;
+
+    }
+
+ 
+
+    .cat-header .cat-desc {
+
+      font-size: 13px;
+
+      opacity: 0.8;
+
+      margin-left: auto;
+
+    }
+
+ 
+
+    /* CARD */
+
+    .card-grid {
+
+      display: grid;
+
+      grid-template-columns: 1fr;
+
+      gap: 16px;
+
+    }
+
+ 
+
+    .card {
+
+      background: #fff;
+
+      border-radius: 10px;
+
+      border: 1px solid #E5E7EB;
+
+      padding: 22px 24px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 10px;
+
+    }
+
+ 
+
+    .card-selected {
+
+      border-color: #1E40AF;
+
+      border-width: 2px;
+
+      background: #fff;
+
+    }
+
+ 
+
+    .card-discarded {
+
+      background: #FAFAFA;
+
+      opacity: 0.85;
+
+    }
+
+ 
+
+    .card-top-row {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 8px;
+
+      flex-wrap: wrap;
+
+    }
+
+ 
+
+    .card-tag {
+
+      display: inline-flex;
+
+      align-items: center;
+
+      font-size: 10px;
+
+      font-weight: 700;
+
+      letter-spacing: 0.06em;
+
+      text-transform: uppercase;
+
+      padding: 4px 8px;
+
+      border-radius: 4px;
+
+    }
+
+ 
+
+    .tag-fondato { background: #D1FAE5; color: #065F46; }
+
+    .tag-verosimile { background: #FEF3C7; color: #92400E; }
+
+    .tag-selezionato { background: #DBEAFE; color: #1E40AF; }
+
+    .tag-scartato { background: #F3F4F6; color: #6B7280; }
+
+ 
+
+    .card-title {
+
+      font-size: 16px;
+
+      font-weight: 700;
+
+      color: #111827;
+
+      line-height: 1.4;
+
+    }
+
+ 
+
+    .card-body {
+
+      font-size: 13.5px;
+
+      color: #374151;
+
+      line-height: 1.65;
+
+    }
+
+ 
+
+    .card-evidence {
+
+      background: #F9FAFB;
+
+      border-left: 3px solid #1E40AF;
+
+      padding: 12px 16px;
+
+      border-radius: 4px;
+
+      font-size: 13px;
+
+      color: #1F2937;
+
+      font-style: italic;
+
+      line-height: 1.6;
+
+    }
+
+ 
+
+    .cat-strategici .card-evidence {
+
+      border-left-color: #6B21A8;
+
+    }
+
+ 
+
+    .card-implication {
+
+      font-size: 13px;
+
+      color: #1F2937;
+
+      line-height: 1.6;
+
+    }
+
+ 
+
+    .card-implication strong {
+
+      display: block;
+
+      font-size: 10px;
+
+      font-weight: 700;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.06em;
+
+      color: #6B7280;
+
+      margin-bottom: 4px;
+
+    }
+
+ 
+
+    .card-rationale {
+
+      background: #FFFBEB;
+
+      border-left: 3px solid #F59E0B;
+
+      padding: 10px 14px;
+
+      border-radius: 4px;
+
+      font-size: 12.5px;
+
+      color: #78350F;
+
+      line-height: 1.55;
+
+    }
+
+ 
+
+    .card-rationale strong {
+
+      display: block;
+
+      font-size: 10px;
+
+      font-weight: 700;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.06em;
+
+      margin-bottom: 4px;
+
+    }
+
+ 
+
+    .card-sources {
+
+      font-size: 11.5px;
+
+      color: #6B7280;
+
+      padding-top: 6px;
+
+    }
+
+ 
+
+    .card-sources a {
+
+      color: #2563EB;
+
+      text-decoration: none;
+
+      margin-right: 12px;
+
+    }
+
+ 
+
+    .card-sources a:hover { text-decoration: underline; }
+
+ 
+
+    /* DIAGRAMMA */
+
+    .diagram-block {
+
+      max-width: 960px;
+
+      margin: 0 auto 48px;
+
+      background: #fff;
+
+      border-radius: 10px;
+
+      border: 1px solid #E5E7EB;
+
+      padding: 28px;
+
+    }
+
+ 
+
+    .diagram-title {
+
+      font-size: 16px;
+
+      font-weight: 700;
+
+      color: #111827;
+
+      margin-bottom: 4px;
+
+    }
+
+ 
+
+    .diagram-caption {
+
+      font-size: 13px;
+
+      color: #6B7280;
+
+      margin-bottom: 20px;
+
+    }
+
+ 
+
+    .diagram-block svg {
+
+      display: block;
+
+      width: 100%;
+
+      height: auto;
+
+    }
+
+ 
+
+    .diagram-footnote {
+
+      font-size: 12px;
+
+      color: #6B7280;
+
+      margin-top: 14px;
+
+      padding-top: 14px;
+
+      border-top: 1px solid #F3F4F6;
+
+      line-height: 1.55;
+
+    }
+
+ 
+
+    .methodology-note {
+
+      max-width: 960px;
+
+      margin: 0 auto 32px;
+
+      background: #FFF7ED;
+
+      border-left: 3px solid #F59E0B;
+
+      padding: 14px 18px;
+
+      border-radius: 6px;
+
+      font-size: 12.5px;
+
+      color: #78350F;
+
+      line-height: 1.55;
+
+    }
+
+ 
+
+    .methodology-note strong {
+
+      display: block;
+
+      margin-bottom: 4px;
+
+      text-transform: uppercase;
+
+      font-size: 10px;
+
+      letter-spacing: 0.06em;
+
+    }
+
+ 
+
+    footer {
+
+      max-width: 960px;
+
+      margin: 40px auto 0;
+
+      font-size: 11px;
+
+      color: #9CA3AF;
+
+      border-top: 1px solid #E5E7EB;
+
+      padding-top: 16px;
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+ 
+
+<header>
+
+  <span class="internal-badge">Documento interno</span>
+
+  <div class="project-label">ACI Global Servizi — Ricerca Desk</div>
+
+  <h1>Passaggio 3 · Insight preliminari (versione interna)</h1>
+
+  <p class="subtitle">Set completo degli insight estratti dai dati di mercato (P1) e dai dati utenti (P2). Include il razionale di selezione: quali insight vanno nel deliverable cliente e perché alcuni sono stati esclusi.</p>
+
+</header>
+
+ 
+
+<div class="methodology-note">
+
+  <strong>Nota di lettura</strong>
+
+  Gli insight con bordo blu e tag "Selezionato" sono i 6 portati nel deliverable cliente. Gli altri restano qui come materiale di lavoro: contengono dati validi ma sono stati esclusi per fragilità argomentativa, scarsa rilevanza progettuale, o per evitare ridondanza. Il razionale di esclusione è esplicitato in ogni card scartata.
+
+</div>
+
+ 
+
+<!-- TREND SUMMARY -->
+
+<div class="trend-block">
+
+  <h2>Sintesi del trend</h2>
+
+  <p>
+
+    Il sito attuale di ACI Global Servizi serve, di fatto, due bisogni distinti che oggi non sono né riconosciuti né separati dall'architettura: una modalità informativa (utenti che vogliono capire cosa è il servizio, cosa costa, cosa copre prima di averne bisogno) e una modalità emergenziale (utenti in stress che devono attivare il soccorso). I dati di mercato indicano un bacino strutturalmente in crescita, ma il fattore competitivo concreto non è la velocità, è la certezza: gli utenti accettano tempi lunghi se sono prevedibili. La fiducia, come documentato dalla letteratura UX, si costruisce sulla trasparenza preventiva, ed è esattamente il pain più segnalato dalle recensioni e il più risolvibile attraverso il canale web. L'acquisizione di ACI Global Servizi da parte di Sara Assicurazioni (fine 2025 / inizio 2026) apre una finestra temporale per riposizionare il sito coerentemente con la nuova fase del gruppo.
+
+  </p>
+
+</div>
+
+ 
+
+<!-- ========== INSIGHT DI DESIGN ========== -->
+
+<div class="category cat-design">
+
+  <div class="cat-header">
+
+    <span class="cat-tag">Sezione 01</span>
+
+    <h2>Insight di design</h2>
+
+    <span class="cat-desc">Pattern, criticità, comportamenti da supportare</span>
+
+  </div>
+
+ 
+
+  <div class="card-grid">
+
+ 
+
+    <!-- D1 — SELEZIONATO -->
+
+    <div class="card card-selected">
+
+      <div class="card-top-row">
+
+        <span class="card-tag tag-selezionato">✓ Selezionato per il cliente</span>
+
+        <span class="card-tag tag-fondato">✓ Fondato</span>
+
+      </div>
+
+      <div class="card-title">D1. Trasparenza preventiva su costi e condizioni</div>
+
+      <div class="card-body">Le condizioni "non dette" (costi extra, chilometri coperti, orari, perimetro geografico, auto sostitutiva) sono il problema più segnalato dalle recensioni. Sono anche il pain più direttamente risolvibile attraverso il canale web. Oggi le tariffe ACI Global esistono come PDF tabellari nascosti sotto "Privati > Tariffe Soccorso Stradale" e non sono linkate dalla pagina servizio.</div>
+
+      <div class="card-evidence">"La signorina del centralino mi conferma che è un mio diritto, senza specificare che ci sarebbe stato un costo aggiuntivo. A metà tragitto il carro attrezzi mi chiama per puntualizzare che avrei dovuto pagare 3 euro al km."</div>
+
+      <div class="card-implication">
+
+        <strong>Implicazione progettuale</strong>
+
+        Tariffario scansionabile in HTML direttamente nelle pagine servizio, non scaricabile come PDF. Sezione "cosa è incluso / cosa non è incluso" con esempi concreti (km, orari, perimetro). Differenziazione visiva tra socio e non socio se rilevante.
+
+      </div>
+
+      <div class="card-sources">
+
+        <a href="https://it.trustpilot.com/review/www.europassistance.it?page=174" target="_blank">Trustpilot Europ Assistance</a>
+
+        <a href="https://it.trustpilot.com/review/www.aciglobal.it?page=2" target="_blank">Trustpilot ACI Global</a>
+
+        <a href="https://www.aciglobalservizi.it/it/service/privati/privati__tariffe_soccorso_stradale" target="_blank">PDF tariffe ACI Global (as-is)</a>
+
+      </div>
+
+    </div>
+
+ 
+
+    <!-- D2 — SELEZIONATO -->
+
+    <div class="card card-selected">
+
+      <div class="card-top-row">
+
+        <span class="card-tag tag-selezionato">✓ Selezionato per il cliente</span>
+
+        <span class="card-tag tag-fondato">✓ Fondato</span>
+
+      </div>
+
+      <div class="card-title">D2. L'app i803.116 è già funzionalmente valida, è il sito che la nasconde</div>
+
+      <div class="card-body">L'app integra le funzioni che le recensioni negative chiedono: geolocalizzazione, click-to-call, tracking dell'intervento, memorizzazione posizione auto. Oggi è collocata sotto "Chi siamo > La nostra app", in fondo all'IA, lontana dai task primari.</div>
+
+      <div class="card-evidence">Funzioni dichiarate sull'App Store: "richiesta soccorso con un click, geolocalizzazione automatica, tracking, memorizzazione posizione auto, integrazione tessera ACI, numeri pubblica utilità". Mercato globale delle app assicurative mobile: $9,5 mld nel 2023 → $26,7 mld nel 2032 (CAGR 12%).</div>
+
+      <div class="card-implication">
+
+        <strong>Implicazione progettuale</strong>
+
+        Promuovere l'app in homepage e nelle pagine soccorso come canale alternativo al telefono, con CTA dedicate iOS/Android. Spostarla dall'ambito "corporate / chi siamo" all'ambito "come ti aiutiamo".
+
+      </div>
+
+      <div class="card-sources">
+
+        <a href="https://apps.apple.com/it/app/aci-global/id398469440" target="_blank">App Store ACI Global</a>
+
+        <a href="https://gapsystudio.com/blog/insurance-app-design/" target="_blank">Gapsy Studio 2025</a>
+
+      </div>
+
+    </div>
+
+ 
+
+    <!-- D3 — SELEZIONATO (riformulato da "stress emotivo") -->
+
+    <div class="card card-selected">
+
+      <div class="card-top-row">
+
+        <span class="card-tag tag-selezionato">✓ Selezionato per il cliente</span>
+
+        <span class="card-tag tag-fondato">✓ Fondato</span>
+
+      </div>
+
+      <div class="card-title">D3. Due modalità d'uso distinte, oggi non riconosciute dall'IA</div>
+
+      <div class="card-body">Il sito serve due bisogni diversi: una modalità informativa (l'utente che vuole capire cosa è il servizio, quanto costa, cosa copre prima di averne bisogno) e una modalità emergenziale (l'utente in stress che deve attivare il soccorso). L'IA attuale non distingue le due modalità: i servizi core sono sepolti in sottosezioni e il numero 803.116 non è il punto di arrivo esplicito di nessun percorso.</div>
+
+      <div class="card-evidence">Domande ricorrenti su forum, articoli SEO e Trustpilot: "conviene farsi socio?", "quanto costa se non sono socio?", "cosa è incluso?", "fino a dove mi portano?" (modalità informativa) vs "chi chiamo?", "quanto devo aspettare?", "a che punto è il carro?" (modalità emergenziale).</div>
+
+      <div class="card-implication">
+
+        <strong>Implicazione progettuale</strong>
+
+        Ristrutturare l'IA per task utente (non per organigramma). Numero verde persistente in ogni schermata; sezione informativa autonoma (FAQ, tariffe, condizioni, guide "cosa fare se...") scansionabile e linkabile.
+
+      </div>
+
+      <div class="card-sources">
+
+        <a href="https://www.camperonline.it/forum/varie/altro-sui-camper/vale-la-pena-farsi-socio-aci/234301" target="_blank">CamperOnLine</a>
+
+        <a href="https://it.motor1.com/features/362722/auto-ferma-in-autostrada-cosa-fare-chiedere-assistenza/" target="_blank">Motor1</a>
+
+        <a href="https://it.trustpilot.com/review/www.aciglobal.it" target="_blank">Trustpilot ACI Global</a>
+
+      </div>
+
+    </div>
+
+ 
+
+    <!-- D4 — SCARTATO (stress emotivo, accorpato in D3) -->
+
+    <div class="card card-discarded">
+
+      <div class="card-top-row">
+
+        <span class="card-tag tag-scartato">○ Materiale interno</span>
+
+        <span class="card-tag tag-fondato">✓ Fondato</span>
+
+      </div>
+
+      <div class="card-title">D4. L'utente in emergenza arriva in stato di stress emotivo elevato</div>
+
+      <div class="card-body">Le recensioni Trustpilot mostrano in modo consistente che l'utente in panne è già frustrato prima di toccare un canale digitale ("posso solo dire VERGOGNA", "IL PEGGIOR SERVIZIO CLIENTI"). Ogni informazione non trovata si trasforma in chiamata aggiuntiva e amplifica l'emozione negativa.</div>
+
+      <div class="card-rationale">
+
+        <strong>Perché non va al cliente</strong>
+
+        L'insight è vero ma fragile in presentazione: è un'inferenza psicologica su stati emotivi, facilmente attaccabile come "interpretativo". È stato accorpato in D3 (doppia modalità d'uso) dove diventa un fatto strutturale dell'IA, non un'ipotesi sulla mente dell'utente. La conseguenza progettuale (numero verde persistente, zero friction) è preservata in D3.
+
+      </div>
+
+      <div class="card-sources">
+
+        <a href="https://it.trustpilot.com/review/www.aciglobal.it" target="_blank">Trustpilot ACI Global</a>
+
+        <a href="https://www.nngroup.com/videos/pyramid-trust/" target="_blank">NN/g — Pyramid of Trust</a>
+
+      </div>
+
+    </div>
+
+ 
+
+    <!-- D5 — SCARTATO (carousel) -->
+
+    <div class="card card-discarded">
+
+      <div class="card-top-row">
+
+        <span class="card-tag tag-scartato">○ Materiale interno</span>
+
+        <span class="card-tag tag-verosimile">~ Verosimile</span>
+
+      </div>
+
+      <div class="card-title">D5. Il carousel della homepage non viene letto</div>
+
+      <div class="card-body">CTR medio sulla prima slide di un auto-forwarding carousel è inferiore all'1%, le slide successive sostanzialmente zero. L'attuale homepage di ACI Global Servizi è quasi interamente occupata da un carousel istituzionale che non porta a un task.</div>
+
+      <div class="card-rationale">
+
+        <strong>Perché non va al cliente</strong>
+
+        Il principio NN/g è solido ma "verosimile" per il contesto specifico, e gli stakeholder che hanno commissionato il carousel attuale sono i primi a difenderlo. Meglio non esporre questo punto come insight di ricerca (è opinabile). Verrà argomentato in fase di progettazione, come conseguenza pratica di D3 (modalità d'uso).
+
+      </div>
+
+      <div class="card-sources">
+
+        <a href="https://www.nngroup.com/articles/auto-forwarding/" target="_blank">NN/g — Auto-Forwarding Carousels</a>
+
+      </div>
+
+    </div>
+
+ 
+
+  </div>
+
+</div>
+
+ 
+
+<!-- ========== DIAGRAMMA 1 ========== -->
+
+<div class="diagram-block">
+
+  <div class="diagram-title">Stati dell'utente lungo il journey</div>
+
+  <div class="diagram-caption">Tre momenti distinti, ciascuno con un bisogno informativo proprio e una corrispondente responsabilità del sito.</div>
+
+ 
+
+  <svg viewBox="0 0 920 460" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="diag1-title diag1-desc">
+
+    <title id="diag1-title">Journey utente in tre fasi con priorità di design</title>
+
+    <desc id="diag1-desc">Pre-evento, durante l'emergenza, post-intervento. Per ogni fase: bisogno prevalente e responsabilità del sito.</desc>
+
+ 
+
+    <defs>
+
+      <marker id="arr1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+
+        <path d="M2 1L8 5L2 9" fill="none" stroke="#6B7280" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+      </marker>
+
+    </defs>
+
+ 
+
+    <text x="40" y="34" font-family="-apple-system, sans-serif" font-size="14" font-weight="700" fill="#111827">Sequenza temporale del journey</text>
+
+ 
+
+    <!-- Stage 1: Pre -->
+
+    <rect x="40" y="64" width="270" height="60" rx="10" fill="#D1FAE5" stroke="#047857" stroke-width="1"/>
+
+    <text x="175" y="92" font-family="-apple-system, sans-serif" font-size="15" font-weight="700" fill="#064E3B" text-anchor="middle">Pre-evento</text>
+
+    <text x="175" y="112" font-family="-apple-system, sans-serif" font-size="12" fill="#047857" text-anchor="middle">Informarsi, valutare, prepararsi</text>
+
+ 
+
+    <!-- Stage 2: Durante -->
+
+    <rect x="325" y="64" width="270" height="60" rx="10" fill="#FEE2E2" stroke="#991B1B" stroke-width="1"/>
+
+    <text x="460" y="92" font-family="-apple-system, sans-serif" font-size="15" font-weight="700" fill="#7F1D1D" text-anchor="middle">Durante l'emergenza</text>
+
+    <text x="460" y="112" font-family="-apple-system, sans-serif" font-size="12" fill="#991B1B" text-anchor="middle">Stress alto, agire subito</text>
+
+ 
+
+    <!-- Stage 3: Post -->
+
+    <rect x="610" y="64" width="270" height="60" rx="10" fill="#EDE9FE" stroke="#6B21A8" stroke-width="1"/>
+
+    <text x="745" y="92" font-family="-apple-system, sans-serif" font-size="15" font-weight="700" fill="#4C1D95" text-anchor="middle">Post-intervento</text>
+
+    <text x="745" y="112" font-family="-apple-system, sans-serif" font-size="12" fill="#6B21A8" text-anchor="middle">Risoluzione, fiducia o rottura</text>
+
+ 
+
+    <!-- arrows -->
+
+    <line x1="310" y1="94" x2="324" y2="94" stroke="#6B7280" stroke-width="1.5" marker-end="url(#arr1)"/>
+
+    <line x1="595" y1="94" x2="609" y2="94" stroke="#6B7280" stroke-width="1.5" marker-end="url(#arr1)"/>
+
+ 
+
+    <!-- Bisogno label -->
+
+    <text x="40" y="166" font-family="-apple-system, sans-serif" font-size="11" font-weight="700" letter-spacing="0.06em" fill="#6B7280" text-transform="uppercase">DOMANDE PREVALENTI</text>
+
+ 
+
+    <rect x="40" y="178" width="270" height="92" rx="8" fill="#fff" stroke="#E5E7EB" stroke-width="1"/>
+
+    <text x="56" y="202" font-family="-apple-system, sans-serif" font-size="12.5" fill="#374151">"Conviene farsi socio?"</text>
+
+    <text x="56" y="224" font-family="-apple-system, sans-serif" font-size="12.5" fill="#374151">"Quanto costa il servizio?"</text>
+
+    <text x="56" y="246" font-family="-apple-system, sans-serif" font-size="12.5" fill="#374151">"Cosa è incluso? E all'estero?"</text>
+
+ 
+
+    <rect x="325" y="178" width="270" height="92" rx="8" fill="#fff" stroke="#E5E7EB" stroke-width="1"/>
+
+    <text x="341" y="202" font-family="-apple-system, sans-serif" font-size="12.5" fill="#374151">"Chi chiamo? Dov'è il numero?"</text>
+
+    <text x="341" y="224" font-family="-apple-system, sans-serif" font-size="12.5" fill="#374151">"Quanto devo aspettare?"</text>
+
+    <text x="341" y="246" font-family="-apple-system, sans-serif" font-size="12.5" fill="#374151">"A che punto è il carro?"</text>
+
+ 
+
+    <rect x="610" y="178" width="270" height="92" rx="8" fill="#fff" stroke="#E5E7EB" stroke-width="1"/>
+
+    <text x="626" y="202" font-family="-apple-system, sans-serif" font-size="12.5" fill="#374151">"Auto sostitutiva quando?"</text>
+
+    <text x="626" y="224" font-family="-apple-system, sans-serif" font-size="12.5" fill="#374151">"Dove è stata portata l'auto?"</text>
+
+    <text x="626" y="246" font-family="-apple-system, sans-serif" font-size="12.5" fill="#374151">"Devo pagare qualcosa?"</text>
+
+ 
+
+    <!-- Responsabilità del sito -->
+
+    <text x="40" y="304" font-family="-apple-system, sans-serif" font-size="11" font-weight="700" letter-spacing="0.06em" fill="#6B7280" text-transform="uppercase">COSA IL SITO DEVE FARE</text>
+
+ 
+
+    <rect x="40" y="316" width="270" height="120" rx="8" fill="#ECFDF5" stroke="#047857" stroke-width="1"/>
+
+    <text x="56" y="340" font-family="-apple-system, sans-serif" font-size="12.5" fill="#064E3B">• Tariffe in chiaro, non in PDF</text>
+
+    <text x="56" y="362" font-family="-apple-system, sans-serif" font-size="12.5" fill="#064E3B">• FAQ scansionabile</text>
+
+    <text x="56" y="384" font-family="-apple-system, sans-serif" font-size="12.5" fill="#064E3B">• Comparativa socio / non socio</text>
+
+    <text x="56" y="406" font-family="-apple-system, sans-serif" font-size="12.5" fill="#064E3B">• Guide "cosa fare se..."</text>
+
+    <text x="56" y="428" font-family="-apple-system, sans-serif" font-size="12.5" fill="#064E3B">• Copertura europea visualizzata</text>
+
+ 
+
+    <rect x="325" y="316" width="270" height="120" rx="8" fill="#FEF2F2" stroke="#991B1B" stroke-width="1"/>
+
+    <text x="341" y="340" font-family="-apple-system, sans-serif" font-size="12.5" fill="#7F1D1D">• 803.116 persistente e tappabile</text>
+
+    <text x="341" y="362" font-family="-apple-system, sans-serif" font-size="12.5" fill="#7F1D1D">• CTA app come canale alternativo</text>
+
+    <text x="341" y="384" font-family="-apple-system, sans-serif" font-size="12.5" fill="#7F1D1D">• Tempi medi di intervento</text>
+
+    <text x="341" y="406" font-family="-apple-system, sans-serif" font-size="12.5" fill="#7F1D1D">• Tracking in tempo reale</text>
+
+    <text x="341" y="428" font-family="-apple-system, sans-serif" font-size="12.5" fill="#7F1D1D">• Zero friction, zero decorazioni</text>
+
+ 
+
+    <rect x="610" y="316" width="270" height="120" rx="8" fill="#F5F3FF" stroke="#6B21A8" stroke-width="1"/>
+
+    <text x="626" y="340" font-family="-apple-system, sans-serif" font-size="12.5" fill="#4C1D95">• Stato pratica online</text>
+
+    <text x="626" y="362" font-family="-apple-system, sans-serif" font-size="12.5" fill="#4C1D95">• Condizioni auto sostitutiva</text>
+
+    <text x="626" y="384" font-family="-apple-system, sans-serif" font-size="12.5" fill="#4C1D95">• Rete officine convenzionate</text>
+
+    <text x="626" y="406" font-family="-apple-system, sans-serif" font-size="12.5" fill="#4C1D95">• Processo rimborso esplicito</text>
+
+    <text x="626" y="428" font-family="-apple-system, sans-serif" font-size="12.5" fill="#4C1D95">• Accesso al servizio clienti</text>
+
+  </svg>
+
+ 
+
+  <div class="diagram-footnote">Il sito attuale presidia la fase centrale (numero verde visibile, recapiti, contatti). È sostanzialmente muto nelle fasi pre e post, che sono quelle dove si costruisce o si rompe la fiducia.</div>
+
+</div>
+
+ 
+
+<!-- ========== INSIGHT STRATEGICI ========== -->
+
+<div class="category cat-strategici">
+
+  <div class="cat-header">
+
+    <span class="cat-tag">Sezione 02</span>
+
+    <h2>Insight strategici</h2>
+
+    <span class="cat-desc">Posizionamento, value proposition, finestra temporale</span>
+
+  </div>
+
+ 
+
+  <div class="card-grid">
+
+ 
+
+    <!-- S1 — SELEZIONATO -->
+
+    <div class="card card-selected">
+
+      <div class="card-top-row">
+
+        <span class="card-tag tag-selezionato">✓ Selezionato per il cliente</span>
+
+        <span class="card-tag tag-fondato">✓ Fondato</span>
+
+      </div>
+
+      <div class="card-title">S1. L'utente non distingue tra ACI, ACI Global, Sara, e non vuole farlo</div>
+
+      <div class="card-body">I tesserati vengono rimbalzati tra entità del gruppo senza capire di chi è la competenza. L'IA attuale rispecchia l'organigramma del gruppo, non i bisogni dell'utente.</div>
+
+      <div class="card-evidence">"Automobil club mi risponde subito ma mi dice che nonostante io sia tesserato devo contattare un altro numero telefonico proprio perché legato ad un'assicurazione."</div>
+
+      <div class="card-implication">
+
+        <strong>Implicazione progettuale e strategica</strong>
+
+        L'IA attuale rispecchia l'organigramma del gruppo. Va riprogettata per chiarire esplicitamente cosa fa ACI Global Servizi e accompagnare l'utente verso le altre entità del gruppo (ACI Italia per il tesseramento, Sara Assicurazioni per le polizze) quando ciò che cerca è di loro competenza. L'utente non deve capire la struttura societaria per ricevere assistenza.
+
+      </div>
+
+      <div class="card-sources">
+
+        <a href="https://it.trustpilot.com/review/www.aci.it?page=3" target="_blank">Trustpilot ACI Italia</a>
+
+      </div>
+
+    </div>
+
+ 
+
+    <!-- S2 — SELEZIONATO -->
+
+    <div class="card card-selected">
+
+      <div class="card-top-row">
+
+        <span class="card-tag tag-selezionato">✓ Selezionato per il cliente</span>
+
+        <span class="card-tag tag-fondato">✓ Fondato</span>
+
+      </div>
+
+      <div class="card-title">S2. Posizionamento sulla certezza, non sulla velocità</div>
+
+      <div class="card-body">Gli utenti accettano tempi lunghi se sono certi. Quello che genera frustrazione è il rinvio ripetuto delle stime. La promessa di essere "i più veloci" è ad alta esposizione (basta un'esperienza negativa per smentirla). La promessa di "trasparenza sui tempi e proattività nella comunicazione" è più solida e più differenziante.</div>
+
+      <div class="card-evidence">"Prima prospettiva di attesa, 45 minuti. Seconda proposta di attesa, ulteriori 24 minuti. Terza proposta di attesa, altri 30 minuti." · Rating Trustpilot: ACI 1,9/5 (oltre 300 recensioni) vs AutoAssist 4,3/5.</div>
+
+      <div class="card-implication">
+
+        <strong>Implicazione progettuale e strategica</strong>
+
+        La value proposition del sito è "sai cosa aspettarti", non "siamo i più veloci". Comunicare tempi medi di intervento, tracking, dati aggregati di affidabilità (88% soddisfazione, 300 operatori h24, 1.800 partner multiservizi, 32 paesi via rete ARC Europe) in posizione di evidenza.
+
+      </div>
+
+      <div class="card-sources">
+
+        <a href="https://it.trustpilot.com/review/www.aci.it?page=3" target="_blank">Trustpilot ACI Italia</a>
+
+        <a href="https://it.trustpilot.com/review/autoassist.it" target="_blank">Trustpilot AutoAssist</a>
+
+        <a href="https://www.nngroup.com/videos/pyramid-trust/" target="_blank">NN/g — Pyramid of Trust</a>
+
+      </div>
+
+    </div>
+
+ 
+
+    <!-- S3 — SELEZIONATO -->
+
+    <div class="card card-selected">
+
+      <div class="card-top-row">
+
+        <span class="card-tag tag-selezionato">✓ Selezionato per il cliente</span>
+
+        <span class="card-tag tag-fondato">✓ Fondato</span>
+
+      </div>
+
+      <div class="card-title">S3. L'acquisizione Sara è il momento giusto per riposizionare il sito</div>
+
+      <div class="card-body">Tra fine 2025 e inizio 2026 Sara Assicurazioni ha completato l'acquisizione del 100% di ACI Global Servizi. La dichiarazione del DG Tosti posiziona ACI Global come "fulcro" della capacità di Sara di offrire servizi di assistenza integrati estesi oltre la dimensione stradale.</div>
+
+      <div class="card-evidence">Comunicato ufficiale Sara Assicurazioni: l'operazione abilita servizi "non limitati alla dimensione stradale ma estesi a molteplici ambiti della mobilità e della vita quotidiana" (Alberto Tosti, DG Sara).</div>
+
+      <div class="card-implication">
+
+        <strong>Implicazione progettuale e strategica</strong>
+
+        Il sito attuale non riflette questa nuova fase. L'architettura informativa va progettata modulare e scalabile per accogliere l'estensione di servizi beyond automotive senza destrutturare l'offerta core. La presenza di Sara va resa esplicita come garante istituzionale, non come logo nel footer.
+
+      </div>
+
+      <div class="card-sources">
+
+        <a href="https://www.sara.it/news/sara-assicurazioni-completa-lacquisizione-di-aci-global-servizi" target="_blank">Sara Assicurazioni — Comunicato ufficiale</a>
+
+      </div>
+
+    </div>
+
+ 
+
+    <!-- S4 — SCARTATO -->
+
+    <div class="card card-discarded">
+
+      <div class="card-top-row">
+
+        <span class="card-tag tag-scartato">○ Materiale interno</span>
+
+        <span class="card-tag tag-fondato">✓ Fondato</span>
+
+      </div>
+
+      <div class="card-title">S4. La domanda è strutturale per almeno 15 anni</div>
+
+      <div class="card-body">Parco circolante a 41,7 mln (+425.000/anno), 42% delle vetture Euro 4 o inferiore, età media 13 anni e in crescita, 701 auto/1000 abitanti. Mercato italiano del soccorso a 684 mln di dollari (CAGR 3,1%). Il modello non è in declino.</div>
+
+      <div class="card-rationale">
+
+        <strong>Perché non va al cliente</strong>
+
+        Il cliente sa già che la domanda esiste (è il suo mercato) e ha già deciso di investire nel redesign. Questo insight non sposta nessuna decisione progettuale. Resta qui come backup per giustificare l'investimento se la conversazione lo richiedesse.
+
+      </div>
+
+      <div class="card-sources">
+
+        <a href="https://aci.gov.it/comunicati-stampa/annuario-statistico-2025-tutti-i-numeri-delle-auto-in-italia/" target="_blank">ACI Annuario 2025</a>
+
+        <a href="https://www.cognitivemarketresearch.com/vehicle-roadside-assistance-market-report" target="_blank">Cognitive Market Research</a>
+
+      </div>
+
+    </div>
+
+ 
+
+    <!-- S5 — SCARTATO -->
+
+    <div class="card card-discarded">
+
+      <div class="card-top-row">
+
+        <span class="card-tag tag-scartato">○ Materiale interno</span>
+
+        <span class="card-tag tag-fondato">✓ Fondato</span>
+
+      </div>
+
+      <div class="card-title">S5. Brand ACI ancora forte, percezione di servizio scollegata</div>
+
+      <div class="card-body">"Mi dispiace per il marchio importante ACI, sempre disponibile e cortese al telefono, ma il soccorritore locale è stato poco professionale." Il brand ACI ha ancora valore percepito; ACI Global Servizi è percepita come ente operativo separato.</div>
+
+      <div class="card-rationale">
+
+        <strong>Perché non va al cliente</strong>
+
+        Insight narrativo, non oggettivabile da un singolo dato citabile. La conseguenza progettuale (mettere in evidenza i dati aggregati di affidabilità) è già preservata in S2 (posizionamento sulla certezza), che usa lo stesso framework concettuale ma è argomentato con dati confrontabili. Evita la ridondanza.
+
+      </div>
+
+      <div class="card-sources">
+
+        <a href="https://it.trustpilot.com/review/www.aciglobal.it" target="_blank">Trustpilot ACI Global</a>
+
+      </div>
+
+    </div>
+
+ 
+
+    <!-- S6 — SCARTATO -->
+
+    <div class="card card-discarded">
+
+      <div class="card-top-row">
+
+        <span class="card-tag tag-scartato">○ Materiale interno</span>
+
+        <span class="card-tag tag-fondato">✓ Fondato</span>
+
+      </div>
+
+      <div class="card-title">S6. Coprire la fase pre-bisogno con contenuti autorevoli</div>
+
+      <div class="card-body">Articoli SEO di terze parti (Motor1, Genertel, TuttoSoccorsoStradale, Pratiche Auto Online) rispondono già a domande che dovrebbero essere presidio diretto di un provider di soccorso ("cosa fare in caso di guasto", "auto in panne in autostrada", "conviene la tessera ACI"). ACI Global oggi è assente da questo spazio.</div>
+
+      <div class="card-rationale">
+
+        <strong>Perché non va al cliente</strong>
+
+        È un'opportunità di acquisizione, non una criticità del sito attuale. Va al cliente come raccomandazione operativa in una fase successiva (strategia contenuti / SEO), non come insight di ricerca preliminare.
+
+      </div>
+
+      <div class="card-sources">
+
+        <a href="https://it.motor1.com/features/362722/auto-ferma-in-autostrada-cosa-fare-chiedere-assistenza/" target="_blank">Motor1</a>
+
+        <a href="https://www.genertel.it/blog/carroattrezzi-soccorso-stradale" target="_blank">Genertel</a>
+
+      </div>
+
+    </div>
+
+ 
+
+    <!-- S7 — SCARTATO -->
+
+    <div class="card card-discarded">
+
+      <div class="card-top-row">
+
+        <span class="card-tag tag-scartato">○ Materiale interno</span>
+
+        <span class="card-tag tag-fondato">✓ Fondato</span>
+
+      </div>
+
+      <div class="card-title">S7. Self-service come asset operativo (riduzione carico call center)</div>
+
+      <div class="card-body">Il pain "impossibile parlare con qualcuno che sa rispondere" e il volume di chiamate di sollecito per stato pratica indicano un sovraccarico del call center. Tracking via app, FAQ ben costruita, tariffario online, stato pratica self-service riducono il carico operativo.</div>
+
+      <div class="card-rationale">
+
+        <strong>Perché non va al cliente</strong>
+
+        È una conseguenza di D1 (trasparenza), D2 (app) e D3 (modalità d'uso): se quegli insight vengono recepiti, il beneficio operativo emerge automaticamente. Tenerlo come insight separato è ridondante. Va riusato in fase di razionale economico verso lo stakeholder (ROI), non come insight di ricerca.
+
+      </div>
+
+      <div class="card-sources">
+
+        <a href="https://it.trustpilot.com/review/www.europassistance.it?page=2" target="_blank">Trustpilot Europ Assistance</a>
+
+      </div>
+
+    </div>
+
+ 
+
+  </div>
+
+</div>
+
+ 
+
+<!-- ========== DIAGRAMMA 2 ========== -->
+
+<div class="diagram-block">
+
+  <div class="diagram-title">Matrice di prioritizzazione dei pain point</div>
+
+  <div class="diagram-caption">Frequenza nelle recensioni × risolvibilità attraverso il sito. Il quadrante in alto a destra è dove il redesign produce il massimo ritorno.</div>
+
+ 
+
+  <svg viewBox="0 0 920 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="diag2-title diag2-desc">
+
+    <title id="diag2-title">Matrice frequenza per risolvibilità dei pain point</title>
+
+    <desc id="diag2-desc">Distribuzione dei pain point su due assi: frequenza nelle recensioni Trustpilot e risolvibilità attraverso il sito.</desc>
+
+ 
+
+    <!-- assi -->
+
+    <line x1="120" y1="60" x2="120" y2="440" stroke="#9CA3AF" stroke-width="0.5"/>
+
+    <line x1="120" y1="440" x2="860" y2="440" stroke="#9CA3AF" stroke-width="0.5"/>
+
+ 
+
+    <!-- divisori quadranti -->
+
+    <line x1="490" y1="60" x2="490" y2="440" stroke="#D1D5DB" stroke-width="0.5" stroke-dasharray="4 4"/>
+
+    <line x1="120" y1="250" x2="860" y2="250" stroke="#D1D5DB" stroke-width="0.5" stroke-dasharray="4 4"/>
+
+ 
+
+    <!-- labels assi -->
+
+    <text x="112" y="60" font-family="-apple-system, sans-serif" font-size="12" fill="#6B7280" text-anchor="end" dominant-baseline="central">Alta</text>
+
+    <text x="112" y="440" font-family="-apple-system, sans-serif" font-size="12" fill="#6B7280" text-anchor="end" dominant-baseline="central">Bassa</text>
+
+    <text x="120" y="462" font-family="-apple-system, sans-serif" font-size="12" fill="#6B7280">Bassa</text>
+
+    <text x="860" y="462" font-family="-apple-system, sans-serif" font-size="12" fill="#6B7280" text-anchor="end">Alta</text>
+
+ 
+
+    <text x="60" y="250" font-family="-apple-system, sans-serif" font-size="12" fill="#6B7280" text-anchor="middle" dominant-baseline="central" transform="rotate(-90 60 250)">Frequenza nelle recensioni</text>
+
+    <text x="490" y="492" font-family="-apple-system, sans-serif" font-size="12" fill="#6B7280" text-anchor="middle">Risolvibilità attraverso il sito</text>
+
+ 
+
+    <!-- etichette quadranti -->
+
+    <text x="305" y="80" font-family="-apple-system, sans-serif" font-size="11" font-weight="600" fill="#9CA3AF" text-anchor="middle">Frequente, da gestire altrove</text>
+
+    <text x="675" y="80" font-family="-apple-system, sans-serif" font-size="12" font-weight="700" fill="#1E40AF" text-anchor="middle">Priorità sito</text>
+
+    <text x="305" y="424" font-family="-apple-system, sans-serif" font-size="11" font-weight="600" fill="#9CA3AF" text-anchor="middle">Bassa priorità</text>
+
+    <text x="675" y="424" font-family="-apple-system, sans-serif" font-size="11" font-weight="600" fill="#9CA3AF" text-anchor="middle">Quick win informativi</text>
+
+ 
+
+    <!-- punti quadrante in alto a sinistra (rosso/grigio: alta freq, bassa risolvibilità sito) -->
+
+    <circle cx="265" cy="130" r="10" fill="#FEE2E2" stroke="#991B1B" stroke-width="1"/>
+
+    <text x="282" y="134" font-family="-apple-system, sans-serif" font-size="12" fill="#1F2937">Attese imprevedibili e ripetuti rinvii</text>
+
+ 
+
+    <circle cx="305" cy="170" r="10" fill="#FEE2E2" stroke="#991B1B" stroke-width="1"/>
+
+    <text x="322" y="174" font-family="-apple-system, sans-serif" font-size="12" fill="#1F2937">Frammentazione centralino — carrista locale</text>
+
+ 
+
+    <!-- punti quadrante in alto a destra (PRIORITÀ SITO, blu) -->
+
+    <circle cx="700" cy="130" r="14" fill="#DBEAFE" stroke="#1E40AF" stroke-width="1.5"/>
+
+    <text x="720" y="134" font-family="-apple-system, sans-serif" font-size="12.5" font-weight="700" fill="#1E40AF">Opacità sui costi (sorprese in fattura)</text>
+
+ 
+
+    <circle cx="670" cy="165" r="14" fill="#DBEAFE" stroke="#1E40AF" stroke-width="1.5"/>
+
+    <text x="690" y="169" font-family="-apple-system, sans-serif" font-size="12.5" font-weight="700" fill="#1E40AF">Condizioni "non dette" scoperte solo durante</text>
+
+ 
+
+    <circle cx="635" cy="200" r="12" fill="#DBEAFE" stroke="#1E40AF" stroke-width="1.5"/>
+
+    <text x="654" y="204" font-family="-apple-system, sans-serif" font-size="12.5" font-weight="700" fill="#1E40AF">Auto sostitutiva: quando, come, a quali condizioni</text>
+
+ 
+
+    <circle cx="600" cy="235" r="11" fill="#DBEAFE" stroke="#1E40AF" stroke-width="1.5"/>
+
+    <text x="618" y="239" font-family="-apple-system, sans-serif" font-size="12.5" font-weight="700" fill="#1E40AF">Rimbalzo tra entità del gruppo</text>
+
+ 
+
+    <!-- punti quadrante in basso a destra (verde: quick wins informativi) -->
+
+    <circle cx="700" cy="320" r="10" fill="#D1FAE5" stroke="#047857" stroke-width="1"/>
+
+    <text x="717" y="324" font-family="-apple-system, sans-serif" font-size="12" fill="#1F2937">"Cosa fare se sono in panne"</text>
+
+ 
+
+    <circle cx="660" cy="360" r="9" fill="#D1FAE5" stroke="#047857" stroke-width="1"/>
+
+    <text x="675" y="364" font-family="-apple-system, sans-serif" font-size="12" fill="#1F2937">Confronto socio vs polizza assicurativa</text>
+
+ 
+
+    <!-- punti quadrante in basso a sinistra (grigio: bassa priorità) -->
+
+    <circle cx="265" cy="350" r="9" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1"/>
+
+    <text x="280" y="354" font-family="-apple-system, sans-serif" font-size="12" fill="#6B7280">Qualità individuale del singolo carrista</text>
+
+  </svg>
+
+ 
+
+  <div class="diagram-footnote">Lettura: i pain blu (quadrante in alto a destra) sono quelli che il sito può effettivamente risolvere. I pain rossi (in alto a sinistra) sono ad alta frequenza ma vanno gestiti su altri canali (operations, partner network, SLA). Il sito può solo mitigarli comunicando l'aggregato.</div>
+
+</div>
+
+ 
+
+<!-- ========== DOMANDE APERTE ========== -->
+
+<div class="category cat-aperte">
+
+  <div class="cat-header">
+
+    <span class="cat-tag">Sezione 03</span>
+
+    <h2>Domande aperte</h2>
+
+    <span class="cat-desc">Da validare in fase successiva (interviste, analytics, dati interni)</span>
+
+  </div>
+
+ 
+
+  <div class="card-grid">
+
+ 
+
+    <div class="card">
+
+      <div class="card-title">Distribuzione reale del traffico per intent</div>
+
+      <div class="card-body">Quanto del traffico attuale è informativo (pre-evento), transazionale (richiesta soccorso), post-evento (stato pratica)? Cambia il peso relativo delle priorità di redesign e la gerarchia in homepage. Richiede analytics del sito attuale.</div>
+
+    </div>
+
+ 
+
+    <div class="card">
+
+      <div class="card-title">Funnel di conversione attuale</div>
+
+      <div class="card-body">Dove gli utenti abbandonano oggi? L'analisi as-is può solo dedurre ipotesi senza accesso ai dati di sessione. Richiede GA o equivalente.</div>
+
+    </div>
+
+ 
+
+    <div class="card">
+
+      <div class="card-title">Soci ACI vs non soci nel target del sito</div>
+
+      <div class="card-body">Il sito di ACI Global Servizi parla a chi? Soci, non soci, entrambi? Oggi non è chiaro nemmeno nell'IA. Richiede allineamento con il cliente prima di disegnare la home.</div>
+
+    </div>
+
+ 
+
+    <div class="card">
+
+      <div class="card-title">Peso reale del segmento B2B vs B2C sul fatturato</div>
+
+      <div class="card-body">Cambia drasticamente l'equilibrio dell'homepage e dei percorsi prioritari. Aziende e flotte hanno bisogni distinti dai privati e meritano percorsi dedicati. Richiede dato interno.</div>
+
+    </div>
+
+ 
+
+  </div>
+
+</div>
+
+ 
+
+<footer>
+
+  Ricerca desk · Passaggio 3 (insight preliminari, versione interna) · Progetto redesign sito web ACI Global Servizi · Giugno 2026.
+
+</footer>
+
+ 
+
+</body>
+
+</html>
