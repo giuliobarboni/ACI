@@ -1,10 +1,17 @@
 # 04 · Benchmark — File Operativo
 
 <!--
-  Questo file registra i deliverable compilati del benchmark, passaggio per passaggio.
-  Scopo: sopravvivere ai compact del contesto. Ogni volta che un passaggio è completato
-  e validato dal designer, il risultato viene scritto qui. Claude legge questo file
-  all'inizio di ogni sessione di benchmark per recuperare il contesto perso.
+  RAPPORTO TRA I FILE:
+  - docs/04-benchmark.md è il template metodologico: definisce il metodo, le regole generali
+    e le istruzioni per ogni passaggio.
+  - docs/04-benchmark-ops.md (questo file) è il deliverable specifico del progetto ACI Global
+    Servizi: registra i risultati compilati passaggio per passaggio.
+
+  ISTRUZIONE PER CLAUDE DOPO UN COMPACT:
+  Per riprendere il lavoro, leggere SEMPRE entrambi i file insieme:
+  1. docs/04-benchmark.md — per rileggere il metodo e le istruzioni del passaggio in corso
+  2. docs/04-benchmark-ops.md — per recuperare i risultati già prodotti e validati
+
 -->
 
 ---
@@ -1222,127 +1229,85 @@ Non esiste un messaggio esplicito "Sei già cliente Revolut Personal? Aggiungi B
 
 ## Passaggio 5 · Sintesi dei pattern
 
+L'output di questo passaggio è il documento con cui ci allineiamo con il cliente sulla direzione di design, prima di disegnare l'architettura dell'informazione. Non è la sintesi dell'analisi — quella è nel Passaggio 4, consultabile a supporto delle conclusioni — ma la nostra presa di posizione: cosa abbiamo trovato nel mercato (**§5.1**), cosa vi consigliamo di fare (**§5.2**), e le poche scelte che restano in mano vostra (**§5.3**).
+
 > **Tesi in una frase:** il benchmark non chiede ad ACI Global di "fare un sito più bello", ma di rendere visibili sul sito tre cose che oggi accadono (o potrebbero accadere) altrove — la fiducia che si genera durante il servizio, la certezza dell'attesa, e la chiarezza tra le entità del gruppo — convertendole da fatti operativi nascosti in contenuto strutturale.
 
-Le analisi dei 16 player attraverso i 5 cluster si sintetizzano nei tre livelli prescritti dal metodo (cfr. [04-benchmark.md](04-benchmark.md), Passaggio 5): **pattern trasversali** (cosa emerge da tutti o dalla maggioranza, in positivo e in negativo), **pattern applicabili al progetto** (cosa importare e perché, ancorato agli insight), **opportunità distintive** (cosa nessuno fa bene e che ACI può rendere differenziante). A valle: scelte strategiche aperte, matrice di riferimento, priorità per ROI.
+---
+
+### 5.1 · Il quadro di partenza
+
+_Sei fatti emersi dal benchmark che spiegano perché le raccomandazioni di §5.2 hanno senso. Sono osservazioni di mercato, non ancora prescrizioni: descrivono cosa fa (e cosa non fa) la categoria, prima di dire cosa dovrebbe fare ACI._
+
+- **La fiducia, nei leader, è documentata — non dichiarata.** I player più maturi pubblicano i propri dati di servizio (ADAC con la statistica annuale dei soccorsi; Booking con i suoi "300 milioni di recensioni") invece di affidarsi a slogan.
+- **Il punteggio unico aggregato è superato.** Booking e Airbnb scompongono la soddisfazione in più assi (pulizia, comunicazione, posizione…), trasformando il rating da verdetto monolitico in dato interrogabile.
+- **L'emergenza, dove è gestita bene, è un layer a sé.** AAA e ADAC separano l'azione urgente dal resto con colore e posizione dedicati e canali ridondanti (app + web + telefono), invece di annegarla nei contenuti informativi.
+- **Il contenuto commerciale dei leader vive in HTML.** Iliad e Lemonade tengono prezzi, incluso/escluso e persino il documento di polizza in pagine scansionabili; il PDF resta solo per la compliance.
+- **Un percorso B2B/fleet vero non esiste nella categoria soccorso.** ADAC, AAA, Europ Assistance e AutoAssist non lo presidiano: un B2B strutturato si trova solo nei player cross-settore (Revolut, Amazon).
+- **L'attesa, nel soccorso, è quasi sempre lasciata al silenzio.** Il tracking arriva tardi (ADAC, AA: "poco prima dell'arrivo") e si rompe quando l'attesa si allunga (RAC: stime riviste più volte → frustrazione); l'empatia situazionale è assente quasi ovunque.
 
 ---
 
-### 5.1 · Pattern trasversali
+### 5.2 · La nostra direzione consigliata
 
-_Cosa emerge dalla maggioranza dei player — i comportamenti condivisi dai più maturi e gli errori che si ripetono._
+_Sei raccomandazioni operative, ordinate dalla più immediata (alto impatto, basso costo) alla più fondativa. Per ognuna: cosa consigliamo, perché ha senso per questo progetto, chi nel benchmark lo fa bene, e l'errore concreto da evitare._
 
-**Positivi ricorrenti (cosa fanno i player maturi):**
-- **Trust con dati propri verificabili, non slogan** — i leader pubblicano numeri: ADAC (Pannenhilfebilanz, Pannenstatistik), Booking ("300 milioni di recensioni"), Europ Assistance ("10+ mln clienti, 200 paesi"). La fiducia è documentata, non dichiarata.
-- **Emergenza separata strutturalmente** — layer e colore distinti dal resto: AAA (top-bar navy + CTA rossa + floating button), ADAC (SOS rossa persistente sul giallo del brand).
-- **App come canale primario, non alternativo** — il tracking e il servizio completo vivono nell'app; il web è spesso una brochure (Uber, Glovo, RAC, AA, ADAC).
-- **Trust scomposto in sottodimensioni** — il punteggio unico è superato: Booking (7 assi a decimali), Airbnb (6 sottodimensioni + longevità host).
-- **HTML-first per il contenuto commerciale** — Iliad e Lemonade tengono incluso/escluso, prezzi e persino il documento di polizza in HTML; il PDF resta solo per la compliance.
-- **Progressive disclosure su audience multiple** — hero semplice + profondità nel footer/navbar (Revolut, Amazon): la complessità è accessibile ma non imposta.
+#### 1 · Tariffe e condizioni in HTML scansionabile, non in PDF
+- **Cosa consigliamo.** Portare tariffe, "cosa è incluso / cosa non lo è", sovrapprezzi, limiti di km e fasce orarie dentro pagine HTML navigabili, con esempi concreti ("se si scarica la batteria di notte in autostrada…"). Dove il prezzo è variabile, mostrare un valore di partenza o un range tipico ("un intervento SOD da X€", "piano Essenziale da X€/anno") *prima* del preventivo.
+- **Perché per ACI.** È il reclamo numero uno (condizioni scoperte durante il servizio: sovrapprezzi, km, orari) ed è insieme il pain point a più alta risolvibilità via web e il più economico da realizzare. In più sblocca il procurement B2B, che davanti a un PDF nel footer si ferma.
+- **Chi lo fa bene.** Iliad e Lemonade (contenuto commerciale interamente in HTML, PDF solo per la legge); ConTe come gemello strutturale di ACI (prezzo variabile per profilo, garanzie esplorabili prima del preventivo obbligato IVASS); Europ Assistance SOD, che dimostra come nel soccorso un prezzo fisso in hero (99€) sia possibile.
+- **Cosa evitare.** Il modello AutoAssist: condizioni relegate a un PDF nel footer, prezzi assenti — l'opacità che alimenta direttamente la sfiducia.
 
-**Negativi ricorrenti (opportunità mancate da quasi tutti — seedbed delle opportunità distintive):**
-- **Empatia situazionale assente** — quasi nessun player riconosce la condizione di chi è in panne/in stress. ADAC, EA, AA hanno tono istituzionale o efficiente, mai empatico nel momento. Ricorre in ogni analisi di categoria.
-- **B2B/fleet assente nella categoria soccorso** — ADAC, AAA, EA, AutoAssist: o assente o un accenno ("Group membership"). Un percorso B2B reale esiste solo nei cross-settore (Revolut, Amazon).
-- **Il tracking crolla sull'attesa eccezionale** — RAC mostra l'ETA ma non spiega i ritardi (→ frustrazione); AA e ADAC attivano il tracking "poco prima dell'arrivo". Lo strumento che dovrebbe rassicurare aumenta l'ansia proprio quando l'attesa si allunga.
-- **Trust sistemico e individuale non dialogano** — Airbnb stesso lo nota: manca un'interfaccia che colleghi il dato di sistema all'identità/affidabilità del singolo operatore.
-- **Parent brand nascosto invece che usato come garanzia** — EA nasconde Generali, AutoAssist non valorizza Facile.it. La garanzia istituzionale resta un link nel footer.
-- **Post-intervento debole o assente** — feedback loop inaffidabile (Glovo: supporto evasivo) o nessun prompt di rating strutturato (AA, RAC, ADAC). La relazione si chiude con l'intervento.
+#### 2 · L'emergenza come layer persistente, separato dai contenuti informativi
+- **Cosa consigliamo.** CTA d'emergenza sempre visibile e cromaticamente distinta su ogni schermata (numero verde persistente), con IA costruita per task (informarsi ↔ chiedere soccorso) e non per organigramma. In prospettiva, un'app di soccorso efficace (geolocalizzazione, tracking, contatto immediato) può diventare un secondo canale digitale forte sul modello AAA/ADAC — ma è un'opportunità futura da costruire, non un asset già pronto: oggi l'app ACI è ancora debole, e non comunicarla è la scelta corretta finché non è affidabile.
+- **Perché per ACI.** L'utente in panne è sotto stress e non deve "navigare" per trovare il soccorso: il numero verde persistente è la mossa a costo minimo e ritorno immediato. Il canale app, invece, va prima reso solido — è un investimento, non un quick win — ma una volta efficace apre la strada al modello multi-canale (cfr. §5.3.1).
+- **Chi lo fa bene.** AAA (top-bar dedicata + floating button persistente + CTA per-servizio: "seleziona il problema, non descriverlo"); ADAC (SOS rossa persistente staccata dal giallo del brand + tre canali paralleli app/web/telefono).
+- **Cosa evitare.** RAC (canale unico app + login OTP che fallisce proprio in emergenza) ed Europ Assistance (nessun numero in homepage): un solo punto di accesso fragile è il rischio peggiore in un servizio d'urgenza — ragione in più per non puntare sull'app finché non è davvero affidabile.
 
----
+#### 3 · Dichiarare l'architettura multi-entità nella navigazione
+- **Cosa consigliamo.** Una navbar che biforca i percorsi fin dal primo schermo — "Privati | Aziende | Soci ACI" — ed esplicita chi-fa-cosa senza costringere l'utente a ricostruire la struttura societaria: soccorso = ACI Global, tessere/bollo = ACI, polizza/garanzia = Sara. Sara presente come garante, non come logo nel footer.
+- **Perché per ACI.** Risponde direttamente all'insight S1 (l'utente non distingue ACI / ACI Global / Sara e rimbalza tra le entità). Poiché il nome "ACI" appartiene a un ente terzo, per Sara la via obbligata è l'orchestrazione, non l'assorbimento: il sito è il luogo dove questa orchestrazione si rende leggibile.
+- **Chi lo fa bene.** Revolut (biforcazione in navbar sempre visibile, stesso brand, pricing/feature/SLA differenziati per audience — massima chiarezza, zero attrito); Amazon (sotto-marchio riconoscibile come figlio del parent).
+- **Cosa evitare.** Europ Assistance: due siti, due numeri verdi, parent Generali nascosto, rebrand in corso — la frammentazione che l'utente vive come confusione. È esattamente il rischio di ACI, moltiplicato da una terza entità.
 
-### 5.2 · Pattern applicabili al progetto
+#### 4 · Costruire la fiducia con dati propri verificabili e scomposti
+- **Cosa consigliamo.** Pubblicare come documentazione — con fonte e data — i dati di affidabilità che ACI già possiede (88% soddisfazione, 300 operatori h24, 1.800 partner, 32 Paesi) e scomporre la soddisfazione in assi comunicabili — *velocità di arrivo, competenza tecnica, cortesia dell'operatore, completezza della risoluzione, comunicazione durante l'attesa* — con recensioni filtrabili per tipo di intervento.
+- **Perché per ACI.** ACI parte da un Trustpilot aggregato di 1,9: il numero unico è un verdetto monolitico che gioca contro. Scomporlo e affiancarlo a dati di sistema verificabili gli toglie il ruolo di unica prova. ACI ha già i numeri di ADAC — semplicemente non li pubblica come ADAC.
+- **Chi lo fa bene.** ADAC (la statistica pubblica dei soccorsi come trust documentale); Booking e Airbnb (rating scomposto in sottodimensioni + segnali di longevità → il rating diventa un database interrogabile, non una lista da scorrere).
+- **Cosa evitare.** Guidare con il Trustpilot aggregato (a 1,9 è autolesionista) o nascondere i propri dati in "Chi siamo", come accade oggi.
 
-_I sei pattern che ricorrono in più cluster e che conviene importare nel redesign — ognuno ancorato a un insight di progetto._
+#### 5 · Comunicare l'attesa con segnali ridondanti
+- **Cosa consigliamo.** Posizionarsi sulla certezza, non sulla velocità: tracking dell'operatore dal momento dell'assegnazione (non dall'ultimo tratto), con ETA + stato verbale + push, e — dove il tracking tecnico manca — il richiamo proattivo come fallback umano. Mai promettere minuti che il sistema possa poi smentire.
+- **Perché per ACI.** Insight S2: l'utente accetta attese lunghe se prevedibili; a frustrare è la revisione ripetuta delle stime. La comunicazione proattiva durante l'attesa è anche la leva reale dietro il paradosso AutoAssist (Trustpilot 4,3 con un sito di tre pagine): la fiducia si costruisce nel comportamento, e il sito può renderlo una promessa esplicita ("durante l'attesa ti richiamiamo noi").
+- **Chi lo fa bene.** Uber e Glovo (gold standard cross-settore: mappa live + ETA dinamica + stati verbali + push); AutoAssist (la versione umana dello stesso principio — il richiamo proattivo che emerge dalle recensioni).
+- **Cosa evitare.** RAC: ETA mostrata ma ritardi non spiegati e stime riviste più volte nel silenzio — la finestra di silenzio che trasforma lo strumento di rassicurazione in fonte d'ansia.
 
-#### Pattern 1 — La fiducia si costruisce durante il servizio; il sito la documenta, non la promette
-**Cosa dice il benchmark.** Il paradosso AutoAssist (Trustpilot 4,3 vs ACI 1,9 con un sito di 3 pagine, zero prezzi, zero sistema d'emergenza digitale) dimostra che il gap di fiducia di ACI **non nasce primariamente dal sito**: nasce nell'operatività. La leva reale di AutoAssist è la comunicazione proattiva durante l'attesa ("mi hanno chiamato più volte assicurandosi che…"). Sul versante opposto, ADAC e Booking mostrano l'altra metà: la fiducia *sistemica* si costruisce con dati propri verificabili (Pannenhilfebilanz; "300 milioni di recensioni"), non con slogan.
-**Chi lo incarna.** AutoAssist (trust comportamentale, post-esperienza) · ADAC (trust documentale: dati operativi pubblici) · Booking (trust infrastrutturale: il sistema, non il singolo provider).
-**Azione ACI.** Due mosse complementari: (1) **rendere il comportamento una promessa esplicita** — "ti richiamiamo noi durante l'attesa", non aspettare che il cliente solleciti; (2) **pubblicare i dati di affidabilità come documentazione**, non come marketing — 88% soddisfazione, 300 operatori h24, 1.800 partner, 32 Paesi, 10 mln di minuti gestiti, con fonte e data. ACI ha già i numeri di ADAC senza pubblicarli come ADAC.
-
-#### Pattern 2 — Certezza, non velocità: l'attesa va raccontata con segnali ridondanti
-**Cosa dice il benchmark.** Insight utente: si accettano attese lunghe se prevedibili; a frustrare è la *revisione ripetuta* delle stime (RAC: "after a 6hr wait… now 11-2am" → 2★). I best-in-class del tracking sovrappongono più segnali simultanei: Glovo (mappa live + ETA dinamica + 6 stati verbali + push), Uber (gli stessi + RideCheck proattivo). I competitor di categoria sono indietro ma in movimento: ADAC e AA attivano il tracking solo "poco prima dell'arrivo" (finestra di silenzio iniziale), AA dichiara "twice as fast as calling" con ragione tecnica (GPS).
-**Chi lo incarna.** Uber/Glovo (gold standard cross-settore) · ADAC/AA (categoria, tracking parziale) · AutoAssist (la versione *umana* dello stesso principio: il richiamo proattivo).
-**Azione ACI.** Posizionamento sulla **certezza** (S2): tracking dell'operatore dal momento dell'assegnazione (non dall'ultimo tratto), ETA + stato verbale + push, e — dove il tracking tecnico manca — il richiamo proattivo come fallback umano. Mai una promessa di minuti che il sistema possa smentire.
-
-#### Pattern 3 — Trasparenza strutturale: HTML per il servizio, PDF solo per la legge
-**Cosa dice il benchmark.** È il reclamo #1 di ACI (condizioni non dichiarate: sovrapprezzi, km, orari, limiti). Iliad e Lemonade sono lo standard: contenuto commerciale interamente in HTML (incluso/escluso, overage pricing, persino il documento di polizza in Lemonade Policy 2.0), PDF riservato alla sola compliance. ConTe è il **gemello strutturale di ACI** (prezzo variabile per profilo, preventivo obbligato per legge IVASS) e mostra il compromesso realistico: garanzie accessorie in HTML esplorabili *prima* del preventivo. Europ Assistance SOD dimostra che nell'assistenza stradale un **prezzo fisso visibile in hero** (99€) è possibile.
-**Chi lo incarna.** Iliad/Lemonade (eccellenza assoluta) · ConTe (compromesso per prezzo variabile) · EA SOD (prezzo fisso in categoria) · AutoAssist (anti-pattern: solo PDF nel footer).
-**Azione ACI.** Convertire i PDF tariffari (oggi per tipo di intervento e fascia oraria) in **HTML scansionabile** con "cosa è incluso / non incluso" per servizio, esempi concreti ("se si scarica la batteria…"), e — dove il prezzo è variabile — un **floor o range tipico** ("un intervento SOD da X€"; "piano Essenziale da X€/anno") che riduce l'incertezza senza sostituire il preventivo. Bonus B2B: l'HTML non blocca i processi di procurement aziendale.
-
-#### Pattern 4 — L'emergenza è un layer persistente, non un contenuto dell'hero
-**Cosa dice il benchmark.** I player di categoria più maturi separano *strutturalmente* l'azione urgente dal resto: AAA usa una top-bar navy con CTA rossa "Get Roadside Assistance" + floating button persistente, sopra una nav informativa distinta; ADAC tiene la "SOS Nothilfe" rossa in header su ogni pagina, cromaticamente staccata dal giallo del brand. ADAC offre inoltre **tre canali paralleli** (app + web form 4-step + telefono), riducendo la dipendenza da un singolo punto di fallimento — mentre RAC mostra il rischio opposto (tracking app-only + login OTP che fallisce proprio in emergenza).
-**Chi lo incarna.** AAA (doppio layer + floating) · ADAC (SOS persistente + multi-canale) · AAA per-service CTA (6 bottoni: "seleziona il problema, non descriverlo") · RAC (anti-pattern: canale unico fragile).
-**Azione ACI.** CTA d'emergenza **sempre visibile e cromaticamente distinta** in ogni schermata (numero verde persistente, da insight utente), affiancata dalla promozione dell'**app i803116 oggi sepolta in "Chi siamo"** (geolocalizzazione, click-to-call, tracking, memoria posizione auto già integrati). Separare i due modi d'uso — **informativa vs emergenza** — con IA per task, non per organigramma.
-
-#### Pattern 5 — La fiducia si scompone in sottodimensioni (e i due piani, sistemico e individuale, devono dialogare)
-**Cosa dice il benchmark.** Booking e Airbnb non mostrano un punteggio unico: lo **scompongono** in assi separati (Booking: Staff/Pulizia/Comfort/Posizione/Qualità-prezzo/WiFi/Servizi a decimali; Airbnb: Pulizia/Precisione/Check-in/Comunicazione/Posizione/Qualità-prezzo). Il rating diventa così *calibrabile* sul profilo di chi legge, e le recensioni diventano un **database interrogabile** (filtro per argomento, segmentazione per tipo di viaggiatore) invece di una lista da scorrere. Airbnb aggiunge i segnali di longevità (anni da host, tasso di risposta).
-**Chi lo incarna.** Booking (architettura a 7 livelli, trust nel sistema) · Airbnb (trust bottom-up + sottodimensioni + longevità).
-**Azione ACI.** Scomporre la soddisfazione cliente in assi misurabili e comunicabili — **Velocità di arrivo / Competenza tecnica / Cortesia operatore / Completezza risoluzione / Comunicazione durante l'attesa** — invece di un unico Trustpilot aggregato (oggi a sfavore). Recensioni filtrabili per tipo di intervento (batteria vs incidente vs foratura). Così il dato 1,9 smette di essere un verdetto monolitico.
-
-#### Pattern 6 — L'architettura a più entità si dichiara in navigazione, non si subisce
-**Cosa dice il benchmark.** È il cluster che risponde direttamente a S1 (l'utente non distingue ACI / ACI Global / Sara) e al gap B2B. Tre modelli:
-- **Revolut** — biforcazione in navbar ("Personale | Business | Giovani | Società") sempre visibile, stesso brand e dominio, ma pricing/feature/prove sociali/SLA differenziati per audience. **Massima chiarezza, zero attrito.**
-- **Amazon** — sottomarchio "Amazon Business" (logo valigetta, dominio dedicato), navigazione **per outcome** (non per categoria), segmentazione per dimensione, fattura elettronica come leva IT. Riconoscibile come figlio del parent ma con bassa prominenza sul B2C (solo footer).
-- **Europ Assistance** — **l'anti-pattern**: due siti, due numeri verdi, due entità (EA Italia + EA VAI), parent Generali nascosto, rebrand "Redion" in corso → frammentazione vissuta dall'utente come confusione.
-
-La mappatura corretta post-acquisizione (cfr. §Cluster 5): **Sara = parent assicurativo** (ruolo Generali) · **ACI Global Servizi = sub-brand operativo** (ruolo Europ Assistance) · **ACI = ente istituzionale terzo** (bollo, tessere) di cui ACI Global porta il nome in licenza. Poiché "ACI" appartiene a un terzo, per Sara la via è l'**orchestrazione**, non l'assorbimento alla Generali.
-**Azione ACI.** (1) **Navbar che dichiara i percorsi** — "Privati | Aziende | Soci ACI" — risolvendo S1 prima di qualsiasi contenuto (modello Revolut). (2) **Percorso B2B/fleet reale** organizzato per outcome ("Gestione interventi flotta", "Rendicontazione", "SLA garantiti") con segmentazione per tipo di cliente (Taxi/NCC, Flotta aziendale, Ente pubblico) — modello Amazon Business, possibile sotto-marchio "ACI Fleet". (3) Esplicitare i confini con handoff chiari (chi fa cosa: ACI Global = soccorso; ACI Italia = tessere; Sara = polizze/garanzia) **senza costringere l'utente a capire la struttura societaria** — evitando il rimbalzo EA.
+#### 6 · Creare il primo percorso B2B/fleet strutturato della categoria
+- **Cosa consigliamo.** Un percorso B2B reale, organizzato per outcome ("gestione interventi flotta", "rendicontazione", "SLA garantiti") e segmentato per tipo di cliente (taxi/NCC, flotta aziendale, ente pubblico), eventualmente sotto un sotto-marchio dedicato ("ACI Fleet" / "ACI Business"), con pricing, prove sociali e SLA distinti dal B2C.
+- **Perché per ACI.** Nessun competitor di categoria (ADAC, AAA, EA, AutoAssist) presidia davvero il B2B, mentre ACI ha domanda reale (taxi/NCC, flotte, enti pubblici) e il vincolo organizzativo che la rende strategica. Farlo significa essere il primo della categoria — un vantaggio competitivo, non un semplice allineamento.
+- **Chi lo fa bene.** Amazon Business (navigazione per outcome invece che per prodotto, segmentazione per dimensione, fattura elettronica come leva per il mercato IT); Revolut Business (percorso dichiarato in navbar con offerta differenziata).
+- **Cosa evitare.** L'accenno simbolico — il "Group membership" di AAA, o l'assenza totale di un percorso dedicato in EA e ADAC — che cita o evoca il B2B senza costruirgli un percorso reale: visibilità senza sostanza, che non sblocca né il procurement né la rendicontazione.
 
 ---
 
-### 5.3 · Opportunità distintive
+### 5.3 · Le decisioni aperte
 
-_Cosa nessun player del benchmark fa bene — e che ACI Global può trasformare in elemento differenziante. Nascono direttamente dai negativi ricorrenti di §5.1._
+_Tre bivi che il benchmark illumina ma non chiude: il mercato mostra approcci validi e opposti. Per ognuno diamo la nostra posizione, ma la scelta finale spetta a voi e va presa con Sara / ACI Global prima dell'IA._
 
-1. **"Non ti lasciamo solo nell'attesa" come promessa di prodotto.** Nessun player di categoria *dichiara* la comunicazione proattiva durante l'attesa: AutoAssist la fa (emerge solo nelle recensioni), Uber è proattivo ma sulla safety (RideCheck), tutti gli altri lasciano l'utente nel silenzio fino al tracking tardivo. ACI può possedere la combinazione **tracking dall'assegnazione + richiamo proattivo + spiegazione del ritardo motivato** — proprio il punto dove RAC fallisce. Attacca frontalmente l'insight S2 (la frustrazione non è l'attesa, è la revisione ripetuta delle stime).
+#### 1 · Quanto digital-first?
+- **La tensione.** AAA ha rimosso il telefono dall'header puntando su chatbot e app ("4 minuti in media") — radicale, e funziona in un mercato USA digitalmente maturo. ADAC tiene invece tre canali paralleli (app + web + telefono).
+- **La nostra posizione.** Modello multi-canale ADAC. Il profilo dell'utente ACI (parco auto datato, utenti anche anziani, stress a bordo strada) rende l'app-only un rischio: numero verde persistente *e* app *e* web form, non l'uno al posto dell'altro.
+- **Cosa decidete voi.** Quanto investire sui canali digitali rispetto al presidio telefonico, e se l'app debba diventare il canale primario o restare uno dei tre paritari.
 
-2. **Il primo soccorso stradale con un B2B/fleet realmente strutturato.** Nessun competitor di categoria (ADAC, AAA, EA, AutoAssist) ha un percorso B2B vero — solo accenni. ACI ha invece domanda reale (taxi/NCC, flotte aziendali, enti pubblici) e il vincolo organizzativo che la rende strategica. Importando il modello Amazon/Revolut (navigazione per outcome, SLA, rendicontazione, segmentazione) ACI sarebbe **il primo della categoria** → vantaggio competitivo netto, non solo allineamento.
+#### 2 · Quanto rendere visibile Sara?
+- **La tensione.** Europ Assistance nasconde Generali e perde la garanzia istituzionale; ADAC è monolitico (massima coerenza ma rischio reputazionale concentrato su un solo marchio). Il vincolo ACI — il nome "ACI" appartiene a un ente terzo — impone comunque orchestrazione, non assorbimento.
+- **La nostra posizione.** Valorizzare Sara come garante esplicito, non lasciarla un logo nel footer: in un servizio dove la fiducia è il nodo, un assicuratore solido alle spalle è un asset, non un dettaglio legale.
+- **Cosa decidete voi.** Quanto in alto portare Sara nella gerarchia di marca — garante dichiarata su ogni pagina sensibile vs presenza discreta — e come bilanciarla con l'autonomia operativa di ACI Global.
 
-3. **Un'architettura a tre entità resa leggibile.** Nessun player gestisce una tripletta "ente istituzionale terzo + operativo + assicuratore garante": Revolut/Amazon orchestrano al più due audience, EA fallisce già con due entità. Se ACI rende esplicito **chi-fa-cosa senza rimbalzi** (bollo/tessere = ACI · soccorso = ACI Global · polizza/garanzia = Sara), trasforma S1 (la confusione tra entità) da problema a **segnale di serietà e trasparenza** — un pattern che letteralmente nessuno nel benchmark possiede.
-
-4. **La trasparenza Iliad portata nel soccorso stradale.** Nella categoria, solo EA SOD ha un prezzo fisso visibile (e solo sul pay-per-use); tutti gli altri sono opachi o rinviano a PDF. Portare lo standard "prezzo e condizioni senza sorprese, in HTML" nel soccorso stradale è un differenziante diretto sul **reclamo #1** — e nessun concorrente lo presidia.
-
-5. **Unire il dato di sistema all'identità dell'operatore.** Nessuno collega trust sistemico (l'88%, alla ADAC) + feedback scomposto per dimensione (alla Booking) + identità del soccorritore (alla "Gelbe Engel", ma agganciata al track record reale). ACI può rendere l'operatore **una persona con uno storico**, non un anonimo — chiudendo il gap che Airbnb stesso dichiara aperto.
-
-6. **L'empatia come azione, non come copy.** Tutti i player o ignorano il momento di stress o lo riempiono di slogan ("you live, we care"). Ma l'insight di progetto dice: gli utenti vogliono **certezza, non rassicurazioni**. L'opportunità è quindi l'empatia *operativa* — il sistema che ti richiama, che ti dà istruzioni di sicurezza nell'attesa (alla AA), che non ti fa ripetere il problema (CTA per-servizio alla AAA). Empatia dimostrata dai fatti, l'unica che il benchmark mostra essere credibile.
-
----
-
-### 5.4 · Le scelte strategiche aperte (decisioni del cliente)
-
-Tre bivi che il benchmark illumina ma non chiude — vanno decisi con Sara/ACI Global:
-
-1. **Quanto digital-first?** AAA ha rimosso il telefono dall'header (chatbot + app, "avg 4 min") — radicale, funziona in un mercato USA digitalmente maturo. ADAC tiene tre canali paralleli. Dato il profilo utente ACI (parco auto vecchio, utenti anche anziani, stress a bordo strada) la raccomandazione è il **modello multi-canale ADAC**: numero verde persistente *e* app *e* web form, non l'app-only.
-
-2. **Orchestrazione: quanto rendere visibile Sara?** Europ Assistance nasconde Generali (perde la garanzia istituzionale); ADAC è monolitico (massima coerenza, massimo rischio reputazionale concentrato). Per ACI Global il vincolo (nome ACI = terzo) impone orchestrazione: la scelta aperta è **quanto valorizzare Sara come garante** (oggi logo nascosto nel footer) vs quanto lasciare ACI Global autonomo.
-
-3. **Con cosa si guida il trust?** Dati sistemici (ADAC/Booking) o prova sociale (AutoAssist/Airbnb)? ACI parte da Trustpilot 1,9: guidare con la prova sociale aggregata è autolesionista. **Raccomandazione: guidare con i dati sistemici** (che ACI possiede e che non dipendono dalla media recensioni), affiancando le recensioni *scomposte per dimensione* (Pattern 5) per non esporre il numero unico.
-
----
-
-### 5.5 · Matrice dei riferimenti best-in-class
-
-| Pattern trasversale | Riferimento da imitare | Anti-pattern da evitare |
-|---|---|---|
-| 1 · Fiducia documentata | ADAC (dati pubblici) · AutoAssist (richiamo proattivo) | ACI oggi (dati nascosti in "Chi siamo") |
-| 2 · Certezza dell'attesa | Uber/Glovo (tracking multi-segnale) | RAC (canale unico + OTP fragile) |
-| 3 · Trasparenza HTML | Iliad/Lemonade · ConTe (per prezzo variabile) | AutoAssist (solo PDF nel footer) |
-| 4 · Emergenza come layer | AAA (doppio layer) · ADAC (SOS + multi-canale) | EA (nessun numero in home) |
-| 5 · Trust scomposto | Booking (7 dimensioni) · Airbnb (sottodimensioni) | Trustpilot aggregato unico |
-| 6 · Multi-entità dichiarata | Revolut (navbar) · Amazon (sotto-marchio per outcome) | Europ Assistance (2 siti, 2 numeri, parent nascosto) |
-
----
-
-### 5.6 · Priorità per il redesign (ordinate per ROI)
-
-Ancorate ai **pain point ad alta risolvibilità via web** (PROJECT.md): opacità costi · condizioni scoperte durante il servizio · auto sostitutiva · rimbalzo tra entità.
-
-1. **Tariffe e condizioni in HTML scansionabile** (Pattern 3) — attacca il reclamo #1, sblocca il procurement B2B. *Massimo ROI, basso costo tecnico.*
-2. **Navbar che dichiara i percorsi "Privati | Aziende | Soci ACI"** (Pattern 6) — risolve S1 (rimbalzo) e apre il B2B oggi invisibile. *Alto ROI strutturale.*
-3. **App i803116 promossa in home + numero verde persistente** (Pattern 4) — asset già esistente, oggi sepolto: si valorizza, non si costruisce. *Alto ROI, costo minimo.*
-4. **Dati di affidabilità come trust signal nelle pagine servizio** (Pattern 1 + 5) — 88% / 300 operatori / 1.800 partner / 32 Paesi, scomposti per dimensione. *Medio-alto ROI.*
-5. **Tracking dell'intervento + comunicazione proattiva dell'attesa** (Pattern 2) — il più impattante sull'esperienza ma dipendente dall'integrazione operativa (app + centrale). *Alto valore, costo/tempo maggiore.*
-6. **Architettura modulare "beyond automotive" + percorso B2B per outcome** (Pattern 6) — abilita l'espansione Sara senza destabilizzare il core. *ROI a medio termine, fondativo per la scalabilità.*
+#### 3 · Con cosa si guida il trust?
+- **La tensione.** Dati sistemici (ADAC, Booking) o prova sociale (AutoAssist, Airbnb)? Sono due motori di fiducia entrambi validi nel benchmark.
+- **La nostra posizione.** Guidare con i dati sistemici, che ACI possiede e che non dipendono dalla media delle recensioni; affiancare la prova sociale solo scomposta per dimensione (cfr. §5.2.4), mai il voto aggregato. Partendo da 1,9, guidare con la prova sociale aggregata sarebbe autolesionista.
+- **Cosa decidete voi.** Quali dati di servizio siete disposti a pubblicare con fonte e data, e con quale cadenza aggiornarli — perché il trust documentale funziona solo se verificabile e mantenuto nel tempo.
 
 ---
 

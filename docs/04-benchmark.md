@@ -80,13 +80,21 @@ Per ogni osservazione che scrivi, fornisci il link diretto al materiale in cui l
 
 ## Passaggio 5 · Sintesi dei pattern
 
-Sulla base dell'analisi di tutti i player, estrai i pattern ricorrenti. Produci:
+L'output di questo passaggio è client-facing: non è una sintesi analitica, è una presa di posizione. Il tono è quello di un consiglio progettuale — "ecco cosa abbiamo trovato, ecco cosa vi consigliamo". Il cliente legge §5.2 e §5.3 per allinearsi sulle scelte di design prima di passare all'IA; se vuole approfondire, consulta il Passaggio 4.
 
-**Pattern trasversali**
-Cosa emerge da tutti o dalla maggioranza dei player, sia in positivo che in negativo.
+Produci tre sezioni:
 
-**Pattern applicabili al progetto**
-Quali pattern è utile applicare al nostro progetto e perché. Collega ogni pattern agli insight strategici e di design già estratti.
+**§5.1 · Il quadro di partenza**
+Massimo 5–6 bullet, una riga ciascuno. Solo fatti osservati sul mercato, senza prescrizione. Funzione: dare al cliente il contesto minimo per capire perché le raccomandazioni di §5.2 hanno senso. Non è una sintesi dell'analisi — è il punto di partenza da cui si muovono le raccomandazioni.
 
-**Opportunità distintive**
-Cosa nessun player sta facendo bene e che potrebbe diventare un elemento differenziante per il nostro prodotto.
+**§5.2 · La nostra direzione consigliata**
+Il cuore del documento. 6–8 raccomandazioni operative, ognuna strutturata come:
+- Cosa consigliamo (azione specifica)
+- Perché per questo progetto (collegato agli insight e al benchmark)
+- Chi lo fa bene (player di riferimento)
+- Cosa evitare (anti-pattern esplicito dal benchmark)
+
+Le raccomandazioni devono coprire: la gerarchia emergenza/informazione, il trust con dati propri, la trasparenza tariffaria HTML, la comunicazione dell'attesa, l'architettura multi-entità nella navigazione, il B2B/fleet.
+
+**§5.3 · Le decisioni aperte**
+Le tensioni strategiche dove il benchmark mostra approcci validi e opposti. Per ognuna: la tensione, la nostra posizione, cosa il cliente deve decidere. Non più di 3 punti. Tipicamente coprono: quanto digital-first (AAA chatbot-only ↔ ADAC multi-canale), quanto valorizzare il parent brand (nascosto ↔ garante esplicito), con cosa guidare il trust (dati sistemici ↔ prova sociale).
