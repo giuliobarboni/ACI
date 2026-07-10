@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UI Proposal — Homepage AGSE (v3)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,900&family=Gill+Sans+MT&family=Roboto:wght@400;500;700&family=Lato:wght@400&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --dark: #012549;
+    --dark-1: #013b76;
+    --primary: #1149ab;
+    --primary-1: #065ffa;
+    --primary-2: #e6effe;
+    --secondary: #fbb900;
+    --neutral-2: #71797d;
+    --heading: #1a1a2e;
+    --tint: rgba(17,73,171,.05);
+    --number-bg: #eaeff7;
+    --cream: #fff0d6;
+    --heading-font: 'Gill Sans', 'Gill Sans MT', 'Segoe UI', Calibri, system-ui, sans-serif;
+    --body-font: 'Inter', system-ui, sans-serif;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior:smooth; overflow-x:hidden; }
+  body{
+    font-family: var(--body-font);
+    color: var(--heading);
+    background:#fff;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{ max-width:100%; display:block; }
+  .container{ max-width:1219px; margin:0 auto; padding:0 24px; }
+  a{ color:inherit; text-decoration:none; }
+  button{ font-family:inherit; cursor:pointer; border:none; background:none; }
+  ul{ list-style:none; }
+  h1,h2,h3{ font-family:var(--body-font); }
+
+  /* ===== BUTTONS ===== */
+  .pill{
+    display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    border-radius:999px; font-size:18px; font-weight:600; padding:12px 24px;
+    white-space:nowrap; transition:transform .2s ease, box-shadow .2s ease, opacity .2s ease;
+  }
+  .pill:hover{ transform:translateY(-2px); box-shadow:0 10px 24px rgba(1,37,73,.18); }
+  .pill-primary{ background:var(--primary-1); color:#fff; }
+  .pill-secondary{ background:var(--secondary); color:var(--dark); }
+  .pill-outline{ background:transparent; border:1px solid var(--dark-1); color:var(--dark-1); }
+  .pill-outline:hover{ background:var(--dark-1); color:#fff; }
+
+  .btn-text{
+    display:inline-flex; align-self:flex-start; flex:0 0 auto; width:fit-content;
+    height:48px; min-width:48px; align-items:center; gap:16px;
+    background:#fff; border:1px solid #000; border-radius:999px;
+    padding:0 8px 0 24px; font-size:18px; font-weight:600; color:var(--dark);
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .btn-text:hover{ transform:translateY(-2px); box-shadow:0 10px 24px rgba(1,37,73,.18); }
+  .btn-text .chev{ width:36px; height:36px; flex-shrink:0; }
+  .btn-text.light{ color:#fff; }
+
+  .link-underline{ font-size:14px; font-weight:600; color:var(--primary); text-decoration:underline; text-underline-offset:3px; }
+
+  .label-mobile, .mobile-cta, .media-mobile{ display:none; }
+
+  .eyebrow-label{ font-size:12px; font-weight:500; color:var(--neutral-2); text-transform:uppercase; letter-spacing:.03em; }
+
+  .section-title{ font-size:52px; font-weight:700; line-height:1.15; color:var(--dark); letter-spacing:-1px; }
+
+  /* ===== HEADER ===== */
+  header.site-header{ position:fixed; top:0; left:0; right:0; width:100%; z-index:200; box-shadow:0 2px 0 rgba(0,0,0,0); transition:box-shadow .2s ease; }
+  header.site-header.is-scrolled{ box-shadow:0 6px 24px rgba(1,37,73,.12); }
+  .header-spacer{ width:100%; }
+  .topbar{ background:var(--dark-1); color:#fff; }
+  .topbar-inner{ max-width:1440px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:24px; padding:10px 24px; }
+  .topbar .info strong{ display:block; font-size:15px; font-weight:600; }
+  .topbar .info span{ display:block; font-size:13px; opacity:.9; }
+  .topbar .call-pill{
+    display:inline-flex; align-items:center; gap:8px; background:var(--secondary); color:var(--dark);
+    border-radius:999px; padding:9px 20px; font-size:16px; font-weight:600; flex-shrink:0;
+    transition:transform .2s ease;
+  }
+  .topbar .call-pill:hover{ transform:translateY(-2px); }
+  .topbar .call-pill svg{ width:20px; height:20px; }
+
+  .navbar2{ background:#fff; }
+  .navbar2-inner{ max-width:1440px; margin:0 auto; display:flex; align-items:center; gap:32px; padding:10px 24px; }
+  .navbar2 .logo img{ height:34px; width:auto; }
+  .navbar2 .menu{ flex:1; display:flex; align-items:center; justify-content:center; gap:24px; }
+  .navbar2 .menu a{ font-size:15px; font-weight:600; color:#2b2b2b; opacity:.85; }
+  .navbar2 .menu a:hover{ opacity:1; }
+  .navbar2 .area-btn{ border:1px solid var(--dark-1); color:var(--dark-1); border-radius:8px; padding:9px 22px; font-size:14px; font-weight:600; white-space:nowrap; }
+  .navbar2 .area-btn:hover{ background:var(--dark-1); color:#fff; }
+  .navbar2 .burger{ display:none; }
+
+  /* ===== HERO ===== */
+  .hero2{ position:relative; overflow:hidden; min-height:100vh; display:flex; align-items:center; }
+  .hero2-bg{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:-2; transform:scale(1.06); }
+  .hero2-gradient{ position:absolute; inset:0; background:linear-gradient(to bottom, rgba(0,0,0,.35) 0%, rgba(0,0,0,.2) 30%, rgba(0,0,0,.88) 100%); z-index:-1; }
+  .hero2-inner{
+    position:relative; width:100%; max-width:1440px; margin:0 auto;
+    padding:80px 100px 100px; display:flex; gap:32px; align-items:center; justify-content:space-between;
+  }
+  .hero2-text{ flex:1 1 auto; min-width:280px; max-width:700px; display:flex; flex-direction:column; gap:32px; color:#fff; }
+  .hero2-text h1{ font-size:64px; line-height:1.2; font-weight:700; }
+  .hero2-text p{ font-size:20px; line-height:1.5; opacity:.95; max-width:100%; }
+
+  .hero2-cards{ display:flex; flex-direction:column; gap:16px; flex:0 0 427px; width:427px; max-width:427px; }
+  .hero-card{
+    background:#fff; border-radius:8px; width:100%;
+    padding:24px 24px 12px; display:flex; flex-direction:column; justify-content:space-between; gap:16px;
+    min-height:150px; box-shadow:0 20px 40px rgba(1,37,73,.16);
+    opacity:0; animation:heroIn .8s cubic-bezier(.16,.8,.24,1) .3s forwards;
+  }
+  .hero-card .icon{ width:24px; height:24px; }
+  .hero-card h3{ font-size:24px; font-weight:500; color:var(--primary); line-height:1.2; }
+  .hero-card .link-underline{ align-self:flex-start; padding:10px 0; }
+
+  /* ===== CHI SIAMO ===== */
+  .chi-siamo2{ background:var(--tint); position:relative; overflow:hidden; min-height:100vh; display:flex; flex-direction:column; justify-content:center; }
+  .chi-siamo2-inner{ width:100%; max-width:1440px; margin:0 auto; padding:96px 100px; position:relative; }
+  .chi-siamo2-watermark{
+    position:absolute; right:-8%; top:8%; width:620px; max-width:none; opacity:.08;
+    transform:rotate(-30deg); pointer-events:none;
+  }
+  .chi-siamo2-head{ position:relative; display:flex; align-items:flex-end; justify-content:space-between; gap:24px; margin-bottom:56px; }
+  .chi-siamo2-body{ position:relative; display:flex; gap:64px; align-items:center; }
+  .chi-siamo2-copy{ flex:0 0 320px; max-width:320px; font-size:19px; line-height:1.6; color:var(--dark-1); }
+  .chi-siamo2-copy p + p{ margin-top:16px; }
+  .kpi-grid{ flex:1; display:grid; grid-template-columns:repeat(3, 1fr); gap:16px; }
+  .kpi-card{ background:var(--number-bg); border-radius:8px; padding:24px; text-align:center; }
+  .kpi-card .num{ display:block; font-size:72px; font-weight:500; color:var(--primary); line-height:1.1; }
+  .kpi-card .label{ font-size:14px; color:var(--dark); margin-top:4px; }
+
+  /* ===== SERVIZI ===== */
+  .servizi2{ background:#fff; min-height:100vh; display:flex; flex-direction:column; justify-content:center; }
+  .servizi2-inner{ width:100%; max-width:1440px; margin:0 auto; padding:96px 100px; }
+  .servizi2-inner h2{ margin-bottom:40px; }
+  .servizi2-grid{ display:flex; gap:20px; align-items:stretch; }
+  .servizi2-hero{ position:relative; border-radius:20px; overflow:hidden; flex:1.15; min-height:520px; }
+  .servizi2-hero img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  .servizi2-hero::after{ content:''; position:absolute; inset:0; background:linear-gradient(2deg, rgba(1, 37, 73, 0.82) 1.72%, rgba(1, 37, 73, 0.45) 98.96%); }
+  .servizi2-hero-content{ position:relative; z-index:1; height:100%; display:flex; flex-direction:column; justify-content:space-between; padding:40px; color:#fff; }
+  .servizi2-hero-texts{ display:flex; flex-direction:column; gap:32px; }
+  .servizi2-hero-content .eyebrow-title{ font-size:28px; font-weight:600; text-transform:uppercase; }
+  .servizi2-hero-content p{ font-size:24px; }
+
+  .servizi2-side{ flex:1; display:flex; flex-direction:column; gap:20px; }
+  .servizi2-card{ background:var(--primary-2); border-radius:16px; overflow:hidden; display:flex; flex-direction:column; }
+  .servizi2-card .body{ padding:32px; flex:1; display:flex; flex-direction:column; gap:12px; }
+  .servizi2-card .body h3{ color:var(--primary); font-family:'Inter', sans-serif; font-size:20px; font-style:normal; font-weight:700; line-height:32px; text-transform:uppercase; }
+  .servizi2-card .body p{ font-size:16px; color:var(--dark); }
+  .servizi2-card .foot{ background:var(--cream); display:flex; align-items:center; gap:8px; padding:16px 32px; font-size:18px; font-weight:600; color:var(--dark); }
+  .servizi2-card .foot img{ width:24px; height:24px; }
+  .servizi2-card.tall .body{ min-height:196px; }
+  .servizi2-row{ display:flex; gap:20px; flex:1; }
+  .servizi2-row .servizi2-card{ flex:1; }
+
+  /* ===== COME INTERVENIAMO ===== */
+  .come2{ background:var(--tint); min-height:100vh; display:flex; flex-direction:column; justify-content:center; }
+  .come2-inner{ width:100%; max-width:1440px; margin:0 auto; padding:96px 100px; }
+  .come2-head{ display:flex; align-items:flex-end; justify-content:space-between; gap:24px; margin-bottom:40px; }
+  .come2-grid{ display:flex; gap:40px; align-items:stretch; }
+  .come2-card{ flex:1; background:#fff; border:1px solid #ddd; border-radius:16px; overflow:hidden; display:flex; flex-direction:column; }
+  .come2-card img{ height:228px; width:100%; object-fit:cover; }
+  .come2-card .body{ padding:24px; flex:1; }
+  .come2-card .step-num{ font-size:40px; font-weight:700; color:rgba(0,0,0,.3); display:block; margin-bottom:4px; }
+  .come2-card h3{ font-size:24px; font-weight:600; color:#2b2b2b; margin-bottom:4px; }
+  .come2-card p{ font-size:18px; color:var(--neutral-2); }
+
+  /* ===== FAQ ===== */
+  .faq2{ background:#fff; position:relative; overflow:hidden; min-height:100vh; display:flex; flex-direction:column; justify-content:center; }
+  .faq2-inner{ width:100%; max-width:1440px; margin:0 auto; padding:80px 90px; position:relative; }
+  .faq2-deco{ position:absolute; right:-40px; top:60px; width:420px; opacity:.55; pointer-events:none; }
+  .faq2-head{ position:relative; max-width:769px; margin-bottom:56px; }
+  .faq2-head h2{ font-size:48px; font-weight:600; letter-spacing:-1px; color:var(--heading); line-height:1.2; }
+  .faq2-head p{ font-size:18px; color:var(--neutral-2); margin-top:24px; line-height:1.6; }
+  .faq2-list{ position:relative; display:flex; flex-direction:column; gap:24px; max-width:894px; margin-bottom:32px; }
+  .faq2-item{ background:#fff; border-radius:16px; padding:16px; box-shadow:0 2px 12px rgba(0,0,0,.1); transition:box-shadow .25s ease, transform .25s ease; }
+  .faq2-item:hover{ box-shadow:0 10px 28px rgba(1,37,73,.14); transform:translateY(-2px); }
+  .faq2-toggle{ width:100%; display:flex; align-items:center; justify-content:space-between; gap:16px; text-align:left; }
+  .faq2-kicker{ font-size:12px; font-weight:500; color:var(--neutral-2); text-transform:uppercase; margin-bottom:4px; }
+  .faq2-item h3{ font-size:24px; font-weight:900; color:var(--dark); margin-bottom:4px; }
+  .faq2-sub{ font-size:14px; color:var(--neutral-2); }
+  .faq2-plus{
+    width:48px; height:48px; border-radius:50px; border:2px solid #fff; background:rgba(0,0,0,0); flex-shrink:0;
+    display:flex; align-items:center; justify-content:center; transition:transform .25s ease, background .25s ease;
+  }
+  .faq2-plus img{ width:24px; height:24px; }
+  .faq2-item.open .faq2-plus{ transform:rotate(90deg); background:var(--primary-2); }
+  .faq2-answer{ max-height:0; overflow:hidden; transition:max-height .3s ease; }
+  .faq2-answer p{ font-size:15px; color:var(--neutral-2); padding-top:16px; max-width:640px; }
+
+  /* ===== BANNER APP ===== */
+  .banner-app2{ background:linear-gradient(135deg, #071e45, var(--primary)); position:relative; overflow:hidden; min-height:100vh; display:flex; flex-direction:column; justify-content:center; }
+  .banner-app2 .container{ width:100%; display:flex; align-items:center; gap:40px; max-width:1440px; margin:0 auto; padding:96px 100px; }
+  .banner-app2-text{ flex:0 0 620px; max-width:620px; display:flex; flex-direction:column; gap:32px; color:#fff; }
+  .banner-app2-text h2{ font-family:var(--heading-font); font-size:48px; font-weight:600; line-height:1.1; }
+  .banner-app2-text p{ font-family:'Lato', sans-serif; font-size:20px; line-height:1.5; }
+  .store-badges2{ display:flex; gap:16px; flex-wrap:wrap; }
+  .store-badges2 img{ height:48px; width:auto; }
+  .banner-app2-media{ position:relative; flex:1; min-width:280px; aspect-ratio:575/571; }
+  .banner-app2-media img{ position:absolute; right:-48px; bottom:60px; width:100%; max-width:520px; }
+
+  /* ===== FOOTER ===== */
+  footer.site-footer2{ background:var(--dark); color:#fff; padding:96px 24px 40px; }
+  .partner-banner{ max-width:1219px; margin:0 auto 64px; border-radius:16px; overflow:hidden; }
+  .partner-banner img{ width:100%; height:auto; display:block; }
+
+  .footer-cols2{ max-width:1219px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr 1fr auto; gap:40px; padding-bottom:56px; border-bottom:1px solid rgba(255,255,255,.12); align-items:start; }
+  .footer-col2 h4{ font-family:'Roboto', sans-serif; font-size:20px; font-weight:700; margin-bottom:24px; }
+  .footer-col2 ul{ display:flex; flex-direction:column; gap:16px; }
+  .footer-col2 a{ font-family:'Roboto', sans-serif; font-size:16px; font-weight:500; opacity:.9; display:inline-block; transition:opacity .2s ease, transform .2s ease; }
+  .footer-col2 a:hover{ opacity:1; transform:translateX(4px); }
+  .footer-badge{ background:#fff; border-radius:6px; padding:6px; width:154px; }
+  .footer-legal2{ max-width:1219px; margin:32px auto 0; font-size:14px; color:rgba(255,255,255,.6); line-height:1.7; }
+  .footer-legal2 p{ margin-bottom:16px; }
+
+  /* ===== SCROLL REVEAL ===== */
+  .reveal{ opacity:0; transform:translateY(28px); transition:opacity .7s cubic-bezier(.16,.8,.24,1), transform .7s cubic-bezier(.16,.8,.24,1); }
+  .reveal.is-visible{ opacity:1; transform:translateY(0); }
+  @keyframes heroIn{ from{ opacity:0; transform:translateY(22px); } to{ opacity:1; transform:translateY(0); } }
+  .hero2-text > *{ opacity:0; animation:heroIn .8s cubic-bezier(.16,.8,.24,1) forwards; }
+  .hero2-text p{ animation-delay:.15s; }
+  .hero2-text a{ animation-delay:.3s; }
+  .fade-img{ opacity:0; transition:opacity .5s ease; }
+  .fade-img.is-loaded{ opacity:1; }
+
+  a:focus-visible, button:focus-visible{ outline:2px solid var(--primary); outline-offset:3px; border-radius:inherit; }
+
+  section[id]{ scroll-margin-top: var(--header-h, 110px); }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 1200px){
+    .hero2-inner{ padding:64px 40px; }
+    .chi-siamo2-inner, .servizi2-inner, .come2-inner{ padding:80px 40px; }
+    .faq2-inner{ padding:64px 40px; }
+    .banner-app2 .container{ padding:64px 40px; }
+  }
+  @media (max-width: 1024px){
+    .hero2-inner{ flex-direction:column; align-items:stretch; }
+    .hero2-text{ flex:1 1 auto; max-width:100%; }
+    .hero2-cards{ flex:1 1 auto; width:100%; max-width:100%; }
+    .hero-card{ width:100%; }
+    .chi-siamo2-body{ flex-direction:column; align-items:stretch; }
+    .chi-siamo2-copy{ max-width:100%; flex-basis:auto; }
+    .servizi2-grid{ flex-direction:column; }
+    .servizi2-hero{ min-height:400px; }
+    .come2-grid{ flex-direction:column; }
+    .footer-cols2{ grid-template-columns:1fr 1fr; }
+    .banner-app2 .container{ flex-direction:column-reverse; }
+    .banner-app2-text{ max-width:100%; flex-basis:auto; }
+  }
+  @media (max-width: 720px){
+    /* ----- Header ----- */
+    .topbar-inner{ flex-direction:column; align-items:stretch; gap:12px; padding:16px 20px; }
+    .topbar .info strong{ font-size:15px; }
+    .topbar .info span{ font-size:13px; }
+    .topbar .call-pill{ width:100%; justify-content:center; padding:12px; font-size:16px; }
+    .navbar2-inner{ padding:12px 16px; gap:12px; display:flex; justify-content:space-between; align-items:center; flex:1 0 0; }
+    .navbar2 .menu{ position:fixed; top:96px; left:16px; right:16px; background:rgba(1,37,73,.97); border-radius:20px; flex-direction:column; align-items:flex-start; padding:24px; gap:20px; display:none; z-index:150; }
+    .navbar2 .menu.open{ display:flex; }
+    .navbar2 .menu a{ color:#fff; }
+    .navbar2 .burger{ display:flex; align-items:center; justify-content:center; width:36px; height:36px; }
+    .navbar2 .burger svg{ stroke:var(--dark); }
+    .navbar2 .area-btn{ display:none; }
+
+    .hero2, .chi-siamo2, .servizi2, .come2, .banner-app2{ min-height:auto; }
+
+    /* Shared: CTA pills go full width and labels swap to the shorter mobile copy */
+    .btn-text{ align-self:stretch; flex:0 0 auto; width:100%; height:48px; justify-content:space-between; }
+    .label-desktop{ display:none; }
+    .label-mobile{ display:inline; }
+
+    /* ----- Hero ----- */
+    .hero2-inner{ padding:48px 20px; gap:24px; justify-content:center; }
+    .hero2-text{ gap:16px; }
+    .hero2-text h1{ font-size:32px; line-height:1.2; }
+    .hero2-text p{ font-size:16px; }
+    .hero2-text .btn-text{ margin-top:34px; }
+    .hero2-cards{ gap:16px; }
+    .hero-card{ gap:2px; min-height:0; }
+    .hero-card h3{ font-size:20px; }
+
+    /* ----- Chi Siamo ----- */
+    .chi-siamo2-inner, .servizi2-inner, .come2-inner{ padding:48px 20px; }
+    .chi-siamo2-watermark{ display:none; }
+    .chi-siamo2-head, .servizi2-inner h2, .come2-head{ flex-direction:column; align-items:flex-start; gap:16px; }
+    .chi-siamo2-head .head-cta{ display:none; }
+    .chi-siamo2-body{ gap:24px; }
+    .chi-siamo2-copy{ display:flex; flex-direction:column; gap:16px; font-size:16px; }
+    .chi-siamo2-copy .mobile-cta{ display:flex; width:100%; justify-content:center; }
+    .section-title{ font-size:32px; }
+    .kpi-grid{ grid-template-columns:1fr; gap:16px; }
+    .kpi-card .num{ font-size:48px; }
+    .kpi-desktop-only{ display:none; }
+
+    /* ----- Servizi ----- */
+    .servizi2-grid{ gap:24px; }
+    .servizi2-side{ gap:24px; }
+    .servizi2-row{ flex-direction:column; gap:24px; }
+    .servizi2-hero{ min-height:320px; }
+    .servizi2-hero-content{
+      width:100%; height:307px; display:flex; padding:40px 20px;
+      flex-direction:column; align-items:flex-start; justify-content:flex-start; gap:32px;
+    }
+    .servizi2-hero-texts{ flex:1; }
+    .servizi2-hero-content .eyebrow-title{
+      color:var(--content-light, #fff); font-family:'Inter', sans-serif; font-size:20px;
+      font-style:normal; font-weight:600; line-height:120%; text-transform:uppercase;
+    }
+    .servizi2-hero-content p{
+      color:var(--content-light, #fff); font-family:'Inter', sans-serif; font-size:16px;
+      font-style:normal; font-weight:400; line-height:150%;
+    }
+
+    /* ----- Come interveniamo ----- */
+    .come2-head .pill{ width:100%; justify-content:center; }
+    .come2-grid{ flex-direction:column; gap:24px; }
+    .come2-card img{ height:132px; }
+    .come2-card .step-num{ font-size:32px; }
+    .come2-card h3{ font-size:20px; }
+    .come2-card p{ font-size:14px; }
+
+    /* ----- FAQ: not part of the mobile design ----- */
+    .faq2{ display:none; }
+
+    /* ----- Banner App ----- */
+    .banner-app2 .container{ padding:48px 20px; flex-direction:column; align-items:stretch; gap:24px; }
+    .banner-app2-text{ gap:24px; }
+    .banner-app2-text h2{ font-size:32px; letter-spacing:-1px; }
+    .banner-app2-text p{ font-size:16px; }
+    .banner-app2-media{ position:static; aspect-ratio:auto; width:calc(100% + 40px); max-width:none; margin:8px -20px -48px; }
+    .banner-app2-media img{ position:static; width:100%; max-width:none; }
+    .media-desktop{ display:none; }
+    .media-mobile{ display:block; }
+
+    /* ----- Footer ----- */
+    footer.site-footer2{ padding:56px 20px 32px; }
+    .partner-banner{ display:none; }
+    .footer-cols2{ grid-template-columns:1fr; gap:40px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header" id="siteHeader">
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="info">
+        <strong>Soccorso stradale h24</strong>
+        <span>Sei in panne? Chiama, ti rispondiamo subito</span>
+      </div>
+      <a class="call-pill" href="tel:803116">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.7.6.6 0 1 .4 1 1v3.6c0 .6-.4 1-1 1C10.6 21.2 2.8 13.4 2.8 4.9c0-.6.4-1 1-1H7.4c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.7.1.4 0 .8-.2 1l-2.2 2.2z" fill="currentColor"/></svg>
+        803.116
+      </a>
+    </div>
+  </div>
+  <div class="navbar2">
+    <div class="navbar2-inner">
+      <a class="logo" href="#top">
+        <img src="assets/agse2/Logo.png" alt="ACI Global Servizi">
+      </a>
+      <div class="menu" id="navMenu2">
+        <a href="#situazioni">Lorem</a>
+        <a href="#chi-siamo">Lorem</a>
+        <a href="#servizi">Lorem</a>
+        <a href="#come-interveniamo">Lorem</a>
+        <a href="#faq">Lorem</a>
+      </div>
+      <a class="area-btn" href="#">Area Clienti</a>
+      <button class="burger" id="burgerBtn2" aria-label="Menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+<div class="header-spacer" id="headerSpacer"></div>
+
+<section class="hero2" id="top">
+  <img class="hero2-bg fade-img" src="assets/agse2/hero.png" alt="">
+  <div class="hero2-gradient"></div>
+  <div class="hero2-inner">
+    <div class="hero2-text">
+      <h1>Ovunque tu sia<br>arriviamo</h1>
+      <p>Da più di 70 anni al tuo fianco. Soccorso, noleggio, trasporto e cura delle auto d'epoca. In tutta Italia, h24.</p>
+      <a class="btn-text" href="#servizi">
+        Scopri tutti i nostri servizi
+        <span class="chev">
+          <svg viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="17" fill="var(--secondary)"/><path d="M15 12l7 6-7 6" stroke="#012549" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </a>
+    </div>
+    <div class="hero2-cards" id="situazioni">
+      <div class="hero-card">
+        <img class="icon" src="assets/agse2/icon-siren.svg" alt="">
+        <h3>Sei in panne?</h3>
+        <a class="link-underline" href="#servizi">Scopri i servizi</a>
+      </div>
+      <div class="hero-card">
+        <img class="icon" src="assets/agse2/icon-car.svg" alt="">
+        <h3>Hai bisogno di un'auto?</h3>
+        <a class="link-underline" href="#servizi">Scopri i servizi</a>
+      </div>
+      <div class="hero-card">
+        <img class="icon" src="assets/agse2/icon-jeep.svg" alt="">
+        <h3>Devi spostare un veicolo?</h3>
+        <a class="link-underline" href="#servizi">Scopri i servizi</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="chi-siamo2" id="chi-siamo">
+  <img class="chi-siamo2-watermark" src="assets/agse2/ags-letter-logo-white.png" alt="" aria-hidden="true">
+  <div class="chi-siamo2-inner">
+    <div class="chi-siamo2-head reveal">
+      <h2 class="section-title">Chi Siamo</h2>
+      <a class="pill pill-primary head-cta" href="#">Scopri di più su di noi</a>
+    </div>
+    <div class="chi-siamo2-body">
+      <div class="chi-siamo2-copy reveal">
+        <p>Nel 1954 entrava in funzione il primo centralino nazionale di emergenza. Oggi siamo una rete che non si ferma mai.</p>
+        <p>Oggi ACI Global Servizi è un'azienda in costante innovazione, moderna e dinamica.</p>
+        <a class="pill pill-primary mobile-cta" href="#">Scopri di più su di noi</a>
+      </div>
+      <div class="kpi-grid stagger">
+        <div class="kpi-card reveal"><span class="num">40</span><span class="label">Anni di esperienza</span></div>
+        <div class="kpi-card reveal"><span class="num">300</span><span class="label">Operatori</span></div>
+        <div class="kpi-card reveal"><span class="num">75</span><span class="label">Lorem ipsum</span></div>
+        <div class="kpi-card reveal kpi-desktop-only"><span class="num">330</span><span class="label">Mq di zone servite</span></div>
+        <div class="kpi-card reveal kpi-desktop-only"><span class="num">65</span><span class="label">Lorem ipsum sit dolor amet and sit dolor</span></div>
+        <div class="kpi-card reveal kpi-desktop-only"><span class="num">280</span><span class="label">Lorem</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="servizi2" id="servizi">
+  <div class="servizi2-inner">
+    <h2 class="section-title reveal">Ecco cosa possiamo fare per te</h2>
+    <div class="servizi2-grid stagger">
+      <div class="servizi2-hero reveal">
+        <img class="fade-img" src="assets/agse2/servizi-soccorso.jpg" alt="Soccorso stradale">
+        <div class="servizi2-hero-content">
+          <div class="servizi2-hero-texts">
+            <p class="eyebrow-title">Soccorso stradale</p>
+            <p>Garantiamo a chi ci chiama il ripristino della mobilità nel più breve tempo possibile</p>
+          </div>
+          <a class="btn-text" href="#">
+            <span class="label-desktop">Scopri tutte le tipologie di soccorso</span>
+            <span class="label-mobile">Scopri il soccorso</span>
+            <span class="chev">
+              <svg viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="17" fill="var(--secondary)"/><path d="M15 12l7 6-7 6" stroke="#012549" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </a>
+        </div>
+      </div>
+      <div class="servizi2-side">
+        <div class="servizi2-card tall reveal">
+          <div class="body">
+            <h3>Noleggio a breve termine</h3>
+            <p>Offriamo solo il meglio per le esigenze di ogni tipo di Automobilista</p>
+          </div>
+          <a class="foot" href="#">Scopri di più <img src="assets/agse2/icon-chevron-forward.svg" alt=""></a>
+        </div>
+        <div class="servizi2-row reveal">
+          <div class="servizi2-card">
+            <div class="body">
+              <h3>Trasporto veicoli</h3>
+              <p>Trasportiamo veicoli e siamo specializzati nella logistica dell'ultimo miglio</p>
+            </div>
+            <a class="foot" href="#">Scopri di più <img src="assets/agse2/icon-chevron-forward-2.svg" alt=""></a>
+          </div>
+          <div class="servizi2-card">
+            <div class="body">
+              <h3>Auto d'epoca</h3>
+              <p>La naturale evoluzione del concetto di assistenza rivolta con dedizione e affidabilità anche ai veicoli storici.</p>
+            </div>
+            <a class="foot" href="#">Scopri di più <img src="assets/agse2/icon-chevron-forward.svg" alt=""></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="come2" id="come-interveniamo">
+  <div class="come2-inner">
+    <div class="come2-head reveal">
+      <h2 class="section-title">Come interveniamo</h2>
+      <a class="pill pill-primary" href="#">
+        <span class="label-desktop">Scopri le nostre tariffe e condizioni</span>
+        <span class="label-mobile">Scopri le tariffe e condizioni</span>
+      </a>
+    </div>
+    <div class="come2-grid stagger">
+      <div class="come2-card reveal">
+        <img class="fade-img" src="assets/agse2/ci-step1.jpg" alt="Ci chiami">
+        <div class="body">
+          <span class="step-num">01</span>
+          <h3>Ci chiami</h3>
+          <p>Un numero unico, attivo 24 ore su 24, in tutta Italia.</p>
+        </div>
+      </div>
+      <div class="come2-card reveal">
+        <img class="fade-img" src="assets/agse2/ci-step2.jpg" alt="Ti localizziamo">
+        <div class="body">
+          <span class="step-num">02</span>
+          <h3>Ti localizziamo</h3>
+          <p>Individuiamo la tua posizione e il mezzo più vicino.</p>
+        </div>
+      </div>
+      <div class="come2-card reveal">
+        <img class="fade-img" src="assets/agse2/ci-step3.jpg" alt="Arriviamo e risolviamo">
+        <div class="body">
+          <span class="step-num">03</span>
+          <h3>Arriviamo e risolviamo</h3>
+          <p>Raggiungiamo il punto nel minor tempo possibile e ripristiniamo la tua mobilità.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="faq2" id="faq">
+  <img class="faq2-deco" src="assets/agse2/faq-vector.png" alt="" aria-hidden="true">
+  <div class="faq2-inner">
+  <div class="faq2-head reveal">
+    <h2>Tutte le risposte che cerchi, a portata di click</h2>
+    <p>Abbiamo raccolto tutte le domande frequenti dei nostri clienti in un'unica sezione divisa per argomenti. Così non devi sforzarti di trovare ciò che ti serve.</p>
+  </div>
+  <div class="faq2-list stagger">
+    <div class="faq2-item reveal">
+      <button class="faq2-toggle">
+        <div>
+          <div class="faq2-kicker">Come funziona</div>
+          <h3>Cosa succede dopo aver chiamato il soccorso?</h3>
+          <div class="faq2-sub">Cosa aspettarti passo dopo passo, dalla chiamata all'arrivo del mezzo</div>
+        </div>
+        <span class="faq2-plus"><img src="assets/agse2/icon-caret-right.svg" alt=""></span>
+      </button>
+      <div class="faq2-answer">
+        <p>Dopo la chiamata al numero unico, l'operatore raccoglie la tua posizione e il tipo di problema, individua il mezzo più vicino e ti aggiorna sui tempi stimati di arrivo, restando in contatto fino alla risoluzione.</p>
+      </div>
+    </div>
+    <div class="faq2-item reveal">
+      <button class="faq2-toggle">
+        <div>
+          <div class="faq2-kicker">Tempistiche</div>
+          <h3>In quanto tempo arrivate?</h3>
+          <div class="faq2-sub">Come funzionano i tempi di intervento e da cosa dipendono</div>
+        </div>
+        <span class="faq2-plus"><img src="assets/agse2/icon-caret-right.svg" alt=""></span>
+      </button>
+      <div class="faq2-answer">
+        <p>I tempi variano in base alla zona, al traffico e alla disponibilità dei mezzi più vicini alla tua posizione. In media interveniamo entro 30-45 minuti dalla chiamata, con aggiornamenti in tempo reale.</p>
+      </div>
+    </div>
+    <div class="faq2-item reveal">
+      <button class="faq2-toggle">
+        <div>
+          <div class="faq2-kicker">Costi e tessera</div>
+          <h3>Quanto costa il soccorso, e quanto risparmio da socio?</h3>
+          <div class="faq2-sub">I costi in chiaro per tutti, con i vantaggi riservati ai soci</div>
+        </div>
+        <span class="faq2-plus"><img src="assets/agse2/icon-caret-right.svg" alt=""></span>
+      </button>
+      <div class="faq2-answer">
+        <p>Il costo dipende dal tipo di intervento e dalla distanza percorsa. Con la tessera socio ottieni interventi gratuiti o a tariffa ridotta, oltre a vantaggi su noleggio e altri servizi dedicati.</p>
+      </div>
+    </div>
+  </div>
+  <a class="pill pill-primary" href="#">Leggi tutte le FAQ</a>
+  </div>
+</section>
+
+<section class="banner-app2" id="app">
+  <div class="container">
+    <div class="banner-app2-text reveal">
+      <h2>I nostri servizi, sempre con te</h2>
+      <p>Con la nostra app mobile puoi richiedere in modo semplice e veloce, ovunque ti trovi, assistenza stradale h24 e hai sempre a disposizione i servizi e la nostra consulenza direttamente dal tuo smartphone.</p>
+      <a class="btn-text" href="tel:803116">
+        Scopri l'app mobile i803.116
+        <span class="chev">
+          <svg viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="17" fill="var(--secondary)"/><path d="M15 12l7 6-7 6" stroke="#012549" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </a>
+      <div class="store-badges2">
+        <img class="fade-img" src="assets/agse2/store-apple.png" alt="Scarica su App Store">
+        <img class="fade-img" src="assets/agse2/store-google.png" alt="Disponibile su Google Play">
+      </div>
+    </div>
+    <div class="banner-app2-media reveal">
+      <img class="fade-img media-desktop" src="assets/agse2/mock-app.png" alt="App AGSE su smartphone">
+      <img class="fade-img media-mobile" src="assets/agse2/mock-app-mobile.png" alt="App AGSE su smartphone">
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer2">
+  <div class="partner-banner reveal">
+    <img class="fade-img" src="assets/agse2/banner-sara.png" alt="Parte del gruppo Sara Assicurazioni">
+  </div>
+  <div class="footer-cols2">
+    <div class="footer-col2">
+      <h4>Lorem ipsum dolor sit</h4>
+      <ul>
+        <li><a href="tel:803116">Lorem ipsum</a></li>
+        <li><a href="#">Lorem ipsum</a></li>
+      </ul>
+    </div>
+    <div class="footer-col2">
+      <h4>Lorem ipsum dolor sit</h4>
+      <ul>
+        <li><a href="#">Lorem</a></li>
+        <li><a href="#">Lorem ipsum</a></li>
+        <li><a href="#">Lorem</a></li>
+        <li><a href="#">Lorem ipsum</a></li>
+        <li><a href="#">Lorem</a></li>
+        <li><a href="#">Lorem ipsum</a></li>
+      </ul>
+    </div>
+    <div class="footer-col2">
+      <h4>Lorem ipsum dolor</h4>
+      <ul>
+        <li><a href="#">Lorem</a></li>
+        <li><a href="#">Lorem</a></li>
+        <li><a href="#">Lorem ipsum</a></li>
+        <li><a href="#">Lorem ipsum dolor</a></li>
+        <li><a href="#">Lorem ipsum dolor sit</a></li>
+      </ul>
+    </div>
+    <div class="footer-col2">
+      <div class="footer-badge">
+        <img src="assets/agse2/footer-partner-logo.png" alt="Qui informazioni sulla trasparenza">
+      </div>
+    </div>
+  </div>
+  <div class="footer-legal2">
+    <p>Lorem ipsum dolor sit amet, cum sapientem honestatis ea, verear labores feugait sea in, cu justo suscipiantur mel. Mel facilis sensibus petentium in, ne ignota mollis suavitate mei, modus reque signiferumque in cum. Ut molestiae complectitur eam, partiendo necessitatibus ad vix. Putent semper nusquam sea in. Eu vix altera vidisse.</p>
+    <p>Vis electram vituperata neglegentur id, eu graeco legendos est. Ad sed error populo feugait, unum solum lucilius eum te, vis purto oblique ea. Noluisse repudiare vix no. Nam ea alii latine, mei feugait evertitur ne. Audire ullamcorper in vix. Pro affert officiis patrioque no.</p>
+    <p>Ad per aperiri rationibus disputationi, no constituam dissentiet efficiantur qui, cu sed vitae verterem. No prima melius eum. Eos ex solet consul oportere. Wisi natum oporteat ius ei, ut sea aperiam ponderum. Cum dictas nonumes suscipiantur id, id partem fastidii deserunt sea.</p>
+    <p>Sit dolor</p>
+  </div>
+</footer>
+
+<script>
+  // Header scroll shadow + mobile menu
+  const header = document.getElementById('siteHeader');
+  const headerSpacer = document.getElementById('headerSpacer');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('is-scrolled', window.scrollY > 40);
+  });
+  document.getElementById('burgerBtn2').addEventListener('click', () => {
+    document.getElementById('navMenu2').classList.toggle('open');
+  });
+
+  // Keep the spacer in sync with the fixed header's real height
+  function syncHeaderSpacer(){
+    const h = header.offsetHeight;
+    headerSpacer.style.height = h + 'px';
+    document.documentElement.style.setProperty('--header-h', h + 'px');
+  }
+  syncHeaderSpacer();
+  window.addEventListener('resize', syncHeaderSpacer);
+  window.addEventListener('load', syncHeaderSpacer);
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(syncHeaderSpacer);
+  }
+
+  // FAQ accordion
+  document.querySelectorAll('.faq2-item').forEach(item => {
+    const toggle = item.querySelector('.faq2-toggle');
+    const answer = item.querySelector('.faq2-answer');
+    toggle.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq2-item.open').forEach(openItem => {
+        if (openItem !== item){
+          openItem.classList.remove('open');
+          openItem.querySelector('.faq2-answer').style.maxHeight = null;
+        }
+      });
+      item.classList.toggle('open', !isOpen);
+      answer.style.maxHeight = isOpen ? null : answer.scrollHeight + 'px';
+    });
+  });
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Scroll reveal with stagger
+  document.querySelectorAll('.stagger').forEach(group => {
+    group.querySelectorAll(':scope > .reveal').forEach((el, i) => {
+      el.style.transitionDelay = Math.min(i * 90, 360) + 'ms';
+    });
+  });
+
+  if (prefersReducedMotion) {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('is-visible'));
+  } else {
+    const revealObserver = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+  }
+
+  // Fade-in images once loaded
+  document.querySelectorAll('.fade-img').forEach(img => {
+    if (img.complete && img.naturalWidth > 0) {
+      img.classList.add('is-loaded');
+    } else {
+      img.addEventListener('load', () => img.classList.add('is-loaded'), { once: true });
+      img.addEventListener('error', () => img.classList.add('is-loaded'), { once: true });
+    }
+  });
+</script>
+
+</body>
+</html>
