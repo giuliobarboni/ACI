@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UI Proposal — Homepage AGSE (v4)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,900&family=Space+Grotesk:wght@500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --dark: #012549;
+    --dark-1: #013b76;
+    --primary: #1149ab;
+    --secondary: #fbb900;
+    --secondary-hover: #fddc7f;
+    --neutral-2: #71797d;
+    --border: #e6e9ef;
+    --body-font: 'Inter', system-ui, sans-serif;
+    --display-font: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior:smooth; overflow-x:hidden; }
+  body{
+    font-family: var(--body-font);
+    color: var(--dark);
+    background:#fff;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{ max-width:100%; display:block; }
+  a{ color:inherit; text-decoration:none; }
+  button{ font-family:inherit; cursor:pointer; border:none; background:none; }
+
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    height:48px; border-radius:8px; font-size:18px; font-weight:600; padding:12px 24px;
+    white-space:nowrap; transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .btn:hover{ transform:translateY(-2px); box-shadow:0 10px 24px rgba(1,37,73,.18); }
+  .btn-secondary{ background:var(--secondary); color:var(--dark); }
+  .btn-outline{ background:#fff; border:1px solid var(--dark-1); color:var(--dark-1); }
+  .btn-outline:hover{ background:var(--dark-1); color:#fff; }
+  .btn-call{ background:var(--secondary); color:var(--dark); gap:8px; }
+  .btn-call svg{ width:24px; height:24px; }
+
+  .eyebrow{ display:inline-flex; align-items:center; gap:8px; font-size:12px; font-weight:600; letter-spacing:.135em; text-transform:uppercase; color:var(--dark-1); }
+  .eyebrow.on-dark{ color:var(--secondary-hover); }
+  .eyebrow.on-white-alt{ color:var(--neutral-2); }
+  .eyebrow img{ width:16px; height:16px; }
+
+  h2.section-title{ font-family:var(--display-font); font-weight:700; font-size:48px; line-height:1.2; letter-spacing:-.87px; color:var(--dark); }
+
+  /* ===== HEADER ===== */
+  header.site-header{ position:sticky; top:0; left:0; right:0; z-index:200; background:#fff; box-shadow:0 2px 0 rgba(0,0,0,0); transition:box-shadow .2s ease; }
+  header.site-header.is-scrolled{ box-shadow:0 6px 24px rgba(1,37,73,.12); }
+  .navbar{ display:flex; align-items:center; gap:40px; padding:12px 24px; }
+  .navbar .logo{ display:flex; align-items:center; flex-shrink:0; }
+  .navbar .logo img{ height:37px; width:auto; }
+  .navbar .menu{ flex:1; display:flex; align-items:center; justify-content:center; gap:24px; }
+  .navbar .menu a{ font-size:16px; font-weight:600; color:#2b2b2b; }
+  .navbar .menu a:hover{ opacity:.7; }
+  .navbar .burger{ display:none; }
+
+  /* ===== HERO ===== */
+  .hero{ position:relative; overflow:hidden; height:calc(100vh - 30px); min-height:500px; display:flex; align-items:center; }
+  .hero-bg{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:-2; }
+  .hero-gradient{ position:absolute; inset:0; background:linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,.85) 100%); z-index:-1; }
+  .hero-inner{ width:100%; max-width:1440px; margin:0 auto; padding:60px 100px 100px; }
+  .hero-text{ display:flex; flex-direction:column; gap:50px; max-width:700px; color:#fff; }
+  .hero-text h1{ font-family:var(--display-font); font-weight:700; font-size:64px; line-height:1.2; }
+  .hero-text h1 .underline{ text-decoration:underline; text-decoration-color:var(--secondary); text-decoration-thickness:10%; }
+  .hero-text p{ font-size:20px; line-height:1.5; }
+  .hero-ctas{ display:flex; gap:24px; }
+
+  .situazioni{ position:relative; display:flex; gap:16px; justify-content:center; max-width:1240px; margin:-76px auto 0; padding:0 100px; z-index:5; }
+  .situazione-card{
+    flex:1; background:#fff; border:1px solid var(--border); border-radius:8px;
+    padding:26px 25px; display:flex; flex-direction:column; gap:13px;
+    box-shadow:0 18px 40px rgba(1,37,73,.1);
+  }
+  .situazione-card .text{ flex:1; display:flex; align-items:flex-start; }
+  .situazione-card h3{ font-family:var(--display-font); font-weight:700; font-size:20px; letter-spacing:-.345px; color:var(--dark); }
+  .situazione-card .go{
+    width:48px; height:48px; border-radius:50px; border:2px solid #fff; background:var(--secondary);
+    display:flex; align-items:center; justify-content:center; transition:transform .2s ease;
+  }
+  .situazione-card .go img{ width:24px; height:24px; }
+  .situazione-card:hover .go{ transform:translateX(4px); }
+
+  /* ===== SERVIZI ===== */
+  .servizi{ background:#fff; padding:80px 100px 100px; }
+  .servizi-head{ margin-bottom:40px; max-width:620px; }
+  .servizi-grid{ position:relative; width:100%; }
+  .servizi-grid::before{ content:''; display:block; padding-top:60.62%; }
+  .servizi-card{ position:absolute; border-radius:8px; overflow:hidden; }
+  .servizi-card.card-1{ left:0; top:0; width:59.72%; height:47.9%; z-index:4; }
+  .servizi-card.card-2{ left:61.03%; top:0; width:38.8%; height:57.1%; z-index:3; }
+  .servizi-card.card-3{ left:0; top:49.93%; width:43.7%; height:49.93%; z-index:2; }
+  .servizi-card.card-4{
+    left:44.87%; top:49.93%; width:55.13%; height:49.93%; z-index:1;
+    -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 672 369'%3E%3Cpath d='M8 0 L176 0 A8 8 0 0 1 184 8 L184 60 A8 8 0 0 0 192 68 L664 68 A8 8 0 0 1 672 76 L672 361 A8 8 0 0 1 664 369 L8 369 A8 8 0 0 1 0 361 L0 8 A8 8 0 0 1 8 0 Z' fill='%23fff'/%3E%3C/svg%3E");
+    -webkit-mask-size:100% 100%; -webkit-mask-repeat:no-repeat;
+    mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 672 369'%3E%3Cpath d='M8 0 L176 0 A8 8 0 0 1 184 8 L184 60 A8 8 0 0 0 192 68 L664 68 A8 8 0 0 1 672 76 L672 361 A8 8 0 0 1 664 369 L8 369 A8 8 0 0 1 0 361 L0 8 A8 8 0 0 1 8 0 Z' fill='%23fff'/%3E%3C/svg%3E");
+    mask-size:100% 100%; mask-repeat:no-repeat;
+  }
+  .servizi-card img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  .servizi-card .overlay{ position:absolute; inset:0; background:linear-gradient(to bottom, rgba(1,37,73,.1) 0%, rgba(1,37,73,.92) 100%); }
+  .servizi-card .content{ position:absolute; inset:0; display:flex; flex-direction:column; justify-content:flex-end; gap:12px; padding:32px; }
+  .servizi-card h3{ font-family:var(--display-font); font-weight:700; font-size:32px; letter-spacing:-.51px; color:#fff; }
+  .servizi-card p{ font-size:16px; color:rgba(255,255,255,.85); max-width:360px; }
+  .servizi-card .link{ font-weight:600; font-size:18px; color:var(--secondary); margin-top:8px; }
+
+  /* ===== CHI SIAMO ===== */
+  .chi-siamo{ position:relative; overflow:hidden; min-height:755px; display:flex; align-items:center; }
+  .chi-siamo-bg{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:-2; }
+  .chi-siamo-gradient{ position:absolute; inset:0; background:linear-gradient(to right, rgba(1,37,73,.94) 21.56%, rgba(1,37,73,.62) 71.085%); z-index:-1; }
+  .chi-siamo-inner{ width:100%; max-width:1440px; margin:0 auto; padding:100px; }
+  .chi-siamo-content{ max-width:1240px; display:flex; flex-direction:column; gap:56px; }
+  .chi-siamo-texts{ max-width:676px; display:flex; flex-direction:column; gap:19px; }
+  .chi-siamo-texts h2{ font-family:var(--display-font); font-weight:700; font-size:48px; line-height:1.2; letter-spacing:-.69px; color:#fff; }
+  .chi-siamo-texts h2 .accent{ color:var(--secondary); }
+  .kpi-row{ display:flex; gap:56px; align-items:flex-end; }
+  .kpi{ display:flex; flex-direction:column; gap:12px; }
+  .kpi .num{ font-family:var(--display-font); font-weight:700; font-size:102px; line-height:.8; letter-spacing:-2.04px; color:var(--secondary); }
+  .kpi .label{ font-size:14px; font-weight:500; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.66); }
+
+  /* ===== COME INTERVENIAMO ===== */
+  .come{ background:#fcfcfd; padding:100px 0 100px 100px; }
+  .come-inner{ display:flex; flex-direction:column; gap:56px; padding-right:100px; }
+  .come-first{ position:relative; display:flex; }
+  .come-texts{ flex:1; display:flex; flex-direction:column; gap:18px; max-width:620px; }
+  .come-texts h2{ font-family:var(--display-font); font-weight:700; font-size:48px; line-height:1.2; letter-spacing:-.87px; color:var(--dark); }
+  .come-texts p{ font-size:18px; line-height:1.5; color:#6f777b; max-width:430px; }
+  .come-image{ position:absolute; right:-100px; top:0; width:756px; height:545px; max-width:none; border-radius:8px 0 0 8px; overflow:hidden; }
+  .come-image img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .come-cards{ display:flex; gap:16px; justify-content:center; }
+  .come-card{ flex:1; background:#fff; border:1px solid var(--border); border-radius:8px; padding:41px; display:flex; flex-direction:column; gap:12px; }
+  .come-card .step-num{ font-family:var(--display-font); font-weight:700; font-size:52px; color:var(--secondary); line-height:1; }
+  .come-card h3{ font-family:var(--display-font); font-weight:700; font-size:20px; letter-spacing:-.315px; color:var(--dark); }
+  .come-card p{ font-size:14px; color:var(--neutral-2); }
+
+  /* ===== FAQ ===== */
+  .faq{ background:#f3f5f8; padding:100px; display:flex; gap:56px; }
+  .faq-texts{ flex:1; display:flex; flex-direction:column; gap:56px; }
+  .faq-texts-inner{ display:flex; flex-direction:column; gap:24px; }
+  .faq-texts h2{ max-width:620px; }
+  .faq-texts p{ font-size:18px; line-height:1.8; letter-spacing:-1px; color:var(--neutral-2); max-width:480px; }
+  .faq-cards{ flex:1; display:flex; flex-direction:column; gap:16px; }
+  .faq-card{ background:#fff; border-radius:8px; padding:40px; display:flex; align-items:center; gap:12px; transition:box-shadow .25s ease, transform .25s ease; }
+  .faq-card:hover{ box-shadow:0 10px 28px rgba(1,37,73,.12); transform:translateY(-2px); }
+  .faq-card .text{ flex:1; display:flex; flex-direction:column; gap:8px; }
+  .faq-card h3{ font-family:var(--display-font); font-weight:700; font-size:24px; letter-spacing:-.315px; color:var(--dark); line-height:1.33; }
+  .faq-card .sub{ font-size:14px; color:var(--neutral-2); max-width:260px; }
+  .faq-card .plus{ width:48px; height:48px; border-radius:8px; border:2px solid #fff; background:var(--secondary); flex-shrink:0; display:flex; align-items:center; justify-content:center; }
+  .faq-card .plus img{ width:24px; height:24px; }
+
+  /* ===== BANNER APP ===== */
+  .banner-app{ background:#fff; display:flex; align-items:stretch; }
+  .banner-app-mockup{ position:relative; flex:0 0 720px; width:720px; height:606px; overflow:hidden; border-radius:0 8px 8px 0; background:linear-gradient(to bottom, #071e45, #1149ab); }
+  .banner-app-mockup img{ position:absolute; left:50%; top:52%; width:600px; max-width:none; transform:translate(-50%,-50%) rotate(15deg); }
+  .banner-app-content{ flex:1; display:flex; align-items:center; padding:100px; }
+  .banner-app-texts{ display:flex; flex-direction:column; gap:56px; max-width:535px; }
+  .banner-app-texts-inner{ display:flex; flex-direction:column; gap:16px; }
+  .banner-app-texts h2{ font-family:var(--display-font); font-weight:700; font-size:48px; line-height:1.2; letter-spacing:-.81px; color:var(--dark); }
+  .banner-app-texts h2 .accent{ color:var(--primary); }
+  .banner-app-texts p{ font-size:16px; line-height:1.7; color:var(--neutral-2); }
+  .banner-app-cta{ display:flex; flex-direction:column; gap:24px; }
+  .banner-app-cta .cta-label{ font-family:var(--display-font); font-weight:700; font-size:20px; color:var(--primary); }
+  .store-badges{ display:flex; gap:24px; }
+  .store-badges img{ height:48px; width:auto; }
+
+  /* ===== FOOTER ===== */
+  footer.site-footer{ background:var(--dark); border-top:20px solid var(--secondary); border-radius:8px 8px 0 0; padding:150px 90px 90px; display:flex; flex-direction:column; gap:56px; color:#fff; }
+  .footer-partner-banner{ width:100%; border-radius:8px; overflow:hidden; }
+  .footer-partner-banner img{ width:100%; height:auto; display:block; }
+  .footer-cols{ display:flex; justify-content:space-between; gap:40px; }
+  .footer-col{ display:flex; flex-direction:column; gap:24px; }
+  .footer-col h4{ font-family:'Roboto', sans-serif; font-size:20px; font-weight:700; color:var(--secondary); }
+  .footer-col .links{ display:flex; flex-direction:column; gap:16px; }
+  .footer-col a{ font-family:'Roboto', sans-serif; font-size:16px; font-weight:500; transition:opacity .2s ease, transform .2s ease; }
+  .footer-col a:hover{ opacity:.8; transform:translateX(4px); }
+  .footer-badge{ background:#fff; border-radius:6px; padding:6px; width:154px; flex-shrink:0; }
+  .footer-legal{ font-family:'Roboto', sans-serif; font-size:16px; line-height:1.5; color:#fff; }
+  .footer-legal p + p{ margin-top:16px; }
+
+  /* ===== SCROLL REVEAL ===== */
+  .reveal{ opacity:0; transform:translateY(28px); transition:opacity .7s cubic-bezier(.16,.8,.24,1), transform .7s cubic-bezier(.16,.8,.24,1); }
+  .reveal.is-visible{ opacity:1; transform:translateY(0); }
+  .fade-img{ opacity:0; transition:opacity .5s ease; }
+  .fade-img.is-loaded{ opacity:1; }
+  a:focus-visible, button:focus-visible{ outline:2px solid var(--primary); outline-offset:3px; border-radius:inherit; }
+
+  /* ===== STICKY MOBILE CTA ===== */
+  .sticky-cta{
+    display:none; position:fixed; left:16px; right:16px; bottom:16px; z-index:190;
+    align-items:center; justify-content:center; gap:8px;
+    background:var(--secondary); color:var(--dark); font-weight:600; font-size:15px;
+    padding:14px 20px; border-radius:8px; box-shadow:0 12px 28px rgba(1,37,73,.28);
+  }
+  .sticky-cta svg{ width:18px; height:18px; flex-shrink:0; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 1200px){
+    .hero-inner{ padding:60px 40px 90px; }
+    .situazioni{ padding:0 40px; }
+    .servizi{ padding:48px 40px 90px; }
+    .chi-siamo-inner{ padding:90px 40px; }
+    .come{ padding:90px 40px; }
+    .come-inner{ padding-right:0; }
+    .come-image{ right:0; }
+    .faq{ padding:90px 40px; }
+    .banner-app-content{ padding:90px 40px; }
+    footer.site-footer{ padding:120px 40px 60px; }
+  }
+  @media (max-width: 1024px){
+    .situazioni{ flex-direction:column; margin-top:-76px; }
+    .servizi-grid{ position:static; display:flex; flex-direction:column; gap:16px; }
+    .servizi-grid::before{ display:none; }
+    .servizi-card{ position:static; width:auto !important; height:auto !important; min-height:320px; z-index:auto !important; border-radius:8px !important; clip-path:none !important; -webkit-mask-image:none !important; mask-image:none !important; }
+    .come-first{ flex-direction:column; gap:32px; }
+    .come-image{ position:relative; right:auto; width:100%; height:auto; aspect-ratio:756/545; max-width:100%; }
+    .come-cards{ flex-wrap:wrap; }
+    .come-card{ flex:1 1 45%; }
+    .faq{ flex-direction:column; }
+    .banner-app{ flex-direction:column; }
+    .banner-app-mockup{ width:100%; flex:none; border-radius:8px 8px 0 0; height:400px; }
+    .banner-app-content{ padding:60px 40px; }
+    .footer-cols{ flex-wrap:wrap; gap:40px; }
+  }
+  @media (max-width: 720px){
+    .btn{ font-size:16px; width:100%; align-self:stretch !important; }
+    .navbar{ padding:12px 16px; gap:8px; }
+    .navbar .menu{ display:none; position:fixed; top:64px; left:16px; right:16px; background:#fff; border-radius:12px; box-shadow:0 12px 32px rgba(1,37,73,.18); flex-direction:column; align-items:flex-start; padding:20px; gap:16px; z-index:150; }
+    .navbar .menu.open{ display:flex; }
+    .navbar .btn-call{ display:none; }
+    .sticky-cta{ display:flex; }
+    .navbar .burger{ display:flex; align-items:center; justify-content:center; width:36px; height:36px; flex-shrink:0; margin-left:auto; }
+
+    .hero{ height:auto; min-height:auto; }
+    .hero-gradient{ display:none; }
+    .hero-inner{ padding:48px 20px 40px; }
+    .hero-text{ gap:24px; max-width:100%; }
+    .hero-text h1{ font-size:36px; }
+    .hero-text p{ font-size:16px; }
+    .hero-ctas{ flex-wrap:wrap; }
+    .hero-ctas .btn{ flex:1 1 100%; }
+    .hero-cta-call{ display:none; }
+
+    .situazioni{ position:static; flex-direction:column; gap:12px; padding:0 20px; margin:20px 0 0; max-width:none; }
+    .situazione-card{ flex-direction:row; align-items:center; }
+
+    .servizi{ padding:48px 20px 64px; }
+    .servizi-head, h2.section-title{ font-size:32px; }
+    .servizi-grid{ gap:24px; }
+    .servizi-card{ min-height:354px; }
+    .servizi-card .content{ padding:24px; }
+    .servizi-card h3{ font-size:24px; }
+
+    .chi-siamo{ height:auto; min-height:0; }
+    .chi-siamo-inner{ padding:64px 20px; }
+    .chi-siamo-texts h2{ font-size:32px; }
+    .kpi-row{ flex-direction:column; align-items:flex-start; gap:24px; }
+    .kpi{ gap:4px; }
+    .kpi .num{ font-size:56px; }
+
+    .come{ padding:64px 20px; }
+    .come-texts h2{ font-size:32px; }
+    .come-cards{ flex-direction:column; gap:8px; }
+    .come-card{ flex:1 1 auto; padding:24px; }
+    .come-card .step-num{ font-size:40px; line-height:40px; }
+
+    .faq{ display:none; }
+
+    .banner-app-mockup{ height:auto; aspect-ratio:375/232; }
+    .banner-app-mockup img{ position:absolute; inset:0; left:0; top:0; width:100%; height:100%; max-width:none; object-fit:cover; transform:none; }
+    .banner-app-content{ padding:40px 20px; }
+    .banner-app-texts h2{ font-size:32px; }
+    .store-badges{ flex-wrap:nowrap; gap:16px; }
+
+    .footer-partner-banner{ display:none; }
+    footer.site-footer{ padding:80px 20px 40px; }
+    .footer-cols{ flex-direction:column; gap:32px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header" id="siteHeader">
+  <div class="navbar">
+    <a class="logo" href="#top">
+      <img src="assets/agse3/logo-agse-2.png" alt="ACI Global Servizi">
+    </a>
+    <nav class="menu">
+      <a href="#situazioni">Lorem</a>
+      <a href="#servizi">Lorem</a>
+      <a href="#chi-siamo">Lorem</a>
+      <a href="#come-interveniamo">Lorem</a>
+      <a href="#faq">Lorem</a>
+    </nav>
+    <a class="btn btn-call" href="tel:803116">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.7.6.6 0 1 .4 1 1v3.6c0 .6-.4 1-1 1C10.6 21.2 2.8 13.4 2.8 4.9c0-.6.4-1 1-1H7.4c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.7.1.4 0 .8-.2 1l-2.2 2.2z" fill="currentColor"/></svg>
+      Richiedi soccorso
+    </a>
+    <button class="burger" id="burgerBtn" aria-label="Menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 6h18M3 12h18M3 18h18" stroke="var(--dark)" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <picture>
+    <source media="(max-width: 720px)" srcset="assets/agse3/hero-mobile.png">
+    <img class="hero-bg fade-img" src="assets/agse3/hero.png" alt="">
+  </picture>
+  <div class="hero-gradient"></div>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <h1>Ovunque tu sia<br><span class="underline">arriviamo</span></h1>
+      <p>Da più di 70 anni al tuo fianco. Soccorso, noleggio, trasporto e cura delle auto d'epoca. In tutta Italia, h24.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-secondary hero-cta-call" href="tel:803116">Richiedi soccorso</a>
+        <a class="btn hero-cta-servizi" style="background:#fff; color:var(--dark);" href="#servizi">Scopri i servizi</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="situazioni" id="situazioni">
+  <div class="situazione-card">
+    <div class="text"><h3>Sono in panne</h3></div>
+    <a class="go" href="#servizi" aria-label="Scopri di più"><img src="assets/agse3/icon-caret-right.svg" alt=""></a>
+  </div>
+  <div class="situazione-card">
+    <div class="text"><h3>Ho bisogno di un'auto</h3></div>
+    <a class="go" href="#servizi" aria-label="Scopri di più"><img src="assets/agse3/icon-caret-right.svg" alt=""></a>
+  </div>
+  <div class="situazione-card">
+    <div class="text"><h3>Devo spostare un veicolo</h3></div>
+    <a class="go" href="#servizi" aria-label="Scopri di più"><img src="assets/agse3/icon-caret-right.svg" alt=""></a>
+  </div>
+  <div class="situazione-card">
+    <div class="text"><h3>Ho un'auto d'epoca</h3></div>
+    <a class="go" href="#servizi" aria-label="Scopri di più"><img src="assets/agse3/icon-caret-right.svg" alt=""></a>
+  </div>
+</div>
+
+<section class="servizi" id="servizi">
+  <div class="servizi-head reveal">
+    <span class="eyebrow on-white-alt"><img src="assets/agse3/icon-vector.svg" alt="">I NOSTRI SERVIZI</span>
+    <h2 class="section-title">Ecco cosa possiamo fare per te</h2>
+  </div>
+  <div class="servizi-grid stagger">
+    <div class="servizi-card card-1 reveal">
+      <img class="fade-img" src="assets/agse3/card-soccorso.jpg" alt="Soccorso stradale">
+      <div class="overlay"></div>
+      <div class="content">
+        <h3>Soccorso stradale</h3>
+        <p>Garantiamo il ripristino della mobilità nel più breve tempo possibile, a ogni ora.</p>
+        <a class="link" href="#">Scopri le tipologie di servizio →</a>
+      </div>
+    </div>
+    <div class="servizi-card card-2 reveal">
+      <img class="fade-img" src="assets/agse3/card-noleggio.jpg" alt="Noleggio a breve termine">
+      <div class="overlay"></div>
+      <div class="content">
+        <h3>Noleggio a breve termine</h3>
+        <p>Solo il meglio per le esigenze di ogni tipo di automobilista.</p>
+        <a class="link" href="#">Scopri il servizio →</a>
+      </div>
+    </div>
+    <div class="servizi-card card-3 reveal">
+      <img class="fade-img" src="assets/agse3/card-trasporto.jpg" alt="Trasporto veicoli">
+      <div class="overlay"></div>
+      <div class="content">
+        <h3>Trasporto veicoli</h3>
+        <p>Specializzati nella logistica dell'ultimo miglio.</p>
+        <a class="link" href="#">Scopri il servizio →</a>
+      </div>
+    </div>
+    <div class="servizi-card card-4 reveal">
+      <picture>
+        <source media="(max-width: 720px)" srcset="assets/agse3/card-epoca-mobile.png">
+        <img class="fade-img" src="assets/agse3/card-epoca.png" alt="Auto d'epoca">
+      </picture>
+      <div class="overlay"></div>
+      <div class="content">
+        <h3>Auto d'epoca</h3>
+        <p>Dedizione e affidabilità anche per i veicoli storici.</p>
+        <a class="link" href="#">Scopri il servizio →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="chi-siamo" id="chi-siamo">
+  <img class="chi-siamo-bg fade-img" src="assets/agse3/chi-siamo-bg.jpg" alt="">
+  <div class="chi-siamo-gradient"></div>
+  <div class="chi-siamo-inner">
+    <div class="chi-siamo-content">
+      <div class="chi-siamo-texts reveal">
+        <span class="eyebrow on-dark"><img src="assets/agse3/icon-vector.svg" alt="">Chi siamo</span>
+        <h2>Nel 1954 entrava in funzione il primo centralino nazionale di emergenza. Oggi siamo una rete che <span class="accent">non si ferma mai.</span></h2>
+      </div>
+      <div class="kpi-row reveal">
+        <div class="kpi"><span class="num">70</span><span class="label">Anni di esperienza</span></div>
+        <div class="kpi"><span class="num">300</span><span class="label">Operatori sul territorio</span></div>
+        <div class="kpi"><span class="num">24h</span><span class="label">Sempre operativi</span></div>
+      </div>
+      <a class="btn btn-secondary reveal" href="#" style="align-self:flex-start;">Scopri di più su di noi</a>
+    </div>
+  </div>
+</section>
+
+<section class="come" id="come-interveniamo">
+  <div class="come-inner">
+    <div class="come-first">
+      <div class="come-texts reveal">
+        <span class="eyebrow"><img src="assets/agse3/icon-vector.svg" alt="">il nostro metodo</span>
+        <h2>Come interveniamo</h2>
+        <p>Un metodo trasparente, dalla chiamata alla soluzione. Sempre con te fino alla fine.</p>
+      </div>
+      <div class="come-image reveal">
+        <img class="fade-img" src="assets/agse3/intervento.png" alt="Operatori al lavoro">
+      </div>
+    </div>
+    <div class="come-cards stagger">
+      <div class="come-card reveal">
+        <span class="step-num">01</span>
+        <h3>Ci chiami</h3>
+        <p>Un numero unico, attivo 24 ore su 24, in tutta Italia.</p>
+      </div>
+      <div class="come-card reveal">
+        <span class="step-num">02</span>
+        <h3>Ti localizziamo</h3>
+        <p>Individuiamo la tua posizione e il mezzo più vicino.</p>
+      </div>
+      <div class="come-card reveal">
+        <span class="step-num">03</span>
+        <h3>Arriviamo</h3>
+        <p>Raggiungiamo il punto nel minor tempo possibile.</p>
+      </div>
+      <div class="come-card reveal">
+        <span class="step-num">04</span>
+        <h3>Risolviamo</h3>
+        <p>Ripristiniamo la mobilità e restiamo con te fino alla fine.</p>
+      </div>
+    </div>
+    <a class="btn btn-secondary reveal" href="#" style="align-self:flex-start;">Scopri le nostre tariffe e condizioni</a>
+  </div>
+</section>
+
+<section class="faq" id="faq">
+  <div class="faq-texts">
+    <div class="faq-texts-inner reveal">
+      <span class="eyebrow"><img src="assets/agse3/icon-vector.svg" alt="">FAQ</span>
+      <h2 class="section-title">Tutte le risposte che cerchi, a portata di click</h2>
+      <p>Abbiamo raccolto tutte le domande frequenti dei nostri clienti in un'unica sezione divisa per argomenti. Così non devi sforzarti di trovare ciò che ti serve.</p>
+    </div>
+    <a class="btn btn-secondary reveal" href="#" style="align-self:flex-start;">Leggi tutte le FAQ</a>
+  </div>
+  <div class="faq-cards stagger">
+    <div class="faq-card reveal">
+      <div class="text">
+        <h3>Cosa succede dopo aver chiamato il soccorso?</h3>
+        <div class="sub">Cosa aspettarti passo dopo passo, dalla chiamata all'arrivo del mezzo</div>
+      </div>
+      <span class="plus"><img src="assets/agse3/icon-plus.svg" alt="Espandi"></span>
+    </div>
+    <div class="faq-card reveal">
+      <div class="text">
+        <h3>In quanto tempo arrivate?</h3>
+        <div class="sub">Come funzionano i tempi di intervento e da cosa dipendono</div>
+      </div>
+      <span class="plus"><img src="assets/agse3/icon-plus.svg" alt="Espandi"></span>
+    </div>
+    <div class="faq-card reveal">
+      <div class="text">
+        <h3>Quanto costa il soccorso, e quanto risparmio da socio?</h3>
+        <div class="sub">I costi in chiaro per tutti, con i vantaggi riservati ai soci.</div>
+      </div>
+      <span class="plus"><img src="assets/agse3/icon-plus.svg" alt="Espandi"></span>
+    </div>
+  </div>
+</section>
+
+<section class="banner-app" id="app">
+  <div class="banner-app-mockup reveal">
+    <picture>
+      <source media="(max-width: 720px)" srcset="assets/agse3/mock-app-mobile.png">
+      <img class="fade-img" src="assets/agse3/iphone-mockup.png" alt="App AGSE su smartphone">
+    </picture>
+  </div>
+  <div class="banner-app-content">
+    <div class="banner-app-texts reveal">
+      <div class="banner-app-texts-inner">
+        <span class="eyebrow"><img src="assets/agse3/icon-vector.svg" alt="">la nostra app</span>
+        <h2>I nostri servizi, <span class="accent">sempre con te.</span></h2>
+        <p>Con la nostra app mobile puoi richiedere in modo semplice e veloce, ovunque ti trovi, assistenza stradale h24 e hai sempre a disposizione i servizi e la nostra consulenza direttamente dal tuo smartphone.</p>
+      </div>
+      <div class="banner-app-cta">
+        <span class="cta-label">Scarica subito l'app mobile i803.116</span>
+        <div class="store-badges">
+          <img class="fade-img" src="assets/agse3/store-google.png" alt="Disponibile su Google Play">
+          <img class="fade-img" src="assets/agse3/store-apple.png" alt="Scarica su App Store">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-partner-banner reveal">
+    <img class="fade-img" src="assets/agse3/footer-banner-sara.png" alt="Parte del gruppo Sara Assicurazioni">
+  </div>
+  <div class="footer-cols">
+    <div class="footer-col">
+      <h4>Lorem ipsum dolor sit</h4>
+      <div class="links">
+        <a href="tel:803116">Lorem ipsum</a>
+        <a href="#">Lorem ipsum</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Lorem ipsum dolor sit</h4>
+      <div class="links">
+        <a href="#">Lorem</a>
+        <a href="#">Lorem ipsum</a>
+        <a href="#">Lorem</a>
+        <a href="#">Lorem ipsum</a>
+        <a href="#">Lorem</a>
+        <a href="#">Lorem ipsum</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Lorem ipsum dolor</h4>
+      <div class="links">
+        <a href="#">Lorem</a>
+        <a href="#">Lorem</a>
+        <a href="#">Lorem ipsum</a>
+        <a href="#">Lorem ipsum dolor</a>
+        <a href="#">Lorem ipsum dolor sit</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-badge">
+        <img src="assets/agse3/footer-transparency-badge.png" alt="Informazioni sulla trasparenza">
+      </div>
+    </div>
+  </div>
+  <div class="footer-legal">
+    <p>Lorem ipsum dolor sit amet, cum sapientem honestatis ea, verear labores feugait sea in, cu justo suscipiantur mel. Mel facilis sensibus petentium in, ne ignota mollis suavitate mei, modus reque signiferumque in cum. Ut molestiae complectitur eam, partiendo necessitatibus ad vix. Putent semper nusquam sea in. Eu vix altera vidisse.</p>
+    <p>Vis electram vituperata neglegentur id, eu graeco legendos est. Ad sed error populo feugait, unum solum lucilius eum te, vis purto oblique ea. Noluisse repudiare vix no. Nam ea alii latine, mei feugait evertitur ne. Audire ullamcorper in vix. Pro affert officiis patrioque no.</p>
+    <p>Ad per aperiri rationibus disputationi, no constituam dissentiet efficiantur qui, cu sed vitae verterem. No prima melius eum. Eos ex solet consul oportere. Wisi natum oporteat ius ei, ut sea aperiam ponderum. Cum dictas nonumes suscipiantur id, id partem fastidii deserunt sea.</p>
+    <p>Sit dolor</p>
+  </div>
+</footer>
+
+<a href="tel:803116" class="sticky-cta" id="stickyCta">
+  <svg viewBox="0 0 24 24" fill="none"><path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.7.6.6 0 1 .4 1 1v3.6c0 .6-.4 1-1 1C10.6 21.2 2.8 13.4 2.8 4.9c0-.6.4-1 1-1H7.4c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.7.1.4 0 .8-.2 1l-2.2 2.2z" fill="currentColor"/></svg>
+  Richiedi soccorso — 803.116
+</a>
+
+<script>
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('is-scrolled', window.scrollY > 40);
+  });
+
+  const burgerBtn = document.getElementById('burgerBtn');
+  if (burgerBtn) {
+    burgerBtn.addEventListener('click', () => {
+      document.querySelector('.navbar .menu').classList.toggle('open');
+    });
+  }
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  document.querySelectorAll('.stagger').forEach(group => {
+    group.querySelectorAll(':scope > .reveal').forEach((el, i) => {
+      el.style.transitionDelay = Math.min(i * 90, 360) + 'ms';
+    });
+  });
+
+  if (prefersReducedMotion) {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('is-visible'));
+  } else {
+    const revealObserver = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+  }
+
+  document.querySelectorAll('.fade-img').forEach(img => {
+    if (img.complete && img.naturalWidth > 0) {
+      img.classList.add('is-loaded');
+    } else {
+      img.addEventListener('load', () => img.classList.add('is-loaded'), { once: true });
+      img.addEventListener('error', () => img.classList.add('is-loaded'), { once: true });
+    }
+  });
+</script>
+
+</body>
+</html>
